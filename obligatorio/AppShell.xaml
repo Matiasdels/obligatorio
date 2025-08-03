@@ -4,23 +4,32 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:obligatorio"
-    Shell.FlyoutBehavior="Disabled"
+    Shell.FlyoutBehavior="Flyout"
     Title="obligatorio">
 
 
-    <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:MainPage}"
-        Route="MainPage" />
+    <FlyoutItem Title="Inicio" Icon="home.png">
+        <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
+    </FlyoutItem>
 
-    <FlyoutItem Title="Clima">
+    <FlyoutItem Title="Clima" Icon="clima.png">
         <ShellContent ContentTemplate="{DataTemplate local:ClimaPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Cotizaciones">
+
+    <FlyoutItem Title="Cotizaciones" Icon="money.png">
         <ShellContent ContentTemplate="{DataTemplate local:CotizacionesPage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Noticias">
+
+    <FlyoutItem Title="Noticias" Icon="news.png">
         <ShellContent ContentTemplate="{DataTemplate local:NoticiasPage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Cine" Icon="cinema.png">
+        <ShellContent ContentTemplate="{DataTemplate local:CinePage}" />
+    </FlyoutItem>
+
+    <FlyoutItem Title="Patrocinadores" Icon="sponsor.png">
+        <ShellContent ContentTemplate="{DataTemplate local:PatrocinadoresPage}" />
     </FlyoutItem>
 
 </Shell>
