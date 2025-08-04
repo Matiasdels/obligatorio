@@ -15,12 +15,10 @@ public partial class ClimaPage : ContentPage
 
             if (navStack.Count > 1)
             {
-                // Hay una página anterior, podemos volver
                 await Shell.Current.GoToAsync("..");
             }
             else
             {
-                // No hay página anterior, vamos directo a MainPage
                 await Shell.Current.GoToAsync("//MainPage");
             }
         }
