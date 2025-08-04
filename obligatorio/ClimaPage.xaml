@@ -24,7 +24,11 @@
                    Text="Descripción: --"
                    FontSize="20"
                    HorizontalOptions="Center" />
-        
+            
+            <Button x:Name="btnAtras"
+                    Text="Volver atrás"
+                    Clicked="btnClimaAtras_Clicked"
+                    HorizontalOptions="Fill" />
         </VerticalStackLayout>
     </ScrollView>
 </ContentPage>

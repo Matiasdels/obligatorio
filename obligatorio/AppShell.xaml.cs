@@ -6,6 +6,7 @@
         {
             InitializeComponent();
 
+            Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             Routing.RegisterRoute(nameof(ClimaPage), typeof(ClimaPage));
             Routing.RegisterRoute(nameof(CotizacionesPage), typeof(CotizacionesPage));
             Routing.RegisterRoute(nameof(NoticiasPage), typeof(NoticiasPage));

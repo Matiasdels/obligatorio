@@ -4,11 +4,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:obligatorio"
-    Shell.FlyoutBehavior="Flyout"
+    Shell.FlyoutBehavior="Disabled"
     Title="obligatorio">
 
+    <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
 
-    <FlyoutItem Title="Inicio" Icon="home.png">
+    <!--<FlyoutItem Title="Inicio" Icon="home.png">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
     </FlyoutItem>
 
@@ -30,6 +31,6 @@
 
     <FlyoutItem Title="Patrocinadores" Icon="sponsor.png">
         <ShellContent ContentTemplate="{DataTemplate local:PatrocinadoresPage}" />
-    </FlyoutItem>
+    </FlyoutItem>-->
 
 </Shell>

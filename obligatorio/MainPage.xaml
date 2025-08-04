@@ -14,17 +14,15 @@
                FontSize="18"
                HorizontalOptions="Center" />
             <Button
-                x:Name="CounterBtn"
-                Text="Click me" 
-                SemanticProperties.Hint="Counts the number of times you click"
-                Clicked="OnCounterClicked"
+                x:Name="btnClima"
+                Text="Clima" 
+                Clicked="IrAClima"
                 HorizontalOptions="Fill" />
-
-            <!--<Button Text="Clima" Clicked="IrAClima" />
+            
             <Button Text="Cotizaciones" Clicked="IrACotizaciones" />
             <Button Text="Noticias" Clicked="IrANoticias" />
             <Button Text="Cine" Clicked="IrACine" />
-            <Button Text="Patrocinadores" Clicked="IrAPatrocinadores" />-->
+            <Button Text="Patrocinadores" Clicked="IrAPatrocinadores" />
 
         </VerticalStackLayout>
     </ScrollView>
