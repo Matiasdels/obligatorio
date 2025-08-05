@@ -7,6 +7,8 @@
             InitializeComponent();
 
             MainPage = new AppShell();
+
+            Shell.Current.GoToAsync("//LoginPage");
         }
     }
 }

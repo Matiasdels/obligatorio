@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="obligatorio.LoginPage"
+             Title="LoginPage">
+    <VerticalStackLayout>
+        
+        <Label Text="Usuario" />
+        <Entry x:Name="txtUsuario" Placeholder="Ingrese usuario" />
+
+        <Label Text="Contraseña" />
+        <Entry x:Name="txtPassword" Placeholder="Ingrese contraseña" IsPassword="True" />
+
+        <Button Text="Ingresar" Clicked="BtnLogin_Clicked" />
+        
+    </VerticalStackLayout>
+</ContentPage>

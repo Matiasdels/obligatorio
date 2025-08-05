@@ -72,6 +72,9 @@
 	  <MauiXaml Update="CotizacionesPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="NoticiasPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
