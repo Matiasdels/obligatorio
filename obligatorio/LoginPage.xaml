@@ -3,15 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="obligatorio.LoginPage"
              Title="LoginPage">
-    <VerticalStackLayout>
-        
-        <Label Text="Usuario" />
-        <Entry x:Name="txtUsuario" Placeholder="Ingrese usuario" />
 
-        <Label Text="Contraseña" />
-        <Entry x:Name="txtPassword" Placeholder="Ingrese contraseña" IsPassword="True" />
+    <VerticalStackLayout Padding="30" Spacing="20" HorizontalOptions="Center">
+        <Label Text="Bienvenido" FontSize="24" HorizontalOptions="Center"/>
 
-        <Button Text="Ingresar" Clicked="BtnLogin_Clicked" />
-        
+        <Button x:Name="btnHuella" Text="Ingresar con huella" Clicked="btnHuella_Clicked" />
+
+        <Label x:Name="lblFallback" Text="Iniciar sesión"
+               HorizontalOptions="Center" IsVisible="False" />
+
+        <Entry x:Name="txtUsuario" Placeholder="Usuario" IsVisible="False" WidthRequest="250"/>
+        <Entry x:Name="txtPassword" Placeholder="Contraseña" IsPassword="True" IsVisible="False" WidthRequest="250"/>
+
+        <Button x:Name="btnLogin" Text="Ingresar" Clicked="BtnLogin_Clicked" IsVisible="False"/>
     </VerticalStackLayout>
+
 </ContentPage>
