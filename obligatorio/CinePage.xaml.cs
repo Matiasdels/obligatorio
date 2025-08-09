@@ -1,13 +1,36 @@
 namespace obligatorio;
-
+using obligatorio.Services;
 public partial class CinePage : ContentPage
 {
-	public CinePage()
-	{
-		InitializeComponent();
-	}
+    private readonly TmdbService _tmdbService;
 
-	public async void btnCineAtras_Clicked(object sender, EventArgs e)
+    public CinePage()
+    {
+        InitializeComponent();
+        _tmdbService = new TmdbService();
+        LoadMovies();
+    }
+
+    private async void LoadMovies()
+    {
+        try
+        {
+            var cineData = await _tmdbService.GetNowPlayingMoviesAsync();
+
+            foreach (var movie in cineData.Results)
+            {
+                movie.PosterPath = $"https://image.tmdb.org/t/p/w500{movie.PosterPath}";
+            }
+
+            MoviesCollection.ItemsSource = cineData.Results;
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", $"No se pudieron cargar las películas: {ex.Message}", "OK");
+        }
+    }
+
+    public async void btnCineAtras_Clicked(object sender, EventArgs e)
 	{
 		try
 		{
