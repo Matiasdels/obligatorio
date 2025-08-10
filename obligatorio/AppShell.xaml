@@ -11,14 +11,15 @@
                   ContentTemplate="{DataTemplate local:LoginPage}" />
     
     <ShellContent Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}" />
-    <!--<FlyoutItem Title="Inicio" Icon="home.png">
-        <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
-    </FlyoutItem>
 
     <FlyoutItem Title="Clima" Icon="clima.png">
         <ShellContent ContentTemplate="{DataTemplate local:ClimaPage}" />
     </FlyoutItem>
-
+    
+    <!--<FlyoutItem Title="Inicio" Icon="home.png">
+        <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
+    </FlyoutItem>
+        
     <FlyoutItem Title="Cotizaciones" Icon="money.png">
         <ShellContent ContentTemplate="{DataTemplate local:CotizacionesPage}" />
     </FlyoutItem>

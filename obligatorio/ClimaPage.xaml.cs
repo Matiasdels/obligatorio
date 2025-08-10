@@ -1,30 +1,40 @@
-namespace obligatorio;
+using obligatorio.Services;
+using System;
+using System.Linq;
+using Microsoft.Maui.Controls;
 
-public partial class ClimaPage : ContentPage
+namespace obligatorio
 {
-	public ClimaPage()
-	{
-		InitializeComponent();
-	}
-
-    private async void btnClimaAtras_Clicked(object sender, EventArgs e)
+    public partial class ClimaPage : ContentPage
     {
-        try
+        private readonly WeatherService _weatherService;
+         
+        public ClimaPage()
         {
-            var navStack = Shell.Current.Navigation.NavigationStack;
+            InitializeComponent();
+            _weatherService = new WeatherService();
+            LoadWeather();
+        }
 
-            if (navStack.Count > 1)
+        private async void LoadWeather()
+        {
+            try 
             {
-                await Shell.Current.GoToAsync("..");
+                var data = await _weatherService.GetCurrentWeatherAsync();
+                lblCity.Text = data.name;
+                lblTemp.Text = $"{data.main.temp}°C";
+                lblDescription.Text = data.weather.First().description;
+                imgIcon.Source = $"https://openweathermap.org/img/wn/{data.weather.First().icon}@2x.png";
             }
-            else
+            catch (Exception ex)
             {
-                await Shell.Current.GoToAsync("//MainPage");
+                await DisplayAlert("Error", $"No se pudo obtener el clima: {ex.Message}", "OK");
             }
         }
-        catch (Exception ex)
+
+        private void OnActualizarClicked(object sender, EventArgs e)
         {
-            await DisplayAlert("Error", ex.Message, "OK");
+            LoadWeather();
         }
     }
 }
