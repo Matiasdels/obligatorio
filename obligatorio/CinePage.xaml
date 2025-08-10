@@ -2,16 +2,26 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="obligatorio.CinePage"
-             Title="CinePage">
+             Title="Películas en cartelera">
+
     <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+        <CollectionView x:Name="MoviesCollection" HeightRequest="600">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <VerticalStackLayout Padding="10">
+                        <Image Source="{Binding PosterPath}" HeightRequest="200" Aspect="AspectFill"/>
+                        <Label Text="{Binding Title}" FontAttributes="Bold" FontSize="18"/>
+                        <Label Text="{Binding Overview}" MaxLines="3" LineBreakMode="TailTruncation"/>
+                    </VerticalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
         <Button 
             x:Name="btnAtras"
             Text="Volver atrás"
             Clicked="btnCineAtras_Clicked"
             HorizontalOptions="Fill" />
     </VerticalStackLayout>
+
 </ContentPage>
