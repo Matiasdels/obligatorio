@@ -1,29 +1,42 @@
+using obligatorio.Services;
+
 namespace obligatorio;
 
 public partial class CotizacionesPage : ContentPage
 {
-	public CotizacionesPage()
-	{
-		InitializeComponent();
-	}
+    private readonly CurrencyService _currencyService = new CurrencyService();
 
-    private async void btnCotizaciones_Clicked(object sender, EventArgs e)
+    public CotizacionesPage()
     {
-		try
-		{
-			var navStack = Shell.Current.Navigation.NavigationStack;
-			if (navStack.Count > 1)
-			{
-				await Shell.Current.GoToAsync("..");
-			}
-			else
-			{
-				await Shell.Current.GoToAsync("//MainPage");
-			}
-		}
-		catch (Exception ex)
-		{
-			await DisplayAlert("Error", ex.Message, "OK");
+        InitializeComponent();
+        CargarCotizaciones();
+    }
+
+    private async void CargarCotizaciones()
+    {
+        try
+        {
+            var cotizaciones = await _currencyService.ObtenerCotizacionesAsync();
+
+            if (cotizaciones.Success)
+            {
+                // En la API gratuita, los valores son 1 USD = X moneda, así que invertimos para UYU?USD
+                double usdToUyu = cotizaciones.Quotes["USDUYU"];
+                double eurToUyu = usdToUyu / cotizaciones.Quotes["USDEUR"];
+                double brlToUyu = usdToUyu / cotizaciones.Quotes["USDBRL"];
+
+                lblDolar.Text = $"Dólar: {usdToUyu:F2} UYU";
+                lblEuro.Text = $"Euro: {eurToUyu:F2} UYU";
+                lblReal.Text = $"Real: {brlToUyu:F2} UYU";
+            }
+            else
+            {
+                await DisplayAlert("Error", "No se pudo obtener las cotizaciones", "OK");
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", ex.Message, "OK");
         }
     }
 }
