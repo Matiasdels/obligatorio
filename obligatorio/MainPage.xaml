@@ -23,6 +23,8 @@
             <Button Text="Noticias" Clicked="IrANoticias" />
             <Button Text="Cine" Clicked="IrACine" />
             <Button Text="Patrocinadores" Clicked="IrAPatrocinadores" />
+            <Button Text="Clientes" Clicked="IrAClientes" />
+            <Button Text="ClientesDetalles" Clicked="IrADetallesClientes" />
 
         </VerticalStackLayout>
     </ScrollView>

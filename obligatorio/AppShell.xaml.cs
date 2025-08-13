@@ -1,4 +1,6 @@
-﻿namespace obligatorio
+﻿using obligatorio.Clientes;
+
+namespace obligatorio
 {
     public partial class AppShell : Shell
     {
@@ -12,6 +14,7 @@
             Routing.RegisterRoute(nameof(NoticiasPage), typeof(NoticiasPage));
             Routing.RegisterRoute(nameof(CinePage), typeof(CinePage));
             Routing.RegisterRoute(nameof(PatrocinadoresPage), typeof(PatrocinadoresPage));
+            Routing.RegisterRoute("ClienteListPage", typeof(ClienteListPage));
         }
     }
 }

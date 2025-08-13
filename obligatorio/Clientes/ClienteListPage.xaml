@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="obligatorio.Clientes.ClienteListPage"
+             Title="ClienteListPage">
+    <StackLayout Padding="20" Spacing="10">
+        <Button Text="Agregar Cliente" Clicked="OnAddClienteClicked" />
+
+        <CollectionView x:Name="ClientesCollection"
+                        SelectionMode="Single"
+                        SelectionChanged="OnClienteSelected">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Frame Padding="10" Margin="5" BorderColor="LightGray" CornerRadius="8">
+                        <StackLayout>
+                            <Label Text="{Binding Nombre}" FontAttributes="Bold" FontSize="18"/>
+                            <Label Text="{Binding Email}" FontSize="14"/>
+                            <Label Text="{Binding Telefono}" FontSize="14"/>
+                        </StackLayout>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </StackLayout>
+</ContentPage>

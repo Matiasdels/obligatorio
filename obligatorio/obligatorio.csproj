@@ -70,6 +70,12 @@
 	  <MauiXaml Update="CinePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Clientes\ClienteDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Clientes\ClienteListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="ClimaPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

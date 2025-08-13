@@ -11,10 +11,10 @@ namespace obligatorio
         {
             InitializeComponent();
 
-            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "app.db3");
-            Database = new DataBaseService(dbPath);
+            //string dbPath = Path.Combine(FileSystem.AppDataDirectory, "app.db3");
+            //Database = new DataBaseService(dbPath);
 
-            Database.InitAsync().Wait(); // Crea tabla Sucursal
+            //Database.InitAsync().Wait(); // Crea tabla Sucursal
 
 
             MainPage = new AppShell();

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace obligatorio.Models
 {
-    public class Sucursal
+    public class Cliente
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -15,16 +15,16 @@ namespace obligatorio.Models
         [MaxLength(100), NotNull]
         public string Nombre { get; set; }
 
-        [MaxLength(200), NotNull]
-        public string Direccion { get; set; }
-
         [MaxLength(30)]
         public string Telefono { get; set; }
 
-        [NotNull]
-        public double Latitud { get; set; }
+        [MaxLength(100), Unique, NotNull]
+        public string Email { get; set; }
 
         [NotNull]
-        public double Longitud { get; set; }
+        public string PasswordHash { get; set; }
+
+        public string RutaSelfie { get; set; }
     }
 }
+

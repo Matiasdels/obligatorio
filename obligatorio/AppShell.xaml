@@ -4,6 +4,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:obligatorio"
+    
     Shell.FlyoutBehavior="Disabled"
     Title="obligatorio">
 
@@ -15,6 +16,8 @@
     <FlyoutItem Title="Clima" Icon="clima.png">
         <ShellContent ContentTemplate="{DataTemplate local:ClimaPage}" />
     </FlyoutItem>
+    
+    <ShellContent Route="ClienteListPage" ContentTemplate="{DataTemplate local:Clientes.ClienteListPage}" />
     
     <!--<FlyoutItem Title="Inicio" Icon="home.png">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
