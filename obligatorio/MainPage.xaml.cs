@@ -1,4 +1,4 @@
-﻿using obligatorio.Clientes;
+﻿using obligatorio;
 
 namespace obligatorio
 {

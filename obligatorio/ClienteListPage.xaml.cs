@@ -2,7 +2,7 @@ using obligatorio.Data;
 using obligatorio.Models;
 using System.Collections.ObjectModel;
 
-namespace obligatorio.Clientes;
+namespace obligatorio;
 
 public partial class ClienteListPage : ContentPage
 {

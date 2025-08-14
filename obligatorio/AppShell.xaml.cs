@@ -1,4 +1,4 @@
-﻿using obligatorio.Clientes;
+﻿using obligatorio;
 
 namespace obligatorio
 {
@@ -14,7 +14,7 @@ namespace obligatorio
             Routing.RegisterRoute(nameof(NoticiasPage), typeof(NoticiasPage));
             Routing.RegisterRoute(nameof(CinePage), typeof(CinePage));
             Routing.RegisterRoute(nameof(PatrocinadoresPage), typeof(PatrocinadoresPage));
-            Routing.RegisterRoute("ClienteListPage", typeof(ClienteListPage));
+            Routing.RegisterRoute(nameof(ClienteListPage), typeof(ClienteListPage));
         }
     }
 }

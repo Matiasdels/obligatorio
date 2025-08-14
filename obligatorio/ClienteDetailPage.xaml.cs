@@ -1,7 +1,7 @@
 using obligatorio.Data;
 using obligatorio.Models;
 
-namespace obligatorio.Clientes;
+namespace obligatorio;
 
 public partial class ClienteDetailPage : ContentPage
 {

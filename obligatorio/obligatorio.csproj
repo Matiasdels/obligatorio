@@ -64,16 +64,18 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 		<PackageReference Include="Plugin.Fingerprint" Version="2.1.5" />
 		<PackageReference Include="sqlite-net-pcl" Version="1.9.172" />
+		<PackageReference Include="SQLitePCLRaw.provider.dynamic_cdecl" Version="3.0.1" />
+		<PackageReference Include="SQLitePCLRaw.provider.e_sqlite3" Version="3.0.1" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="CinePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Clientes\ClienteDetailPage.xaml">
+	  <MauiXaml Update="ClienteDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Clientes\ClienteListPage.xaml">
+	  <MauiXaml Update="ClienteListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="ClimaPage.xaml">
@@ -91,6 +93,10 @@
 	  <MauiXaml Update="PatrocinadoresPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Clientes\" />
 	</ItemGroup>
 
 </Project>
