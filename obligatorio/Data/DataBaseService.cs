@@ -18,7 +18,7 @@ namespace obligatorio.Data
         public DataBaseService(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath);
-            InitAsync().Wait();
+            InitAsync();
         }
 
         public async Task InitAsync()

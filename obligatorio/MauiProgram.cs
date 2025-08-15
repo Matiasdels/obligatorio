@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using obligatorio.Data;
 
 namespace obligatorio
 {
@@ -12,12 +13,13 @@ namespace obligatorio
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 });
 
-#if DEBUG
-    		builder.Logging.AddDebug();
-#endif
+            // Ruta para la base de datos
+            string dbPath = Path.Combine(FileSystem.AppDataDirectory, "miBase.db3");
+
+            // Registro del servicio con parámetro
+            builder.Services.AddSingleton<DataBaseService>(s => new DataBaseService(dbPath));
 
             return builder.Build();
         }

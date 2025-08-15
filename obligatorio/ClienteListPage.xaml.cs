@@ -9,10 +9,12 @@ public partial class ClienteListPage : ContentPage
     private DataBaseService _dbService;
     private ObservableCollection<Cliente> _clientes;
 
-    public ClienteListPage(DataBaseService dbService)
+    
+
+    public ClienteListPage()
     {
         InitializeComponent();
-        _dbService = dbService;
+        _dbService = App.Database;
     }
 
     protected override async void OnAppearing()

@@ -11,10 +11,13 @@ namespace obligatorio
         {
             InitializeComponent();
 
-            //string dbPath = Path.Combine(FileSystem.AppDataDirectory, "app.db3");
-            //Database = new DataBaseService(dbPath);
+            string dbPath = Path.Combine(
+                FileSystem.AppDataDirectory, // Carpeta segura de la app
+                "app.db3"                     // Nombre del archivo SQLite
+            );
 
-            //Database.InitAsync().Wait(); // Crea tabla Sucursal
+            Database = new DataBaseService(dbPath);
+
 
 
             MainPage = new AppShell();

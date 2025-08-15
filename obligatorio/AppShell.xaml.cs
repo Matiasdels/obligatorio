@@ -15,6 +15,7 @@ namespace obligatorio
             Routing.RegisterRoute(nameof(CinePage), typeof(CinePage));
             Routing.RegisterRoute(nameof(PatrocinadoresPage), typeof(PatrocinadoresPage));
             Routing.RegisterRoute(nameof(ClienteListPage), typeof(ClienteListPage));
+            Routing.RegisterRoute(nameof(ClienteDetailPage), typeof(ClienteDetailPage));
         }
     }
 }
