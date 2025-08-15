@@ -423,5 +423,101 @@
         <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
         <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>
+    <Style TargetType="ContentPage" x:Key="AppPageStyle">
+        <Setter Property="BackgroundColor" Value="{StaticResource AppBackgroundDark}" />
+        <Setter Property="Shell.BackgroundColor" Value="{StaticResource PrimaryBlue}" />
+        <Setter Property="Shell.TitleColor" Value="{StaticResource AppTextPrimary}" />
+    </Style>
 
+    <Style TargetType="Label" x:Key="AppTitleLabel">
+        <Setter Property="FontSize" Value="26" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryBlueDark}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="Margin" Value="0,15,0,5" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="AppSubtitleLabel">
+        <Setter Property="FontSize" Value="18" />
+        <Setter Property="TextColor" Value="{StaticResource PrimaryBlue}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="Margin" Value="0,0,0,10" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="AppBodyLabel">
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+        <Setter Property="LineBreakMode" Value="WordWrap" />
+    </Style>
+
+
+    <Style TargetType="Button" x:Key="AppPrimaryButton">
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryBlue}" />
+        <Setter Property="TextColor" Value="{StaticResource TextOnPrimary}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="Margin" Value="0,5" />
+        <Setter Property="FontSize" Value="16" />
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow Brush="{StaticResource PrimaryBlueDark}" Opacity="0.2" Radius="8" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Button" x:Key="AppSecondaryButton">
+        <Setter Property="BackgroundColor" Value="{StaticResource SecondaryBlue}" />
+        <Setter Property="TextColor" Value="{StaticResource TextPrimary}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="CornerRadius" Value="12" />
+        <Setter Property="HeightRequest" Value="50" />
+        <Setter Property="Margin" Value="0,5" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+
+    <Style TargetType="Frame" x:Key="AppCardFrame">
+        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="CornerRadius" Value="15" />
+        <Setter Property="HasShadow" Value="True" />
+        <Setter Property="Padding" Value="15" />
+        <Setter Property="Margin" Value="10" />
+        <Setter Property="Shadow">
+            <Setter.Value>
+                <Shadow Brush="Black" Opacity="0.08" Radius="6" />
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="Frame" x:Key="AppHeaderFrame">
+        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryBlue}" />
+        <Setter Property="HasShadow" Value="True" />
+        <Setter Property="Margin" Value="0" />
+        <Setter Property="Padding" Value="20,15" />
+    </Style>
+
+    <Style TargetType="ContentPage">
+        <Setter Property="Background">
+            <Setter.Value>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+                    <GradientStop Color="{StaticResource BackgroundLight}" Offset="0.0" />
+                    <GradientStop Color="{StaticResource PrimaryBlueLight}" Offset="1.0" />
+                </LinearGradientBrush>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+    <Style TargetType="SearchBar" x:Key="AppSearchBar">
+        <Setter Property="BackgroundColor" Value="Transparent" />
+        <Setter Property="TextColor" Value="{StaticResource AppTextPrimary}" />
+        <Setter Property="PlaceholderColor" Value="{StaticResource AppTextSecondary}" />
+        <Setter Property="CancelButtonColor" Value="{StaticResource SecondaryBlue}" />
+        <Setter Property="FontSize" Value="16" />
+    </Style>
+
+    <Style TargetType="Image" x:Key="AppPosterImage">
+        <Setter Property="Aspect" Value="AspectFill" />
+        <Setter Property="BackgroundColor" Value="{StaticResource AppBackgroundLight}" />
+    </Style>
 </ResourceDictionary>

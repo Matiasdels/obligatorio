@@ -1,32 +1,237 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="obligatorio.MainPage">
+             x:Class="obligatorio.MainPage"
+             BackgroundColor="#F8FFFE">
+
+    <ContentPage.Resources>
+        <Style x:Key="HeaderLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="36" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="#0D47A1" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="Margin" Value="0,20,0,10" />
+        </Style>
+
+        <Style x:Key="SubHeaderLabelStyle" TargetType="Label">
+            <Setter Property="FontSize" Value="16" />
+            <Setter Property="TextColor" Value="#1976D2" />
+            <Setter Property="HorizontalOptions" Value="Center" />
+            <Setter Property="Margin" Value="0,0,0,30" />
+            <Setter Property="Opacity" Value="0.8" />
+        </Style>
+
+        <Style x:Key="ModernButtonStyle" TargetType="Button">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="FontAttributes" Value="Bold" />
+            <Setter Property="TextColor" Value="White" />
+            <Setter Property="CornerRadius" Value="30" />
+            <Setter Property="HeightRequest" Value="60" />
+            <Setter Property="Margin" Value="20,8" />
+            <Setter Property="Shadow">
+                <Shadow Brush="#40000000" Offset="0,4" Radius="8" Opacity="0.3" />
+            </Setter>
+        </Style>
+
+        <LinearGradientBrush x:Key="PrimaryGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1976D2" Offset="0.0" />
+            <GradientStop Color="#1565C0" Offset="1.0" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="SecondaryGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#42A5F5" Offset="0.0" />
+            <GradientStop Color="#2196F3" Offset="1.0" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="AccentGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#64B5F6" Offset="0.0" />
+            <GradientStop Color="#42A5F5" Offset="1.0" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="LightGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#90CAF9" Offset="0.0" />
+            <GradientStop Color="#64B5F6" Offset="1.0" />
+        </LinearGradientBrush>
+
+        <LinearGradientBrush x:Key="DarkGradient" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#0D47A1" Offset="0.0" />
+            <GradientStop Color="#1565C0" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Resources>
 
     <ScrollView>
-        <VerticalStackLayout
-            Padding="30,0"
-            Spacing="25">
-            <Label Text="Bienvenidos"
-               FontSize="28"
-               HorizontalOptions="Center" />
-            <Label Text="Usa el menú para navegar"
-               FontSize="18"
-               HorizontalOptions="Center" />
-            <Button
-                x:Name="btnClima"
-                Text="Clima" 
-                Clicked="IrAClima"
-                HorizontalOptions="Fill" />
+        <Grid RowDefinitions="Auto,Auto,Auto,*,Auto" Padding="0">
+
+            <Frame Grid.Row="0" 
+                   Background="{StaticResource PrimaryGradient}"
+                   CornerRadius="40"
+                   Padding="30,40,30,30"
+                   Margin="0,0,0,20"
+                   HasShadow="True">
+                <StackLayout Spacing="10">
+                    <Label Style="{StaticResource HeaderLabelStyle}"
+                           Text="Voz del Este"
+                           TextColor="White" />
+                    <Label Style="{StaticResource SubHeaderLabelStyle}"
+                           Text="Acá poner un eslogan o algo que suene bien"
+                           TextColor="#E3F2FD" />
+                </StackLayout>
+            </Frame>
+
+  
+            <Frame Grid.Row="1"
+                   BackgroundColor="White"
+                   CornerRadius="20"
+                   Margin="20,0"
+                   Padding="0"
+                   HasShadow="True">
+                <Image Source="https://dplnews.com/wp-content/uploads/2019/03/DPL_radio_dn060319.jpg"
+                       SemanticProperties.Description="Modern dashboard interface with blue gradient background showing various app icons and navigation elements in a clean, professional design"
+                       HeightRequest="180"
+                       Aspect="AspectFill" />
+            </Frame>
+
+            <Grid Grid.Row="2" 
+                  ColumnDefinitions="*,*,*"
+                  Margin="20,20,20,10">
+
+                <Frame Grid.Column="0" 
+                       Background="{StaticResource LightGradient}"
+                       CornerRadius="15"
+                       Padding="15"
+                       Margin="5">
+                    <StackLayout HorizontalOptions="Center">
+                        <Label Text="7" 
+                               FontSize="24" 
+                               FontAttributes="Bold" 
+                               TextColor="White"
+                               HorizontalOptions="Center" />
+                        <Label Text="Módulos" 
+                               FontSize="12" 
+                               TextColor="White"
+                               HorizontalOptions="Center" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Column="1" 
+                       Background="{StaticResource AccentGradient}"
+                       CornerRadius="15"
+                       Padding="15"
+                       Margin="5">
+                    <StackLayout HorizontalOptions="Center">
+                        <Label Text="24/7" 
+                               FontSize="24" 
+                               FontAttributes="Bold" 
+                               TextColor="White"
+                               HorizontalOptions="Center" />
+                        <Label Text="Disponible" 
+                               FontSize="12" 
+                               TextColor="White"
+                               HorizontalOptions="Center" />
+                    </StackLayout>
+                </Frame>
+
+                <Frame Grid.Column="2" 
+                       Background="{StaticResource SecondaryGradient}"
+                       CornerRadius="15"
+                       Padding="15"
+                       Margin="5">
+                    <StackLayout HorizontalOptions="Center">
+                        <Label Text="100%" 
+                               FontSize="24" 
+                               FontAttributes="Bold" 
+                               TextColor="White"
+                               HorizontalOptions="Center" />
+                        <Label Text="Seguro" 
+                               FontSize="12" 
+                               TextColor="White"
+                               HorizontalOptions="Center" />
+                    </StackLayout>
+                </Frame>
+            </Grid>
+
+            <StackLayout Grid.Row="3" Spacing="12" Margin="0,10,0,20">
+
+                <Label Text="Navegación Principal" 
+                       FontSize="20" 
+                       FontAttributes="Bold" 
+                       TextColor="#0D47A1" 
+                       Margin="30,0,0,10" />
+
+                <Grid ColumnDefinitions="*,*" Margin="20,0">
+                    <Button Grid.Column="0"
+                            Text="🌤 Clima"
+                            Clicked="IrAClima"
+                            Style="{StaticResource ModernButtonStyle}"
+                            Background="{StaticResource LightGradient}"
+                            Margin="0,0,10,0" />
+
+                    <Button Grid.Column="1"
+                            Text="💰 Cotizaciones"
+                            Clicked="IrACotizaciones"
+                            Style="{StaticResource ModernButtonStyle}"
+                            Background="{StaticResource AccentGradient}"
+                            Margin="10,0,0,0" />
+                </Grid>
+
+                <Grid ColumnDefinitions="*,*" Margin="20,0">
+                    <Button Grid.Column="0"
+                            Text="📰 Noticias"
+                            Clicked="IrANoticias"
+                            Style="{StaticResource ModernButtonStyle}"
+                            Background="{StaticResource SecondaryGradient}"
+                            Margin="0,0,10,0" />
+
+                    <Button Grid.Column="1"
+                            Text="🎬 Cine"
+                            Clicked="IrACine"
+                            Style="{StaticResource ModernButtonStyle}"
+                            Background="{StaticResource PrimaryGradient}"
+                            Margin="10,0,0,0" />
+                </Grid>
+
+                <Grid ColumnDefinitions="*,*" Margin="20,0">
+                    <Button Grid.Column="0"
+                            Text="🤝 Patrocinadores"
+                            Clicked="IrAPatrocinadores"
+                            Style="{StaticResource ModernButtonStyle}"
+                            Background="{StaticResource DarkGradient}"
+                            Margin="0,0,10,0" />
+
+                    <Button Grid.Column="1"
+                            Text="👥 Clientes"
+                            Clicked="IrAClientes"
+                            Style="{StaticResource ModernButtonStyle}"
+                            Background="{StaticResource SecondaryGradient}"
+                            Margin="10,0,0,0" />
+                </Grid>
+
+                <Button Text="📋 Detalles de Clientes"
+                        Clicked="IrADetallesClientes"
+                        Style="{StaticResource ModernButtonStyle}"
+                        Background="{StaticResource PrimaryGradient}"
+                        Margin="20,10,20,0" />
+
+            </StackLayout>
             
-            <Button Text="Cotizaciones" Clicked="IrACotizaciones" />
-            <Button Text="Noticias" Clicked="IrANoticias" />
-            <Button Text="Cine" Clicked="IrACine" />
-            <Button Text="Patrocinadores" Clicked="IrAPatrocinadores" />
-            <Button Text="Clientes" Clicked="IrAClientes" />
-            <Button Text="ClientesDetalles" Clicked="IrADetallesClientes" />
+            <Frame Grid.Row="4"
+                   BackgroundColor="#E3F2FD"
+                   CornerRadius="30"
+                   Padding="30,20"
+                   Margin="0,20,0,0">
+                <StackLayout>
+                    <Label Text="© 2024 Tu Aplicación" 
+                           FontSize="14" 
+                           TextColor="#1976D2" 
+                           HorizontalOptions="Center" />
+                    <Label Text="Versión 1.0.0" 
+                           FontSize="12" 
+                           TextColor="#1976D2" 
+                           HorizontalOptions="Center" 
+                           Opacity="0.7" />
+                </StackLayout>
+            </Frame>
 
-        </VerticalStackLayout>
+        </Grid>
     </ScrollView>
-
 </ContentPage>
