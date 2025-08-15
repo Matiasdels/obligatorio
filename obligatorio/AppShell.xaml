@@ -18,7 +18,9 @@
     </FlyoutItem>
     
     <ShellContent Route="ClienteListPage" ContentTemplate="{DataTemplate local:ClienteListPage}" />
-    
+
+    <ShellContent Route="ClienteDetailPage" ContentTemplate="{DataTemplate local:ClienteDetailPage}" />
+
     <!--<FlyoutItem Title="Inicio" Icon="home.png">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
     </FlyoutItem>
