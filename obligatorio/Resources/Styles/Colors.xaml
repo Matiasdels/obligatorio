@@ -7,8 +7,6 @@
 
     <!-- Note: For Android please see also Platforms\Android\Resources\values\colors.xml -->
 
-  
-    
     <Color x:Key="Primary">#512BD4</Color>
     <Color x:Key="PrimaryDark">#ac99ea</Color>
     <Color x:Key="PrimaryDarkText">#242424</Color>
@@ -46,7 +44,6 @@
     <SolidColorBrush x:Key="Gray900Brush" Color="{StaticResource Gray900}"/>
     <SolidColorBrush x:Key="Gray950Brush" Color="{StaticResource Gray950}"/>
 
-
     <Color x:Key="PrimaryBlue">#1976D2</Color>
     <Color x:Key="PrimaryBlueDark">#0D47A1</Color>
     <Color x:Key="PrimaryBlueLight">#63A4FF</Color>
@@ -65,6 +62,5 @@
     <Color x:Key="AppTextSecondary">#757575</Color>
 
     <Color x:Key="TextOnPrimary">#FFFFFF</Color>
-  
 
 </ResourceDictionary>
