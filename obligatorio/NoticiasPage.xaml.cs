@@ -1,13 +1,27 @@
+using obligatorio.Models;
+using obligatorio.Services;
+
 namespace obligatorio;
 
 public partial class NoticiasPage : ContentPage
 {
-	public NoticiasPage()
-	{
-		InitializeComponent();
-	}
+    private readonly NoticiasViewModel _viewModel;
 
-	public async void btnNoticiasAtras_Clicked(object sender, EventArgs e)
+    public NoticiasPage()
+    {
+        InitializeComponent();
+
+        _viewModel = new NoticiasViewModel();
+        BindingContext = _viewModel;
+    }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await _viewModel.CargarNoticiasAsync();
+    }
+
+    public async void btnNoticiasAtras_Clicked(object sender, EventArgs e)
 	{
 		try
 		{
