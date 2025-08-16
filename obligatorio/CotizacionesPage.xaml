@@ -2,10 +2,293 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="obligatorio.CotizacionesPage"
-             Title="CotizacionesPage">
-    <VerticalStackLayout Padding="20" Spacing="15">
-        <Label x:Name="lblDolar" FontSize="20" FontAttributes="Bold"/>
-        <Label x:Name="lblEuro" FontSize="20" FontAttributes="Bold"/>
-        <Label x:Name="lblReal" FontSize="20" FontAttributes="Bold"/>
-    </VerticalStackLayout>
+             
+             BackgroundColor="#F8FFFE" >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Gradientes principales -->
+            <LinearGradientBrush x:Key="PrimaryGradient" StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#0D47A1" Offset="0.0" />
+                <GradientStop Color="#1976D2" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="SecondaryGradient" StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#1976D2" Offset="0.0" />
+                <GradientStop Color="#42A5F5" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="AccentGradient" StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#42A5F5" Offset="0.0" />
+                <GradientStop Color="#1976D2" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="LightGradient" StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#42A5F5" Offset="0.0" />
+                <GradientStop Color="#64B5F6" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <LinearGradientBrush x:Key="DarkGradient" StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#0D47A1" Offset="0.0" />
+                <GradientStop Color="#0277BD" Offset="1.0" />
+            </LinearGradientBrush>
+
+            <!-- Sombras -->
+            <Shadow x:Key="CardShadow" 
+                    Brush="Black" 
+                    Offset="0,4" 
+                    Radius="8" 
+                    Opacity="0.15"/>
+
+            <Shadow x:Key="ButtonShadow" 
+                    Brush="Black" 
+                    Offset="0,2" 
+                    Radius="6" 
+                    Opacity="0.2"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="25">
+
+            <!-- Encabezado -->
+            <Frame x:Name="HeaderFrame"
+                   BackgroundColor="Transparent" 
+                   Background="{StaticResource PrimaryGradient}" 
+                   CornerRadius="20" 
+                   Padding="25" 
+                   Shadow="{StaticResource CardShadow}">
+                <Frame.GestureRecognizers>
+                    <PointerGestureRecognizer PointerEntered="OnHeaderPointerEntered" 
+                                            PointerExited="OnHeaderPointerExited"/>
+                </Frame.GestureRecognizers>
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="💰 Cotizaciones" 
+                           FontSize="28" 
+                           FontAttributes="Bold" 
+                           TextColor="White" 
+                           HorizontalOptions="Center"/>
+                    <Label Text="Monedas y valores en tiempo real" 
+                           FontSize="16" 
+                           TextColor="White" 
+                           Opacity="0.9" 
+                           HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
+
+            <!-- Imagen ilustrativa -->
+            <Frame BackgroundColor="White" 
+                   CornerRadius="15" 
+                   Padding="0" 
+                   Shadow="{StaticResource CardShadow}">
+                <Image Source="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&amp;h=200&amp;fit=crop&amp;crop=center" 
+                       Aspect="AspectFill" 
+                       HeightRequest="150">
+                    <Image.Clip>
+                        <RoundRectangleGeometry CornerRadius="15" 
+                                              Rect="0,0,400,150"/>
+                    </Image.Clip>
+                </Image>
+            </Frame>
+
+            <!-- Sección de tarjetas de cotizaciones -->
+            <Label Text="Cotizaciones principales" 
+                   FontSize="22" 
+                   FontAttributes="Bold" 
+                   TextColor="#0D47A1" 
+                   Margin="0,10,0,5"/>
+
+            <Grid ColumnDefinitions="*,*,*" 
+                  ColumnSpacing="12">
+
+                <!-- Tarjeta Dólar -->
+                <Frame x:Name="DolarFrame"
+                       Grid.Column="0" 
+                       BackgroundColor="Transparent" 
+                       Background="{StaticResource PrimaryGradient}" 
+                       CornerRadius="15" 
+                       Padding="15" 
+                       Shadow="{StaticResource CardShadow}">
+                    <Frame.GestureRecognizers>
+                        <PointerGestureRecognizer PointerEntered="OnCotizacionPointerEntered" 
+                                                PointerExited="OnCotizacionPointerExited"/>
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="💵" 
+                               FontSize="24" 
+                               HorizontalOptions="Center"/>
+                        <Label Text="USD" 
+                               FontSize="14" 
+                               FontAttributes="Bold" 
+                               TextColor="White" 
+                               HorizontalOptions="Center"/>
+                        <Label x:Name="lblDolar" 
+                               Text="$41.50" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="White" 
+                               HorizontalOptions="Center"/>
+                        <Label x:Name="lblDolarVariacion" 
+                               Text="+0.25" 
+                               FontSize="12" 
+                               TextColor="LightGreen" 
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Tarjeta Euro -->
+                <Frame x:Name="EuroFrame"
+                       Grid.Column="1" 
+                       BackgroundColor="Transparent" 
+                       Background="{StaticResource SecondaryGradient}" 
+                       CornerRadius="15" 
+                       Padding="15" 
+                       Shadow="{StaticResource CardShadow}">
+                    <Frame.GestureRecognizers>
+                        <PointerGestureRecognizer PointerEntered="OnCotizacionPointerEntered" 
+                                                PointerExited="OnCotizacionPointerExited"/>
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="💶" 
+                               FontSize="24" 
+                               HorizontalOptions="Center"/>
+                        <Label Text="EUR" 
+                               FontSize="14" 
+                               FontAttributes="Bold" 
+                               TextColor="White" 
+                               HorizontalOptions="Center"/>
+                        <Label x:Name="lblEuro" 
+                               Text="$45.20" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="White" 
+                               HorizontalOptions="Center"/>
+                        <Label x:Name="lblEuroVariacion" 
+                               Text="-0.15" 
+                               FontSize="12" 
+                               TextColor="LightCoral" 
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+
+                <!-- Tarjeta Real -->
+                <Frame x:Name="RealFrame"
+                       Grid.Column="2" 
+                       BackgroundColor="Transparent" 
+                       Background="{StaticResource AccentGradient}" 
+                       CornerRadius="15" 
+                       Padding="15" 
+                       Shadow="{StaticResource CardShadow}">
+                    <Frame.GestureRecognizers>
+                        <PointerGestureRecognizer PointerEntered="OnCotizacionPointerEntered" 
+                                                PointerExited="OnCotizacionPointerExited"/>
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout Spacing="5">
+                        <Label Text="🇧🇷" 
+                               FontSize="24" 
+                               HorizontalOptions="Center"/>
+                        <Label Text="BRL" 
+                               FontSize="14" 
+                               FontAttributes="Bold" 
+                               TextColor="White" 
+                               HorizontalOptions="Center"/>
+                        <Label x:Name="lblReal" 
+                               Text="$8.75" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="White" 
+                               HorizontalOptions="Center"/>
+                        <Label x:Name="lblRealVariacion" 
+                               Text="+0.05" 
+                               FontSize="12" 
+                               TextColor="LightGreen" 
+                               HorizontalOptions="Center"/>
+                    </VerticalStackLayout>
+                </Frame>
+            </Grid>
+
+            <!-- Sección de navegación -->
+            <Label Text="Opciones" 
+                   FontSize="22" 
+                   FontAttributes="Bold" 
+                   TextColor="#0D47A1" 
+                   Margin="0,20,0,5"/>
+
+            <Grid RowDefinitions="*,*" 
+                  ColumnDefinitions="*,*" 
+                  RowSpacing="12" 
+                  ColumnSpacing="12">
+
+                <!-- Botón Ver más cotizaciones -->
+                <Button x:Name="btnVerMas" 
+                        Grid.Row="0" 
+                        Grid.Column="0" 
+                        Text="💹 Ver más cotizaciones" 
+                        FontSize="14" 
+                        FontAttributes="Bold" 
+                        TextColor="White" 
+                        BackgroundColor="Transparent" 
+                        Background="{StaticResource LightGradient}" 
+                        CornerRadius="30" 
+                        HeightRequest="55" 
+                        Shadow="{StaticResource ButtonShadow}"/>
+
+                <!-- Botón Historial -->
+                <Button x:Name="btnHistorial" 
+                        Grid.Row="0" 
+                        Grid.Column="1" 
+                        Text="📊 Historial" 
+                        FontSize="14" 
+                        FontAttributes="Bold" 
+                        TextColor="White" 
+                        BackgroundColor="Transparent" 
+                        Background="{StaticResource SecondaryGradient}" 
+                        CornerRadius="30" 
+                        HeightRequest="55" 
+                        Shadow="{StaticResource ButtonShadow}"/>
+
+                <!-- Botón Internacional -->
+                <Button x:Name="btnInternacional" 
+                        Grid.Row="1" 
+                        Grid.Column="0" 
+                        Text="🌎 Internacional" 
+                        FontSize="14" 
+                        FontAttributes="Bold" 
+                        TextColor="White" 
+                        BackgroundColor="Transparent" 
+                        Background="{StaticResource DarkGradient}" 
+                        CornerRadius="30" 
+                        HeightRequest="55" 
+                        Shadow="{StaticResource ButtonShadow}"/>
+
+                <!-- Botón Configuración -->
+                <Button x:Name="btnConfiguracion" 
+                        Grid.Row="1" 
+                        Grid.Column="1" 
+                        Text="⚙️ Configuración" 
+                        FontSize="14" 
+                        FontAttributes="Bold" 
+                        TextColor="White" 
+                        BackgroundColor="Transparent" 
+                        Background="{StaticResource AccentGradient}" 
+                        CornerRadius="30" 
+                        HeightRequest="55" 
+                        Shadow="{StaticResource ButtonShadow}"/>
+            </Grid>
+
+            <!-- Footer -->
+            <VerticalStackLayout Spacing="5" 
+                                Margin="0,30,0,0">
+                <Label Text="Cotizaciones App v1.0" 
+                       FontSize="12" 
+                       TextColor="#42A5F5" 
+                       HorizontalOptions="Center"/>
+                <Label Text="© 2025 Todos los derechos reservados" 
+                       FontSize="10" 
+                       TextColor="#1976D2" 
+                       Opacity="0.7" 
+                       HorizontalOptions="Center"/>
+            </VerticalStackLayout>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>
