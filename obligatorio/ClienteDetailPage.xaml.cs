@@ -48,7 +48,7 @@ public partial class ClienteDetailPage : ContentPage
         }
 
         await _dbService.SaveClienteAsync(_cliente);
-        await Navigation.PopAsync();
+        await Navigation.PushAsync(new ClienteListPage());
     }
 
     private async void OnEliminarClicked(object sender, EventArgs e)
