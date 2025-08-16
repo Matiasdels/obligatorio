@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="obligatorio.LoginPage"
-             Title="LoginPage">
+             Title="">
 
     <VerticalStackLayout Padding="30" Spacing="20" HorizontalOptions="Center">
         <Label Text="Bienvenido" FontSize="24" HorizontalOptions="Center"/>
@@ -16,6 +16,20 @@
         <Entry x:Name="txtPassword" Placeholder="Contraseña" IsPassword="True" IsVisible="False" WidthRequest="250"/>
 
         <Button x:Name="btnLogin" Text="Ingresar" Clicked="BtnLogin_Clicked" IsVisible="False"/>
+
+
+        <HorizontalStackLayout HorizontalOptions="Center" Spacing="5" Margin="0,5,0,0">
+            <Label Text="¿Aún no estás registrado?" FontSize="14" />
+            <Label Text="Regístrate aquí"
+           FontSize="14"
+           TextColor="Black"
+           TextDecorations="Underline">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="OnRegistroTapped" />
+                </Label.GestureRecognizers>
+            </Label>
+        </HorizontalStackLayout>
+        
     </VerticalStackLayout>
 
 </ContentPage>

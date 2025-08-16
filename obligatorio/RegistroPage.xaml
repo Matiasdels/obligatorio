@@ -1,0 +1,43 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="obligatorio.RegistroPage"
+             Title="Registro de Usuario">
+
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="15">
+
+            <Label Text="Registro de Usuario" FontSize="24" HorizontalOptions="Center"/>
+
+            <Entry x:Name="txtUsuario" Placeholder="Usuario (único)" />
+            <Entry x:Name="txtPassword" Placeholder="Contraseña" IsPassword="True" />
+            <Entry x:Name="txtNombre" Placeholder="Nombre completo" />
+            <Entry x:Name="txtDireccion" Placeholder="Dirección" />
+            <Entry x:Name="txtTelefono" Placeholder="Teléfono" Keyboard="Telephone" />
+            <Entry x:Name="txtEmail" Placeholder="Email" Keyboard="Email" />
+
+            
+            <Image x:Name="imgFotoPerfil"
+                   HeightRequest="150"
+                   WidthRequest="150"
+                   Aspect="AspectFill"
+                   BackgroundColor="LightGray"
+                   HorizontalOptions="Center" />
+
+            <HorizontalStackLayout HorizontalOptions="Center" Spacing="10">
+                <Button Text="Tomar foto" Clicked="OnTomarFotoClicked" />
+                <Button Text="Seleccionar foto" Clicked="OnSeleccionarFotoClicked" />
+            </HorizontalStackLayout>
+
+            <Button Text="Registrarse"
+                    Clicked="OnRegistroClicked"
+                    BackgroundColor="#2196F3"
+                    TextColor="White"
+                    CornerRadius="8" />
+
+            <Label x:Name="lblResultado"
+                   Text=""
+                   TextColor="Red"
+                   HorizontalOptions="Center" />
+        </VerticalStackLayout>
+    </ScrollView>
+</ContentPage>

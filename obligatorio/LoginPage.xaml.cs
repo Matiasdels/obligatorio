@@ -78,4 +78,10 @@ public partial class LoginPage : ContentPage
             await DisplayAlert("Error", "Usuario o contraseña incorrectos.", "Cerrar");
         }
     }
+
+    private async void OnRegistroTapped(object sender, EventArgs e)
+    {
+        // Asegúrate de tener una página de registro creada, por ejemplo RegistroPage.xaml
+        await Navigation.PushAsync(new RegistroPage());
+    }
 }
