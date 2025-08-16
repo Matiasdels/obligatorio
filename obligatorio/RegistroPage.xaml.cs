@@ -6,6 +6,9 @@ public partial class RegistroPage : ContentPage
 {
     string imagenBase64 = null;
 
+
+
+
     public RegistroPage()
     {
         InitializeComponent();
