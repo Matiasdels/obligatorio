@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="obligatorio.MainPage">
-
+               
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
             <GradientStop Color="#0D1B2A" Offset="0.0" />
@@ -30,7 +30,7 @@
             <Setter Property="FontSize" Value="18" />
             <Setter Property="FontAttributes" Value="Bold" />
             <Setter Property="TextColor" Value="White" />
-            <Setter Property="CornerRadius" Value="30" />
+            <Setter Property="CornerRadius" Value="10" />
             <Setter Property="HeightRequest" Value="60" />
             <Setter Property="Margin" Value="20,8" />
             <Setter Property="Shadow">
@@ -56,6 +56,10 @@
         <LinearGradientBrush x:Key="DarkGradient" StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#0D47A1" Offset="0.0" />
             <GradientStop Color="#1565C0" Offset="1.0" />
+        </LinearGradientBrush>
+        <LinearGradientBrush x:Key="DarkGradientDos" StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#1E2A38" Offset="0.0"/>
+            <GradientStop Color="#28374D" Offset="1.0"/>
         </LinearGradientBrush>
     </ContentPage.Resources>
     
@@ -166,19 +170,18 @@
                        Margin="30,0,0,10" />
 
                 <Grid ColumnDefinitions="*,*" Margin="20,0">
-                    <Button Grid.Column="0"
-                            Text="🌤 Clima"
+                    <Button Text="🌤 Clima"
                             Clicked="IrAClima"
                             Style="{StaticResource ModernButtonStyle}"
-                            Background="{StaticResource LightGradient}"
-                            Margin="0,0,10,0" />
+                            Background="{StaticResource AccentGradient}"
+                            Margin="0,0,5,0" />
 
                     <Button Grid.Column="1"
                             Text="💰 Cotizaciones"
                             Clicked="IrACotizaciones"
                             Style="{StaticResource ModernButtonStyle}"
                             Background="{StaticResource AccentGradient}"
-                            Margin="10,0,0,0" />
+                            Margin="5,0,0,0" />
                 </Grid>
 
                 <Grid ColumnDefinitions="*,*" Margin="20,0">
@@ -187,14 +190,14 @@
                             Clicked="IrANoticias"
                             Style="{StaticResource ModernButtonStyle}"
                             Background="{StaticResource SecondaryGradient}"
-                            Margin="0,0,10,0" />
+                            Margin="0,0,5,0" />
 
                     <Button Grid.Column="1"
                             Text="🎬 Cine"
                             Clicked="IrACine"
                             Style="{StaticResource ModernButtonStyle}"
                             Background="{StaticResource PrimaryGradient}"
-                            Margin="10,0,0,0" />
+                            Margin="5,0,0,0" />
                 </Grid>
 
                 <Grid ColumnDefinitions="*,*" Margin="20,0">
@@ -203,17 +206,17 @@
                             Clicked="IrAPatrocinadores"
                             Style="{StaticResource ModernButtonStyle}"
                             Background="{StaticResource DarkGradient}"
-                            Margin="0,0,10,0" />
+                            Margin="0,0,5,0" />
 
                     <Button Grid.Column="1"
                             Text="👥 Clientes"
                             Clicked="IrAClientes"
                             Style="{StaticResource ModernButtonStyle}"
                             Background="{StaticResource SecondaryGradient}"
-                            Margin="10,0,0,0" />
+                            Margin="5,0,0,0" />
                 </Grid>
 
-                <Button Text="📋 Detalles de Clientes"
+                <Button Text="📋 Detalles de Clientes (PONERLO DENTRO DE CLIENTES)"
                         Clicked="IrADetallesClientes"
                         Style="{StaticResource ModernButtonStyle}"
                         Background="{StaticResource PrimaryGradient}"
