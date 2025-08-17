@@ -2,31 +2,36 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="obligatorio.ClienteListPage"
-             Title="ClienteListPage">
-    <StackLayout Padding="20" Spacing="10">
-        <Button Text="Agregar Cliente" Clicked="OnAddClienteClicked" />
+             Title="Clientes">
 
-        <CollectionView x:Name="ClientesCollection"
-                        SelectionMode="Single"
+    <StackLayout Padding="20" Spacing="15">
+
+        <Button Text="Agregar Cliente" Clicked="OnAddClienteClicked"
+                BackgroundColor="{StaticResource PrimaryBlue}" 
+                TextColor="White" CornerRadius="15" HeightRequest="50"/>
+
+        <CollectionView x:Name="ClientesCollection" SelectionMode="Single"
                         SelectionChanged="OnClienteSelected">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Padding="10" Margin="5" BorderColor="LightGray" CornerRadius="8">
+                    <Frame CornerRadius="10" Margin="0,5"
+                           Padding="10" HasShadow="True"
+                           BackgroundColor="White">
                         <StackLayout>
-                            <Label Text="{Binding Nombre}" FontAttributes="Bold" FontSize="18"/>
-                            <Label Text="{Binding Email}" FontSize="14"/>
-                            <Label Text="{Binding Telefono}" FontSize="14"/>
+                            <Label Text="{Binding Nombre}" FontSize="16" FontAttributes="Bold"/>
+                            <Label Text="{Binding Email}" FontSize="14" TextColor="Gray"/>
+                            <Label Text="{Binding Telefono}" FontSize="14" TextColor="Gray"/>
                         </StackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
         </CollectionView>
-        <Button 
-        x:Name="btnAtras" 
-        Text="← Volver atrás" 
-        Clicked="btnAtras_Clicked"
-        Style="{StaticResource AppPrimaryButton}"
-        HeightRequest="45"
-        Margin="20,10,20,15"/>
+        <Button
+                x:Name="btnAtras" 
+                Text="← Volver atrás" 
+                Clicked="btnAtras_Clicked"
+                Style="{StaticResource AppPrimaryButton}"
+                HeightRequest="45"
+                Margin="20,10,20,15"/>
     </StackLayout>
 </ContentPage>

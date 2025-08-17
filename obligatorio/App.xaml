@@ -8,8 +8,21 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
-                
+
             </ResourceDictionary.MergedDictionaries>
+            <Style TargetType="Label">
+                <Setter Property="FontFamily" Value="NataSans"/>
+            </Style>
+
+            <!-- Estilo global para Button -->
+            <Style TargetType="Button">
+                <Setter Property="FontFamily" Value="NataSans"/>
+            </Style>
+
+            <!-- Estilo global para Entry -->
+            <Style TargetType="Entry">
+                <Setter Property="FontFamily" Value="NataSans"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

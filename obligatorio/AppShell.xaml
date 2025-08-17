@@ -8,15 +8,12 @@
     Shell.FlyoutBehavior="Disabled"
     Title="obligatorio">
 
-    <ShellContent Route="LoginPage"
-                  ContentTemplate="{DataTemplate local:LoginPage}" />
+    <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
     
     <ShellContent Route="MainPage" ContentTemplate="{DataTemplate local:MainPage}" />
 
-    <FlyoutItem Title="Clima" Icon="clima.png">
-        <ShellContent ContentTemplate="{DataTemplate local:ClimaPage}" />
-    </FlyoutItem>
-    
+    <ShellContent Route="ClimaPage" ContentTemplate="{DataTemplate local:ClimaPage}" />
+
     <ShellContent Route="ClienteListPage" ContentTemplate="{DataTemplate local:ClienteListPage}" />
 
     <ShellContent Route="ClienteDetailPage" ContentTemplate="{DataTemplate local:ClienteDetailPage}" />

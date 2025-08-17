@@ -20,6 +20,12 @@ namespace obligatorio
 
             // Registro del servicio con parámetro
             builder.Services.AddSingleton<DataBaseService>(s => new DataBaseService(dbPath));
+            builder.Services.AddSingleton<LoginPage>();
+            builder.Services.AddSingleton<MainPage>();
+            builder.Services.AddSingleton<ClimaPage>();
+            builder.Services.AddSingleton<ClienteListPage>();
+            builder.Services.AddSingleton<ClienteDetailPage>();
+
 
             return builder.Build();
         }

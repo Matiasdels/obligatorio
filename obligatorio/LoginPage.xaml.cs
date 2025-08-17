@@ -80,7 +80,7 @@ public partial class LoginPage : ContentPage
 
         if (usuario != null && usuario.Password == password)
         {
-            await Navigation.PushAsync(new MainPage());
+            await Shell.Current.GoToAsync("//MainPage");
         }
         else
         {

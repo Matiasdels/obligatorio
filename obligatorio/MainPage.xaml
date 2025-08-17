@@ -73,11 +73,13 @@
                     <Label Text="Voz del Este"
                        FontSize="36"
                        FontAttributes="Bold"
+                       
                        TextColor="White"
                        HorizontalOptions="Center"/>
                     <Label Text="La radio del Uruguay"
                        FontSize="16"
                        FontAttributes="Italic"
+                           
                        TextColor="#B0C4DE"
                        HorizontalOptions="Center"/>
                 </StackLayout>

@@ -16,18 +16,12 @@ namespace obligatorio
                 "app.db3"                     // Nombre del archivo SQLite
             );
 
-            
 
             Database = new DataBaseService(dbPath);
 
 
-
-            MainPage = new NavigationPage(new LoginPage(Database));
-
-            
-
-            
-            
+            //MainPage = new NavigationPage(new LoginPage(Database));
+            MainPage = new AppShell();
 
 
         }

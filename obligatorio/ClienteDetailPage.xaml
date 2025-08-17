@@ -2,18 +2,30 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="obligatorio.ClienteDetailPage"
-             Title="ClienteDetailPage">
-    <ScrollView>
-        <StackLayout Padding="20" Spacing="15">
+             Title="Detalle Cliente"
+             Shell.NavBarIsVisible="True">
+    
 
-            <Entry x:Name="NombreEntry" Placeholder="Nombre" />
-            <Entry x:Name="TelefonoEntry" Placeholder="Teléfono" Keyboard="Telephone"/>
-            <Entry x:Name="EmailEntry" Placeholder="Email" Keyboard="Email" />
-            <Entry x:Name="PasswordEntry" Placeholder="Contraseña" IsPassword="True" />
+    <StackLayout Padding="20" Spacing="15">
 
-            <Button Text="Guardar" Clicked="OnGuardarClicked" />
-            <Button Text="Eliminar" Clicked="OnEliminarClicked" IsVisible="False" x:Name="EliminarBtn" />
+        <Entry x:Name="txtNombre" Placeholder="Nombre completo"/>
+        <Entry x:Name="txtEmail" Placeholder="Email" Keyboard="Email"/>
+        <Entry x:Name="txtTelefono" Placeholder="Teléfono" Keyboard="Telephone"/>
 
-        </StackLayout>
-    </ScrollView>
+        <Button Text="Guardar" Clicked="btnGuardar_Clicked"
+                BackgroundColor="{StaticResource PrimaryBlue}" 
+                TextColor="White" CornerRadius="15" HeightRequest="50"/>
+
+        <Button Text="Eliminar" Clicked="OnEliminarClicked"
+        BackgroundColor="Red" TextColor="White" CornerRadius="15" HeightRequest="50"
+        IsVisible="False"
+        x:Name="btnEliminar"/>
+        <Button
+                x:Name="btnAtras" 
+                Text="← Volver atrás" 
+                Clicked="btnAtras_Clicked"
+                Style="{StaticResource AppPrimaryButton}"
+                HeightRequest="45"
+                Margin="20,10,20,15"/>
+    </StackLayout>
 </ContentPage>

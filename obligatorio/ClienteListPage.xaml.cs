@@ -6,10 +6,8 @@ namespace obligatorio;
 
 public partial class ClienteListPage : ContentPage
 {
-    private DataBaseService _dbService;
     private ObservableCollection<Cliente> _clientes;
-
-    
+    private DataBaseService _dbService;
 
     public ClienteListPage()
     {
@@ -20,6 +18,11 @@ public partial class ClienteListPage : ContentPage
     protected override async void OnAppearing()
     {
         base.OnAppearing();
+        await LoadClientesAsync();
+    }
+
+    private async Task LoadClientesAsync()
+    {
         var clientes = await _dbService.GetClientesAsync();
         _clientes = new ObservableCollection<Cliente>(clientes);
         ClientesCollection.ItemsSource = _clientes;
@@ -27,16 +30,14 @@ public partial class ClienteListPage : ContentPage
 
     private async void OnAddClienteClicked(object sender, EventArgs e)
     {
-        await Navigation.PushAsync(new ClienteDetailPage(_dbService));
+        await Shell.Current.GoToAsync("ClienteDetailPage");
     }
 
     private async void OnClienteSelected(object sender, SelectionChangedEventArgs e)
     {
-        if (e.CurrentSelection.Count == 0)
-            return;
-
+        if (e.CurrentSelection.Count == 0) return;
         var cliente = e.CurrentSelection[0] as Cliente;
-        await Navigation.PushAsync(new ClienteDetailPage(_dbService, cliente));
+        await Shell.Current.GoToAsync($"ClienteDetailPage?clienteId={cliente.Id}");
         ((CollectionView)sender).SelectedItem = null;
     }
 

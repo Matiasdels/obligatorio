@@ -13,8 +13,6 @@ namespace obligatorio.Data
             InitAsync().ConfigureAwait(false);
         }
 
-
-
         private async Task CrearAdminPorDefecto()
         {
             // Verificar si ya existe un admin
@@ -160,5 +158,13 @@ namespace obligatorio.Data
 
         public Task<int> DeleteUsuarioAsync(Usuario usuario) =>
             _database.DeleteAsync(usuario);
+
+        // Alias para compatibilidad con ClienteDetailPage
+        public Task<Cliente> GetClienteByIdAsync(int id) => GetClienteAsync(id);
+
+        public Task<int> AddClienteAsync(Cliente cliente) => SaveClienteAsync(cliente);
+
+        public Task<int> UpdateClienteAsync(Cliente cliente) => SaveClienteAsync(cliente);
+
     }
 }
