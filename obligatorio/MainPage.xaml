@@ -2,7 +2,7 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="obligatorio.MainPage"
-             BackgroundColor="#F8FFFE">
+             BackgroundColor="{StaticResource White}">
 
     <ContentPage.Resources>
         <Style x:Key="HeaderLabelStyle" TargetType="Label">
@@ -215,18 +215,18 @@
             </StackLayout>
             
             <Frame Grid.Row="4"
-                   BackgroundColor="#E3F2FD"
+                   BackgroundColor="{StaticResource PrimaryBlue}"
                    CornerRadius="30"
                    Padding="30,20"
                    Margin="0,20,0,0">
                 <StackLayout>
                     <Label Text="© 2024 Tu Aplicación" 
                            FontSize="14" 
-                           TextColor="#1976D2" 
+                           TextColor="{StaticResource White}" 
                            HorizontalOptions="Center" />
                     <Label Text="Versión 1.0.0" 
                            FontSize="12" 
-                           TextColor="#1976D2" 
+                           TextColor="{StaticResource White}" 
                            HorizontalOptions="Center" 
                            Opacity="0.7" />
                 </StackLayout>

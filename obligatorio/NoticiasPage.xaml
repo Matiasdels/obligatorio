@@ -1,70 +1,114 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="obligatorio.NoticiasPage"
-             Title="NoticiasPage">
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+             x:Class="obligatorio.NoticiasPage" 
+             Title="Últimas Noticias"
+             BackgroundColor="{StaticResource AppBackgroundDark}">
 
-    <VerticalStackLayout Padding="20">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="NewsDateLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="#FCD34D"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="Margin" Value="0,5,0,0"/>
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
-        <Label Text="📰 Últimas Noticias"
-               FontSize="24"
-               FontAttributes="Bold"
-               TextColor="#0D47A1"
-               HorizontalOptions="Center"
-               Margin="0,0,0,10" />
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
 
-        <ActivityIndicator IsRunning="{Binding IsBusy}" 
-                           IsVisible="{Binding IsBusy}" 
-                           Color="#1976D2"
-                           HeightRequest="40"/>
+        <Frame Grid.Row="0" Style="{StaticResource AppHeaderFrame}">
+            <Label Text="📰 Últimas Noticias" 
+                   Style="{StaticResource AppTitleLabel}"
+                   FontSize="22"
+                   TextColor="{StaticResource White}"
 
-        <CollectionView ItemsSource="{Binding Noticias}">
+                   HorizontalOptions="Center"/>
+            
+        </Frame>
+
+
+        <Frame Grid.Row="1" 
+               Style="{StaticResource AppBaseFrame}"
+               CornerRadius="20"
+               Margin="20,15,20,10"
+               Padding="15"
+               IsVisible="{Binding IsBusy}">
+            <ActivityIndicator IsRunning="{Binding IsBusy}" 
+                             IsVisible="{Binding IsBusy}" 
+                             Color="{StaticResource AppAccentColor}"
+                             HeightRequest="40"
+                             HorizontalOptions="Center"/>
+        </Frame>
+
+        <CollectionView Grid.Row="2" 
+                       x:Name="NoticiasCollection"
+                       ItemsSource="{Binding Noticias}"
+                       Margin="0,5,0,0">
+
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame BorderColor="#1976D2"
-                           CornerRadius="20"
-                           Margin="0,8"
-                           Padding="12"
-                           HasShadow="True">
-                        <VerticalStackLayout>
+                    <Frame Style="{StaticResource AppCardFrame}" Margin="15,10">
+                        <StackLayout Padding="15">
+
+                  
                             <Label Text="{Binding Title}" 
-                                   FontSize="18"
-                                   FontAttributes="Bold"
-                                   TextColor="#0D47A1" />
+                                   Style="{StaticResource AppSubtitleLabel}"
+                                   FontSize="16"
+                                   Margin="0,0,0,8"/>
+
+               
                             <Label Text="{Binding Description}" 
-                                   FontSize="14"
-                                   TextColor="#333"
-                                   LineBreakMode="WordWrap" 
-                                   MaxLines="3" />
-                            <Label Text="{Binding PubDate}" 
-                                   FontSize="12"
-                                   TextColor="#1976D2"
-                                   HorizontalOptions="End" />
-                        </VerticalStackLayout>
+                                   MaxLines="3" 
+                                   LineBreakMode="TailTruncation"
+                                   Style="{StaticResource AppBodyLabel}"
+                                   FontSize="13"
+                                   VerticalOptions="Fill"
+                                   Margin="0,0,0,8"/>
+
+                      <!--ESTO AGREGA LA HORA Y FECHA PERO SIEMPRE MARCA LA MISMA QUE ES CUANDO SE ABRE NOTICIA, 
+                            LO PODEMOS INTENTAR ARREGLAR O DEJAR SIN USAR PORQUE NO ES NECESARIO-->
+                            <!--<Label Text="{Binding PubDate}" 
+                                   Style="{StaticResource NewsDateLabel}"
+                                   TextColor="{StaticResource PrimaryBlue}"
+                                   HorizontalOptions="End"/>-->
+                                   
+
+                        </StackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
+
+
+            <CollectionView.EmptyView>
+                <StackLayout VerticalOptions="Center" 
+                           HorizontalOptions="Center"
+                           Padding="40">
+                    <Label Text="📰" 
+                           FontSize="48" 
+                           HorizontalOptions="Center"/>
+                    <Label Text="No se encontraron noticias" 
+                           Style="{StaticResource AppSubtitleLabel}"
+                           FontSize="16"
+                           HorizontalOptions="Center"
+                           Margin="0,10,0,0"/>
+                </StackLayout>
+            </CollectionView.EmptyView>
         </CollectionView>
 
-        <Button 
-                x:Name="btnAtras"
-                Text="⬅ Volver"
+        <Button Grid.Row="3"
+                x:Name="btnAtras" 
+                Text="← Volver atrás" 
                 Clicked="btnNoticiasAtras_Clicked"
-                BackgroundColor="#1976D2"
-                TextColor="White"
-                CornerRadius="20"
-                Margin="0,10,0,0" />
-
-    </VerticalStackLayout>
-    <!--<VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button 
-            x:Name="btnAtras"
-            Text="Volver atrás"
-            Clicked="btnNoticiasAtras_Clicked"
-            HorizontalOptions="Fill" />
-    </VerticalStackLayout>-->
+                Style="{StaticResource AppPrimaryButton}"
+                HeightRequest="45"
+                Margin="20,10,20,15"/>
+    </Grid>
 </ContentPage>
