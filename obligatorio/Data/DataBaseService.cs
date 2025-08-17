@@ -145,7 +145,12 @@ namespace obligatorio.Data
         public Task<Usuario> GetUsuarioAsync(int id) =>
             _database.Table<Usuario>().Where(u => u.Id == id).FirstOrDefaultAsync();
 
-
+        public async Task<Usuario> GetUsuarioByEmailAsync(string email)
+        {
+            return await _database.Table<Usuario>()
+                                  .Where(u => u.Email == email)
+                                  .FirstOrDefaultAsync();
+        }
 
 
         public Task<int> SaveUsuarioAsync(Usuario usuario)

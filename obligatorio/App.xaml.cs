@@ -1,4 +1,5 @@
 ﻿using obligatorio.Data;
+using obligatorio.Services;
 
 namespace obligatorio
 {
@@ -6,6 +7,8 @@ namespace obligatorio
     {
 
         public static DataBaseService Database { get; private set; }
+        
+        public static IUsuarioService UsuarioService { get; private set; }
 
         public App()
         {
@@ -18,7 +21,7 @@ namespace obligatorio
 
 
             Database = new DataBaseService(dbPath);
-
+            UsuarioService = new UsuarioService();
 
             //MainPage = new NavigationPage(new LoginPage(Database));
             MainPage = new AppShell();

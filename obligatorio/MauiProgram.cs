@@ -1,5 +1,7 @@
 ﻿using Microsoft.Extensions.Logging;
 using obligatorio.Data;
+using obligatorio.Models;
+using obligatorio.Services;
 
 namespace obligatorio
 {
@@ -25,6 +27,11 @@ namespace obligatorio
             builder.Services.AddSingleton<ClimaPage>();
             builder.Services.AddSingleton<ClienteListPage>();
             builder.Services.AddSingleton<ClienteDetailPage>();
+            builder.Services.AddSingleton<UsuarioService>();
+            builder.Services.AddSingleton<IUsuarioService, UsuarioService>();
+            builder.Services.AddSingleton<AppShell>();
+            builder.Services.AddSingleton<App>();
+            builder.Services.AddTransient<BannerUsuarioViewModel>();
 
 
             return builder.Build();

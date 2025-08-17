@@ -1,12 +1,18 @@
 ﻿using obligatorio;
+using obligatorio.Models;
+using obligatorio.Services;
 
 namespace obligatorio
 {
     public partial class AppShell : Shell
     {
+
         public AppShell()
         {
             InitializeComponent();
+            
+            BindingContext = new BannerUsuarioViewModel(App.UsuarioService);
+
             Routing.RegisterRoute(nameof(LoginPage), typeof(LoginPage));
             Routing.RegisterRoute(nameof(MainPage), typeof(MainPage));
             Routing.RegisterRoute(nameof(ClimaPage), typeof(ClimaPage));

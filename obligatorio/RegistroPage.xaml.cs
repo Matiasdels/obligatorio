@@ -83,7 +83,8 @@ public partial class RegistroPage : ContentPage
             string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(direccion) ||
             string.IsNullOrWhiteSpace(telefono) || string.IsNullOrWhiteSpace(email))
         {
-            lblResultado.Text = "Todos los campos son obligatorios.";
+            
+            await DisplayAlert("Error", "Todos los campos son obligatorios." , "Aceptar");
             return;
         }
 
@@ -92,6 +93,14 @@ public partial class RegistroPage : ContentPage
             lblResultado.Text = "Email inválido.";
             return;
         }
+
+        var usuarioExistente = await _dbService.GetUsuarioByEmailAsync(email);
+        if (usuarioExistente != null)
+        {
+            await DisplayAlert("Error", "El email ya está registrado.", "Aceptar");
+            return;
+        }
+
         var nuevoUsuario = new Usuario
         {
             Nombre = usuario,
@@ -105,6 +114,14 @@ public partial class RegistroPage : ContentPage
 
         await _dbService.SaveUsuarioAsync(nuevoUsuario);
 
+        bool irLogin = await DisplayAlert("Registro exitoso",
+                                      "Usuario registrado correctamente. ¿Deseas ir al login?",
+                                      "Sí", "No");
+        if (irLogin)
+        {
+            // Redirige al LoginPage
+            await Shell.Current.GoToAsync("//LoginPage"); ;
+        }
         lblResultado.TextColor = Colors.Green;
         lblResultado.Text = "Usuario registrado correctamente.";
     }

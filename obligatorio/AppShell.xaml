@@ -6,7 +6,195 @@
     xmlns:local="clr-namespace:obligatorio"
     
     Shell.FlyoutBehavior="Disabled"
-    Title="obligatorio">
+    Title="obligatorio"
+    >
+    <Shell.FlyoutHeader>
+        <Grid HeightRequest="0" />
+    </Shell.FlyoutHeader>
+
+    <!-- Banner flotante personalizado - SOLO visible cuando está logueado -->
+    <Shell.TitleView>
+        <Grid x:Name="BannerContainer" 
+              IsVisible="{Binding EstaLogueado}"
+              BackgroundColor="{AppThemeBinding Light=#2196F3, Dark=#1976D2}"
+              HeightRequest="60">
+
+            <Grid.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding ToggleFlyoutCommand}" />
+            </Grid.GestureRecognizers>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Avatar/Iniciales del usuario -->
+            <Border Grid.Column="0"
+                    Margin="10,10,15,10"
+                    BackgroundColor="{AppThemeBinding Light=White, Dark=#333333}"
+                    StrokeThickness="0"
+                    VerticalOptions="Center"
+                    WidthRequest="40"
+                    HeightRequest="40">
+                <Border.StrokeShape>
+                    <RoundRectangle CornerRadius="20" />
+                </Border.StrokeShape>
+
+                <Label Text="{Binding InicalesUsuario}"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="{AppThemeBinding Light=#2196F3, Dark=White}"
+                       HorizontalOptions="Center"
+                       VerticalOptions="Center" />
+            </Border>
+
+            <!-- Información del usuario -->
+            <StackLayout Grid.Column="1" 
+                         Orientation="Vertical" 
+                         VerticalOptions="Center"
+                         Spacing="2">
+                <Label Text="{Binding NombreUsuario}"
+                       FontSize="16"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       LineBreakMode="TailTruncation" />
+                <Label Text="{Binding RolUsuario}"
+                       FontSize="12"
+                       TextColor="#E1F5FE"
+                       LineBreakMode="TailTruncation" />
+            </StackLayout>
+
+            <!-- Icono de menú -->
+            <Label Grid.Column="2"
+                   Text="☰"
+                   FontSize="20"
+                   TextColor="White"
+                   Margin="15,0"
+                   VerticalOptions="Center"
+                   HorizontalOptions="Center" />
+
+        </Grid>
+    </Shell.TitleView>
+
+    <!-- Contenido del Flyout -->
+    <Shell.FlyoutContent>
+        <ScrollView BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#121212}">
+            <StackLayout Spacing="0">
+
+                <!-- Header del Flyout con información del usuario -->
+                <Grid BackgroundColor="{AppThemeBinding Light=#2196F3, Dark=#1976D2}"
+                      Padding="20"
+                      HeightRequest="150">
+
+                    <StackLayout Orientation="Vertical" 
+                                 VerticalOptions="Center">
+
+                        <!-- Avatar grande -->
+                        <Border BackgroundColor="White"
+                                StrokeThickness="0"
+                                WidthRequest="60"
+                                HeightRequest="60"
+                                Margin="0,0,0,10">
+                            <Border.StrokeShape>
+                                <RoundRectangle CornerRadius="30" />
+                            </Border.StrokeShape>
+
+                            <Label Text="{Binding InicalesUsuario}"
+                                   FontSize="24"
+                                   FontAttributes="Bold"
+                                   TextColor="{AppThemeBinding Light=#2196F3, Dark=White}"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center" />
+                        </Border>
+
+                        <!-- Información del usuario -->
+                        <Label Text="{Binding NombreUsuario}"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               TextColor="White"
+                               HorizontalOptions="Center" />
+                        <Label Text="{Binding RolUsuario}"
+                               FontSize="14"
+                               TextColor="#E1F5FE"
+                               HorizontalOptions="Center" />
+                    </StackLayout>
+                </Grid>
+
+                <!-- Opciones del menú -->
+                <StackLayout Spacing="0" Padding="0,10">
+
+                    <!-- Perfil -->
+                    <Grid BackgroundColor="Transparent" 
+                          HeightRequest="50">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding IrAPerfilCommand}" />
+                        </Grid.GestureRecognizers>
+
+                        <StackLayout Orientation="Horizontal" 
+                                     Margin="20,0"
+                                     VerticalOptions="Center">
+                            <Label Text="👤" FontSize="18" VerticalOptions="Center" />
+                            <Label Text="Perfil" 
+                                   FontSize="16" 
+                                   VerticalOptions="Center" 
+                                   Margin="15,0,0,0"
+                                   TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                        </StackLayout>
+                    </Grid>
+
+                    <!-- Separador -->
+                    <BoxView HeightRequest="1" 
+                             BackgroundColor="{AppThemeBinding Light=#E0E0E0, Dark=#333333}" 
+                             Margin="20,0" />
+
+                    <!-- Preferencias -->
+                    <Grid BackgroundColor="Transparent" 
+                          HeightRequest="50">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding IrAPreferenciasCommand}" />
+                        </Grid.GestureRecognizers>
+
+                        <StackLayout Orientation="Horizontal" 
+                                     Margin="20,0"
+                                     VerticalOptions="Center">
+                            <Label Text="⚙️" FontSize="18" VerticalOptions="Center" />
+                            <Label Text="Preferencias" 
+                                   FontSize="16" 
+                                   VerticalOptions="Center" 
+                                   Margin="15,0,0,0"
+                                   TextColor="{AppThemeBinding Light=Black, Dark=White}" />
+                        </StackLayout>
+                    </Grid>
+
+                    <!-- Separador -->
+                    <BoxView HeightRequest="1" 
+                             BackgroundColor="{AppThemeBinding Light=#E0E0E0, Dark=#333333}" 
+                             Margin="20,0" />
+
+                    <!-- Cerrar Sesión -->
+                    <Grid BackgroundColor="Transparent" 
+                          HeightRequest="50">
+                        <Grid.GestureRecognizers>
+                            <TapGestureRecognizer Command="{Binding CerrarSesionCommand}" />
+                        </Grid.GestureRecognizers>
+
+                        <StackLayout Orientation="Horizontal" 
+                                     Margin="20,0"
+                                     VerticalOptions="Center">
+                            <Label Text="🚪" FontSize="18" VerticalOptions="Center" />
+                            <Label Text="Cerrar Sesión" 
+                                   FontSize="16" 
+                                   VerticalOptions="Center" 
+                                   Margin="15,0,0,0"
+                                   TextColor="#F44336" />
+                        </StackLayout>
+                    </Grid>
+
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </Shell.FlyoutContent>
 
     <ShellContent Route="LoginPage" ContentTemplate="{DataTemplate local:LoginPage}" />
     

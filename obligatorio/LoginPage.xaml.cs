@@ -73,14 +73,16 @@ public partial class LoginPage : ContentPage
 
     private async void BtnLogin_Clicked(object sender, EventArgs e)
     {
-        string valor = txtUsuario.Text?.Trim();
+        string valor = txtUsuario.Text.Trim();
         string password = txtPassword.Text;
 
         var usuario = await _dbService.GetUsuarioByEmailOrNombreAsync(valor);
 
-        if (usuario != null && usuario.Password == password)
+        if (usuario != null && usuario.Password.Trim() == password.Trim())
         {
+            App.UsuarioService.SetUsuarioLogueado(usuario);
             await Shell.Current.GoToAsync("//MainPage");
+            
         }
         else
         {
