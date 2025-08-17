@@ -1,17 +1,21 @@
 
 
+using obligatorio.Data;
+using obligatorio.Models;
+
 namespace obligatorio;
 
 public partial class RegistroPage : ContentPage
 {
     string imagenBase64 = null;
+    private DataBaseService _dbService;
 
 
 
-
-    public RegistroPage()
+    public RegistroPage(DataBaseService dbService)
     {
         InitializeComponent();
+        _dbService = dbService;
     }
 
     private async void OnTomarFotoClicked(object sender, EventArgs e)
@@ -66,7 +70,7 @@ public partial class RegistroPage : ContentPage
         }
     }
 
-    private void OnRegistroClicked(object sender, EventArgs e)
+    private async void OnRegistroClicked(object sender, EventArgs e)
     {
         string usuario = txtUsuario.Text?.Trim();
         string password = txtPassword.Text;
@@ -88,8 +92,18 @@ public partial class RegistroPage : ContentPage
             lblResultado.Text = "Email inválido.";
             return;
         }
+        var nuevoUsuario = new Usuario
+        {
+            Nombre = usuario,
+            Email = email,
+            Password = password,
+            Rol = "Cliente",
+            Direccion = direccion,
+            Telefono = telefono,
+            FotoBase64 = imagenBase64
+        };
 
-        // Aquí podrías guardar los datos a base de datos, o enviarlos a una API
+        await _dbService.SaveUsuarioAsync(nuevoUsuario);
 
         lblResultado.TextColor = Colors.Green;
         lblResultado.Text = "Usuario registrado correctamente.";

@@ -1,13 +1,5 @@
-﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.IO;
-using obligatorio.Models;
+﻿using obligatorio.Models;
+using SQLite;
 
 namespace obligatorio.Data
 {
@@ -18,8 +10,10 @@ namespace obligatorio.Data
         public DataBaseService(string dbPath)
         {
             _database = new SQLiteAsyncConnection(dbPath);
-            InitAsync();
+            InitAsync().ConfigureAwait(false);
         }
+
+
 
         private async Task CrearAdminPorDefecto()
         {
@@ -32,7 +26,7 @@ namespace obligatorio.Data
             {
                 var admin = new Usuario
                 {
-                    Nombre = "Administrador",
+                    Nombre = "admin",
                     Email = "admin@admin.com",
                     Password = "1234", // puedes cambiar la contraseña por defecto
                     Rol = "Administrador"
@@ -47,6 +41,7 @@ namespace obligatorio.Data
             await _database.CreateTableAsync<Sucursal>();
             await _database.CreateTableAsync<Cliente>();
             await _database.CreateTableAsync<Favorito>();
+            await _database.CreateTableAsync<Usuario>();
 
             await CrearAdminPorDefecto();
         }
@@ -83,11 +78,11 @@ namespace obligatorio.Data
             return _database.Table<Cliente>().ToListAsync();
         }
         public Task<Usuario> GetUsuarioByEmailOrNombreAsync(string valor)
-{
-    return _database.Table<Usuario>()
-        .Where(u => u.Email == valor || u.Nombre == valor)
-        .FirstOrDefaultAsync();
-}
+        {
+            return _database.Table<Usuario>()
+                .Where(u => u.Email == valor || u.Nombre == valor)
+                .FirstOrDefaultAsync();
+        }
 
         public Task<Cliente> GetClienteAsync(int id)
         {
@@ -152,11 +147,16 @@ namespace obligatorio.Data
         public Task<Usuario> GetUsuarioAsync(int id) =>
             _database.Table<Usuario>().Where(u => u.Id == id).FirstOrDefaultAsync();
 
-        public Task<Usuario> GetUsuarioByEmailAsync(string email) =>
-            _database.Table<Usuario>().Where(u => u.Email == email).FirstOrDefaultAsync();
 
-        public Task<int> SaveUsuarioAsync(Usuario usuario) =>
-            usuario.Id != 0 ? _database.UpdateAsync(usuario) : _database.InsertAsync(usuario);
+
+
+        public Task<int> SaveUsuarioAsync(Usuario usuario)
+        {
+            if (usuario.Id != 0)
+                return _database.UpdateAsync(usuario);
+            else
+                return _database.InsertAsync(usuario);
+        }
 
         public Task<int> DeleteUsuarioAsync(Usuario usuario) =>
             _database.DeleteAsync(usuario);

@@ -1,3 +1,4 @@
+using obligatorio.Data;
 using Plugin.Fingerprint;
 using Plugin.Fingerprint.Abstractions;
 
@@ -5,9 +6,12 @@ namespace obligatorio;
 
 public partial class LoginPage : ContentPage
 {
-    public LoginPage()
+    private DataBaseService _dbService;
+
+    public LoginPage(DataBaseService dbService)
     {
         InitializeComponent();
+        _dbService = dbService;
 
         if (DeviceInfo.Platform != DevicePlatform.Android && DeviceInfo.Platform != DevicePlatform.iOS)
         {
@@ -69,9 +73,14 @@ public partial class LoginPage : ContentPage
 
     private async void BtnLogin_Clicked(object sender, EventArgs e)
     {
-        if (txtUsuario.Text == "admin" && txtPassword.Text == "1234")
+        string valor = txtUsuario.Text?.Trim();
+        string password = txtPassword.Text;
+
+        var usuario = await _dbService.GetUsuarioByEmailOrNombreAsync(valor);
+
+        if (usuario != null && usuario.Password == password)
         {
-            await Shell.Current.GoToAsync("//MainPage");
+            await Navigation.PushAsync(new MainPage());
         }
         else
         {
@@ -82,6 +91,6 @@ public partial class LoginPage : ContentPage
     private async void OnRegistroTapped(object sender, EventArgs e)
     {
         // Asegúrate de tener una página de registro creada, por ejemplo RegistroPage.xaml
-        await Navigation.PushAsync(new RegistroPage());
+        await Navigation.PushAsync(new RegistroPage(App.Database));
     }
 }
