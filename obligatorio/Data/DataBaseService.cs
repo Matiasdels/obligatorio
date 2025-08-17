@@ -21,11 +21,34 @@ namespace obligatorio.Data
             InitAsync();
         }
 
+        private async Task CrearAdminPorDefecto()
+        {
+            // Verificar si ya existe un admin
+            var adminExistente = await _database.Table<Usuario>()
+                .Where(u => u.Rol == "Administrador")
+                .FirstOrDefaultAsync();
+
+            if (adminExistente == null)
+            {
+                var admin = new Usuario
+                {
+                    Nombre = "Administrador",
+                    Email = "admin@admin.com",
+                    Password = "1234", // puedes cambiar la contraseña por defecto
+                    Rol = "Administrador"
+                };
+
+                await _database.InsertAsync(admin);
+            }
+        }
+
         public async Task InitAsync()
         {
             await _database.CreateTableAsync<Sucursal>();
             await _database.CreateTableAsync<Cliente>();
             await _database.CreateTableAsync<Favorito>();
+
+            await CrearAdminPorDefecto();
         }
 
         public Task<List<Sucursal>> GetSucursalesAsync()
@@ -59,6 +82,12 @@ namespace obligatorio.Data
         {
             return _database.Table<Cliente>().ToListAsync();
         }
+        public Task<Usuario> GetUsuarioByEmailOrNombreAsync(string valor)
+{
+    return _database.Table<Usuario>()
+        .Where(u => u.Email == valor || u.Nombre == valor)
+        .FirstOrDefaultAsync();
+}
 
         public Task<Cliente> GetClienteAsync(int id)
         {
@@ -115,5 +144,21 @@ namespace obligatorio.Data
         {
             return _database.DeleteAsync(favorito);
         }
+
+        // ---------- CRUD Usuario ----------
+        public Task<List<Usuario>> GetUsuariosAsync() =>
+            _database.Table<Usuario>().ToListAsync();
+
+        public Task<Usuario> GetUsuarioAsync(int id) =>
+            _database.Table<Usuario>().Where(u => u.Id == id).FirstOrDefaultAsync();
+
+        public Task<Usuario> GetUsuarioByEmailAsync(string email) =>
+            _database.Table<Usuario>().Where(u => u.Email == email).FirstOrDefaultAsync();
+
+        public Task<int> SaveUsuarioAsync(Usuario usuario) =>
+            usuario.Id != 0 ? _database.UpdateAsync(usuario) : _database.InsertAsync(usuario);
+
+        public Task<int> DeleteUsuarioAsync(Usuario usuario) =>
+            _database.DeleteAsync(usuario);
     }
 }
