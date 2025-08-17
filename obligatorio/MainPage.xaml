@@ -1,8 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="obligatorio.MainPage"
-             BackgroundColor="{StaticResource White}">
+             x:Class="obligatorio.MainPage">
+
+    <ContentPage.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
+            <GradientStop Color="#0D1B2A" Offset="0.0" />
+            <GradientStop Color="#1B2A44" Offset="1.0" />
+        </LinearGradientBrush>
+    </ContentPage.Background>
+    
 
     <ContentPage.Resources>
         <Style x:Key="HeaderLabelStyle" TargetType="Label">
@@ -12,7 +19,6 @@
             <Setter Property="HorizontalOptions" Value="Center" />
             <Setter Property="Margin" Value="0,20,0,10" />
         </Style>
-
         <Style x:Key="SubHeaderLabelStyle" TargetType="Label">
             <Setter Property="FontSize" Value="16" />
             <Setter Property="TextColor" Value="#1976D2" />
@@ -20,7 +26,6 @@
             <Setter Property="Margin" Value="0,0,0,30" />
             <Setter Property="Opacity" Value="0.8" />
         </Style>
-
         <Style x:Key="ModernButtonStyle" TargetType="Button">
             <Setter Property="FontSize" Value="18" />
             <Setter Property="FontAttributes" Value="Bold" />
@@ -32,49 +37,49 @@
                 <Shadow Brush="#40000000" Offset="0,4" Radius="8" Opacity="0.3" />
             </Setter>
         </Style>
-
         <LinearGradientBrush x:Key="PrimaryGradient" StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#1976D2" Offset="0.0" />
             <GradientStop Color="#1565C0" Offset="1.0" />
         </LinearGradientBrush>
-
         <LinearGradientBrush x:Key="SecondaryGradient" StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#42A5F5" Offset="0.0" />
             <GradientStop Color="#2196F3" Offset="1.0" />
         </LinearGradientBrush>
-
         <LinearGradientBrush x:Key="AccentGradient" StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#64B5F6" Offset="0.0" />
             <GradientStop Color="#42A5F5" Offset="1.0" />
         </LinearGradientBrush>
-
         <LinearGradientBrush x:Key="LightGradient" StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#90CAF9" Offset="0.0" />
             <GradientStop Color="#64B5F6" Offset="1.0" />
         </LinearGradientBrush>
-
         <LinearGradientBrush x:Key="DarkGradient" StartPoint="0,0" EndPoint="1,1">
             <GradientStop Color="#0D47A1" Offset="0.0" />
             <GradientStop Color="#1565C0" Offset="1.0" />
         </LinearGradientBrush>
     </ContentPage.Resources>
-
+    
     <ScrollView>
         <Grid RowDefinitions="Auto,Auto,Auto,*,Auto" Padding="0">
 
             <Frame Grid.Row="0" 
-                   Background="{StaticResource PrimaryGradient}"
-                   CornerRadius="40"
+                   Background="{StaticResource PrussianBlue}"
+                   CornerRadius="0"
+
                    Padding="30,40,30,30"
                    Margin="0,0,0,20"
                    HasShadow="True">
-                <StackLayout Spacing="10">
-                    <Label Style="{StaticResource HeaderLabelStyle}"
-                           Text="Voz del Este"
-                           TextColor="White" />
-                    <Label Style="{StaticResource SubHeaderLabelStyle}"
-                           Text="Acá poner un eslogan o algo que suene bien"
-                           TextColor="#E3F2FD" />
+                <StackLayout Spacing="5">
+                    <Label Text="Voz del Este"
+                       FontSize="36"
+                       FontAttributes="Bold"
+                       TextColor="White"
+                       HorizontalOptions="Center"/>
+                    <Label Text="La radio del Uruguay"
+                       FontSize="16"
+                       FontAttributes="Italic"
+                       TextColor="#B0C4DE"
+                       HorizontalOptions="Center"/>
                 </StackLayout>
             </Frame>
 
@@ -155,7 +160,7 @@
                 <Label Text="Navegación Principal" 
                        FontSize="20" 
                        FontAttributes="Bold" 
-                       TextColor="#0D47A1" 
+                       TextColor="White" 
                        Margin="30,0,0,10" />
 
                 <Grid ColumnDefinitions="*,*" Margin="20,0">
@@ -213,10 +218,10 @@
                         Margin="20,10,20,0" />
 
             </StackLayout>
-            
+
             <Frame Grid.Row="4"
-                   BackgroundColor="{StaticResource PrimaryBlue}"
-                   CornerRadius="30"
+                   Background="{StaticResource PrussianBlue}"
+                   CornerRadius="0"
                    Padding="30,20"
                    Margin="0,20,0,0">
                 <StackLayout>
@@ -231,7 +236,6 @@
                            Opacity="0.7" />
                 </StackLayout>
             </Frame>
-
         </Grid>
     </ScrollView>
 </ContentPage>

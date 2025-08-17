@@ -29,6 +29,22 @@
     <Color x:Key="Gray900">#212121</Color>
     <Color x:Key="Gray950">#141414</Color>
 
+    <!-- Azul muy oscuro, profundo -->
+    <Color x:Key="DeepIndigo">#1B1F3B</Color>
+    <!-- Azul profundo, elegante -->
+    <Color x:Key="DarkSapphire">#0F2A44</Color>
+    <!-- Azul con un toque de gris, sobrio -->
+    <Color x:Key="OxfordBlue">#0D1B2A</Color>
+    <!-- Azul muy oscuro clásico -->
+    <Color x:Key="PrussianBlue">#1D3557</Color>
+    <!-- Azul oscuro profesional -->
+    <Color x:Key="CharcoalBlue">#2C3E50</Color>
+    <!-- Azul grisáceo, moderno y neutro -->
+    <Color x:Key="SpaceCadet">#2B2D42</Color>
+    <!-- Azul casi negro, elegante -->
+    <Color x:Key="BlueBlack">#121828</Color>
+    <!-- Azul extremadamente oscuro, serio -->
+
     <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource Primary}"/>
     <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource Secondary}"/>
     <SolidColorBrush x:Key="TertiaryBrush" Color="{StaticResource Tertiary}"/>
