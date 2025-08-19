@@ -86,7 +86,7 @@ namespace obligatorio.Models
                 if (Shell.Current != null)
                 {
                     Shell.Current.FlyoutIsPresented = false;
-                    await Shell.Current.GoToAsync("//perfil");
+                    await Shell.Current.GoToAsync("//Perfil");
                 }
             }
             catch (Exception ex)
@@ -102,7 +102,7 @@ namespace obligatorio.Models
                 if (Shell.Current != null)
                 {
                     Shell.Current.FlyoutIsPresented = false;
-                    await Shell.Current.GoToAsync("//preferencias");
+                    await Shell.Current.GoToAsync("//Preferencias");
                 }
             }
             catch (Exception ex)

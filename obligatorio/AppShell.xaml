@@ -5,12 +5,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:obligatorio"
     
-    Shell.FlyoutBehavior="Disabled"
+    Shell.FlyoutBehavior="Flyout"
+    Shell.FlyoutWidth="320"
+    Shell.FlyoutBackgroundColor="{AppThemeBinding Light=#F8FAFC, Dark=#0F172A}"
     Title="obligatorio"
     >
-    <Shell.FlyoutHeader>
-        <Grid HeightRequest="0" />
-    </Shell.FlyoutHeader>
+    
 
     <!-- Banner flotante personalizado - SOLO visible cuando está logueado -->
     <Shell.TitleView>
@@ -66,13 +66,18 @@
             </StackLayout>
 
             <!-- Icono de menú -->
-            <Label Grid.Column="2"
-                   Text="☰"
-                   FontSize="20"
-                   TextColor="White"
-                   Margin="15,0"
-                   VerticalOptions="Center"
-                   HorizontalOptions="Center" />
+            <Button Grid.Column="2"
+                    Text="☰"
+                    FontSize="20"
+                    TextColor="White"
+                    BackgroundColor="Transparent"
+                    BorderWidth="0"
+                    Margin="15,0"
+                    VerticalOptions="Center"
+                    HorizontalOptions="Center"
+                    Command="{Binding ToggleFlyoutCommand}"
+                    WidthRequest="50"
+                    HeightRequest="50" />
 
         </Grid>
     </Shell.TitleView>

@@ -1,0 +1,346 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="obligatorio.Perfil"
+             Title="Perfil"
+             BackgroundColor="{AppThemeBinding Light=#F8FAFC, Dark=#0F172A}">
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="20">
+
+            <!-- Header con foto y información principal -->
+            <Frame BackgroundColor="{AppThemeBinding Light=White, Dark=#1E293B}"
+                   CornerRadius="20"
+                   HasShadow="True"
+                   Padding="0">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="120" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Fondo degradado del header -->
+                    <Frame Grid.Row="0"
+                           BackgroundColor="#2196F3"
+                           CornerRadius="20,20,0,0"
+                           HasShadow="False"
+                           Padding="0">
+                        <Grid>
+                            <BoxView BackgroundColor="#1976D2" 
+                                     Opacity="0.7"
+                                     VerticalOptions="Fill" 
+                                     HorizontalOptions="Fill" />
+                        </Grid>
+                    </Frame>
+
+                    <!-- Contenido del header -->
+                    <Grid Grid.Row="0" Grid.RowSpan="2" 
+                          Margin="20">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="*" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+
+                        <!-- Foto de perfil -->
+                        <Frame Grid.Row="0"
+                               BackgroundColor="White"
+                               CornerRadius="50"
+                               HasShadow="True"
+                               Padding="0"
+                               WidthRequest="100"
+                               HeightRequest="100"
+                               HorizontalOptions="Center"
+                               VerticalOptions="End"
+                               Margin="0,0,0,-50">
+
+                            <Grid>
+                                <!-- Imagen de perfil -->
+                                <Image x:Name="FotoPerfilImage"
+                                       Source="{Binding FotoPerfilSource}"
+                                       Aspect="AspectFill"
+                                       VerticalOptions="Fill"
+                                       HorizontalOptions="Fill" />
+
+                                <!-- Iniciales como fallback -->
+                                <Label x:Name="InicialesLabel"
+                                       Text="{Binding InicalesUsuario}"
+                                       FontSize="36"
+                                       FontAttributes="Bold"
+                                       TextColor="#2196F3"
+                                       HorizontalOptions="Center"
+                                       VerticalOptions="Center"
+                                       IsVisible="{Binding MostrarIniciales}" />
+
+                                <!-- Botón para cambiar foto -->
+                                <Frame BackgroundColor="#2196F3"
+                                       CornerRadius="15"
+                                       HasShadow="True"
+                                       Padding="5"
+                                       WidthRequest="30"
+                                       HeightRequest="30"
+                                       HorizontalOptions="End"
+                                       VerticalOptions="End"
+                                       Margin="0,0,-5,-5">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Command="{Binding CambiarFotoCommand}" />
+                                    </Frame.GestureRecognizers>
+
+                                    <Label Text="📷"
+                                           FontSize="12"
+                                           TextColor="White"
+                                           HorizontalOptions="Center"
+                                           VerticalOptions="Center" />
+                                </Frame>
+                            </Grid>
+                        </Frame>
+
+                        <!-- Nombre del usuario -->
+                        <Label Grid.Row="1"
+                               Text="{Binding Usuario.Nombre}"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#1E293B, Dark=White}"
+                               HorizontalOptions="Center"
+                               Margin="0,60,0,0" />
+
+                        <!-- Rol del usuario -->
+                        <Frame Grid.Row="2"
+                               BackgroundColor="#E3F2FD"
+                               CornerRadius="15"
+                               HasShadow="False"
+                               Padding="8,4"
+                               HorizontalOptions="Center"
+                               Margin="0,10,0,0">
+                            <Label Text="{Binding Usuario.Rol}"
+                                   FontSize="14"
+                                   FontAttributes="Bold"
+                                   TextColor="#1976D2"
+                                   HorizontalOptions="Center" />
+                        </Frame>
+                    </Grid>
+                </Grid>
+            </Frame>
+
+            <!-- Información personal -->
+            <Frame BackgroundColor="{AppThemeBinding Light=White, Dark=#1E293B}"
+                   CornerRadius="16"
+                   HasShadow="True"
+                   Padding="20">
+
+                <StackLayout Spacing="15">
+                    <!-- Título de la sección -->
+                    <Label Text="📋 Información Personal"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#2196F3"
+                           Margin="0,0,0,10" />
+
+                    <!-- Email -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Text="📧"
+                               FontSize="18"
+                               VerticalOptions="Center"
+                               Margin="0,0,10,0" />
+
+                        <Label Grid.Row="0" Grid.Column="1"
+                               Text="Email"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}" />
+
+                        <Label Grid.Row="1" Grid.Column="1"
+                               Text="{Binding Usuario.Email}"
+                               FontSize="16"
+                               TextColor="{AppThemeBinding Light=#1E293B, Dark=White}"
+                               Margin="0,2,0,0" />
+                    </Grid>
+
+                    <!-- Separador -->
+                    <BoxView HeightRequest="1"
+                             BackgroundColor="{AppThemeBinding Light=#E2E8F0, Dark=#374151}"
+                             Margin="0,5" />
+
+                    <!-- Teléfono -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Text="📱"
+                               FontSize="18"
+                               VerticalOptions="Center"
+                               Margin="0,0,10,0" />
+
+                        <Label Grid.Row="0" Grid.Column="1"
+                               Text="Teléfono"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}" />
+
+                        <Label Grid.Row="1" Grid.Column="1"
+                               Text="{Binding Usuario.Telefono}"
+                               FontSize="16"
+                               TextColor="{AppThemeBinding Light=#1E293B, Dark=White}"
+                               Margin="0,2,0,0" />
+                    </Grid>
+
+                    <!-- Separador -->
+                    <BoxView HeightRequest="1"
+                             BackgroundColor="{AppThemeBinding Light=#E2E8F0, Dark=#374151}"
+                             Margin="0,5" />
+
+                    <!-- Dirección -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Text="📍"
+                               FontSize="18"
+                               VerticalOptions="Center"
+                               Margin="0,0,10,0" />
+
+                        <Label Grid.Row="0" Grid.Column="1"
+                               Text="Dirección"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}" />
+
+                        <Label Grid.Row="1" Grid.Column="1"
+                               Text="{Binding Usuario.Direccion}"
+                               FontSize="16"
+                               TextColor="{AppThemeBinding Light=#1E293B, Dark=White}"
+                               Margin="0,2,0,0"
+                               LineBreakMode="WordWrap" />
+                    </Grid>
+                </StackLayout>
+            </Frame>
+
+            <!-- Información de cuenta -->
+            <Frame BackgroundColor="{AppThemeBinding Light=White, Dark=#1E293B}"
+                   CornerRadius="16"
+                   HasShadow="True"
+                   Padding="20">
+
+                <StackLayout Spacing="15">
+                    <!-- Título de la sección -->
+                    <Label Text="🔐 Información de Cuenta"
+                           FontSize="18"
+                           FontAttributes="Bold"
+                           TextColor="#2196F3"
+                           Margin="0,0,0,10" />
+
+                    <!-- ID de usuario -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Text="🆔"
+                               FontSize="18"
+                               VerticalOptions="Center"
+                               Margin="0,0,10,0" />
+
+                        <Label Grid.Row="0" Grid.Column="1"
+                               Text="ID de Usuario"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}" />
+
+                        <Label Grid.Row="1" Grid.Column="1"
+                               Text="{Binding Usuario.Id}"
+                               FontSize="16"
+                               TextColor="{AppThemeBinding Light=#1E293B, Dark=White}"
+                               Margin="0,2,0,0" />
+                    </Grid>
+
+                    <!-- Separador -->
+                    <BoxView HeightRequest="1"
+                             BackgroundColor="{AppThemeBinding Light=#E2E8F0, Dark=#374151}"
+                             Margin="0,5" />
+
+                    <!-- Estado de la contraseña -->
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Label Grid.Row="0" Grid.Column="0"
+                               Text="🔑"
+                               FontSize="18"
+                               VerticalOptions="Center"
+                               Margin="0,0,10,0" />
+
+                        <Label Grid.Row="0" Grid.Column="1"
+                               Text="Contraseña"
+                               FontSize="14"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}" />
+
+                        <Label Grid.Row="1" Grid.Column="1"
+                               Text="••••••••"
+                               FontSize="16"
+                               TextColor="{AppThemeBinding Light=#1E293B, Dark=White}"
+                               Margin="0,2,0,0" />
+                    </Grid>
+                </StackLayout>
+            </Frame>
+
+            <!-- Mensaje informativo -->
+            <Frame BackgroundColor="#E3F2FD"
+                   CornerRadius="12"
+                   HasShadow="False"
+                   Padding="15">
+
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <Label Text="ℹ️"
+                           FontSize="20"
+                           VerticalOptions="Center" />
+
+                    <Label Text="Solo puedes cambiar tu foto de perfil. Para modificar otros datos, contacta al administrador."
+                           FontSize="14"
+                           TextColor="#1976D2"
+                           VerticalOptions="Center"
+                           LineBreakMode="WordWrap"
+                           HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+            </Frame>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>

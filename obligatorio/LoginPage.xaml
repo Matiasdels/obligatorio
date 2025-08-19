@@ -20,7 +20,7 @@
                 <Frame x:Name="frameHuella" 
                        Style="{StaticResource AppCardFrame}"
                        Padding="0"
-                       IsVisible="False">
+                       IsVisible="True">
                     <Button x:Name="btnHuella" 
                             Text="🔐 Ingresar con Huella Digital" 
                             Style="{StaticResource AppSecondaryButton}"
@@ -33,7 +33,7 @@
                              Orientation="Horizontal" 
                              HorizontalOptions="Center"
                              Spacing="15"
-                             IsVisible="False"
+                             IsVisible="True"
                              Margin="0,10">
                     <BoxView BackgroundColor="{StaticResource Gray200}" HeightRequest="1" WidthRequest="80" VerticalOptions="Center"/>
                     <Label Text="O" TextColor="{StaticResource Gray500}" FontSize="16" FontAttributes="Bold"/>
