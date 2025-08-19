@@ -2,11 +2,10 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="obligatorio.CotizacionesPage"
-             
-             BackgroundColor="#F8FFFE" >
+             BackgroundColor="{StaticResource OxfordBlue}">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <!-- Gradientes principales -->
+         
             <LinearGradientBrush x:Key="PrimaryGradient" StartPoint="0,0" EndPoint="1,1">
                 <GradientStop Color="#0D47A1" Offset="0.0" />
                 <GradientStop Color="#1976D2" Offset="1.0" />
@@ -32,7 +31,6 @@
                 <GradientStop Color="#0277BD" Offset="1.0" />
             </LinearGradientBrush>
 
-            <!-- Sombras -->
             <Shadow x:Key="CardShadow" 
                     Brush="Black" 
                     Offset="0,4" 
@@ -50,7 +48,6 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="25">
 
-            <!-- Encabezado -->
             <Frame x:Name="HeaderFrame"
                    BackgroundColor="Transparent" 
                    Background="{StaticResource PrimaryGradient}" 
@@ -76,18 +73,16 @@
             </Frame>
 
             <!-- Imagen ilustrativa -->
-            <Frame BackgroundColor="White" 
-                   CornerRadius="15" 
-                   Padding="0" 
-                   Shadow="{StaticResource CardShadow}">
-                <Image Source="https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&amp;h=200&amp;fit=crop&amp;crop=center" 
-                       Aspect="AspectFill" 
-                       HeightRequest="150">
-                    <Image.Clip>
-                        <RoundRectangleGeometry CornerRadius="15" 
-                                              Rect="0,0,400,150"/>
-                    </Image.Clip>
-                </Image>
+            <Frame BackgroundColor="White"
+                   CornerRadius="15"
+                   Padding="0"
+                   Shadow="{StaticResource CardShadow}"
+                   HasShadow="True"
+                   HeightRequest="150">
+                <Image Source="cotizacionesimagen.jpg"
+                   Aspect="AspectFill"
+                   HorizontalOptions="Fill"
+                   VerticalOptions="Fill"/>
             </Frame>
 
             <!-- Sección de tarjetas de cotizaciones -->
@@ -207,7 +202,7 @@
             </Grid>
 
             <!-- Sección de navegación -->
-            <Label Text="Opciones" 
+            <!--<Label Text="Opciones" 
                    FontSize="22" 
                    FontAttributes="Bold" 
                    TextColor="#0D47A1" 
@@ -218,7 +213,7 @@
                   RowSpacing="12" 
                   ColumnSpacing="12">
 
-                <!-- Botón Ver más cotizaciones -->
+                --><!-- Botón Ver más cotizaciones --><!--
                 <Button x:Name="btnVerMas" 
                         Grid.Row="0" 
                         Grid.Column="0" 
@@ -232,7 +227,7 @@
                         HeightRequest="55" 
                         Shadow="{StaticResource ButtonShadow}"/>
 
-                <!-- Botón Historial -->
+                --><!-- Botón Historial --><!--
                 <Button x:Name="btnHistorial" 
                         Grid.Row="0" 
                         Grid.Column="1" 
@@ -246,7 +241,7 @@
                         HeightRequest="55" 
                         Shadow="{StaticResource ButtonShadow}"/>
 
-                <!-- Botón Internacional -->
+                --><!-- Botón Internacional --><!--
                 <Button x:Name="btnInternacional" 
                         Grid.Row="1" 
                         Grid.Column="0" 
@@ -260,7 +255,7 @@
                         HeightRequest="55" 
                         Shadow="{StaticResource ButtonShadow}"/>
 
-                <!-- Botón Configuración -->
+                --><!-- Botón Configuración --><!--
                 <Button x:Name="btnConfiguracion" 
                         Grid.Row="1" 
                         Grid.Column="1" 
@@ -275,7 +270,7 @@
                         Shadow="{StaticResource ButtonShadow}"/>
             </Grid>
 
-            <!-- Footer -->
+            --><!-- Footer --><!--
             <VerticalStackLayout Spacing="5" 
                                 Margin="0,30,0,0">
                 <Label Text="Cotizaciones App v1.0" 
@@ -287,7 +282,14 @@
                        TextColor="#1976D2" 
                        Opacity="0.7" 
                        HorizontalOptions="Center"/>
-            </VerticalStackLayout>
+            </VerticalStackLayout>-->
+            <Button Grid.Row="3"
+                x:Name="btnAtras" 
+                Text="← Volver atrás" 
+                Clicked="btnAtras_Clicked"
+                Style="{StaticResource AppPrimaryButton}"
+                HeightRequest="45"
+                Margin="20,10,20,15"/>  
 
         </VerticalStackLayout>
     </ScrollView>
