@@ -468,7 +468,7 @@
 
 
     <Style TargetType="Button" x:Key="AppPrimaryButton">
-        <Setter Property="BackgroundColor" Value="{StaticResource PrimaryBlue}" />
+        <Setter Property="BackgroundColor" Value="{StaticResource PrussianBlue}" />
         <Setter Property="TextColor" Value="{StaticResource TextOnPrimary}" />
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="CornerRadius" Value="12" />

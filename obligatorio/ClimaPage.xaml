@@ -2,38 +2,119 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="obligatorio.ClimaPage"
-             Title="Clima en Punta del Este">
+             Title="Clima"
+             BackgroundColor="{StaticResource OxfordBlue}">
 
     <ScrollView>
-        <VerticalStackLayout Padding="20" Spacing="20" VerticalOptions="Center">
+        <VerticalStackLayout Padding="20" Spacing="20">
 
-            <Label x:Name="lblCity"
-                   Text="Ciudad"
-                   FontSize="28"
-                   FontAttributes="Bold"
-                   HorizontalOptions="Center" />
+            <!-- Header Card - Información Principal del Clima -->
+            <Frame BackgroundColor="{StaticResource PrussianBlue}"
+                   CornerRadius="20"
+                   HasShadow="True"
+                   Padding="20"
+                   HorizontalOptions="Fill">
+                
+                <VerticalStackLayout Spacing="15">
 
-            <Image x:Name="imgIcon"
-                   WidthRequest="100"
-                   HeightRequest="100"
-                   HorizontalOptions="Center" />
+                    <Label x:Name="lblCity"
+                           FontSize="28"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource White}"
+                           HorizontalOptions="Center" />
 
-            <Label x:Name="lblTemp"
-                   Text="0°C"
-                   FontSize="36"
-                   HorizontalOptions="Center" />
+                    <HorizontalStackLayout VerticalOptions="Center" HorizontalOptions="Center" Spacing="10">
+                        <Image x:Name="imgIcon"
+                           HeightRequest="80"
+                           WidthRequest="80"
+                           VerticalOptions="Center" />
+                        <Label x:Name="lblTemp"
+                           FontSize="48"
+                           FontAttributes="Bold"
+                           TextColor="{StaticResource White}"
+                           VerticalOptions="Center" />
+                    </HorizontalStackLayout>
 
-            <Label x:Name="lblDescription"
-                   Text="Descripción del clima"
-                   FontSize="18"
-                   HorizontalOptions="Center" />
+                    <Label x:Name="lblDescription"
+                           FontSize="18"
+                           TextColor="{StaticResource White}"
+                           HorizontalOptions="Center"
+                           FontAttributes="Italic" />
 
-            <Button Text="Actualizar"
-                    Clicked="OnActualizarClicked"
-                    BackgroundColor="#2196F3"
-                    TextColor="White"
-                    CornerRadius="10"
-                    Padding="10" />
+                </VerticalStackLayout>
+            </Frame>
+
+
+            <Frame BackgroundColor="{StaticResource PrussianBlue}"
+                   CornerRadius="20"
+                   HasShadow="True"
+                   Padding="15"
+                   HorizontalOptions="Fill">
+
+                <VerticalStackLayout Spacing="15">
+
+                    <Label Text="Próximos días"
+                       FontSize="20"
+                       FontAttributes="Bold"
+                       TextColor="{StaticResource White}"
+                       HorizontalOptions="Center"/>
+
+                    <CollectionView x:Name="forecastCollection"
+                        ItemsLayout="HorizontalList"
+                        HeightRequest="180"
+                        HorizontalOptions="Center">
+                        
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <Frame BackgroundColor="{StaticResource Gray100}"
+                                   CornerRadius="15"
+                                   Padding="10"
+                                   Margin="5,0"
+                                   HasShadow="False"
+                                   HorizontalOptions="Fill"
+                                   MinimumWidthRequest="100">
+
+                                    <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="*">
+                                        <Label Text="{Binding Date}" 
+                                           FontSize="14" 
+                                           FontAttributes="Bold"
+                                           TextColor="{StaticResource PrussianBlue}"
+                                           HorizontalOptions="Center"/>
+
+                                        <Image Source="{Binding Icon}" 
+                                           HeightRequest="40" 
+                                           WidthRequest="40"
+                                           HorizontalOptions="Center"
+                                           Grid.Row="1"/>
+
+                                        <Label Text="{Binding Temp}" 
+                                           FontSize="16" 
+                                           FontAttributes="Bold"
+                                           TextColor="{StaticResource Gray900}"
+                                           HorizontalOptions="Center"
+                                           Grid.Row="2"/>
+
+                                        <Label Text="{Binding Description}" 
+                                           FontSize="11" 
+                                           TextColor="{StaticResource Gray600}"
+                                           HorizontalOptions="Center"
+                                           LineBreakMode="WordWrap"
+                                           Grid.Row="3"/>   
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+
+                </VerticalStackLayout>
+            </Frame>
+            <Button Grid.Row="3"
+                x:Name="btnAtras" 
+                Text="← Volver atrás" 
+                Clicked="btnAtras_Clicked"
+                Style="{StaticResource AppPrimaryButton}"
+                HeightRequest="45"
+                Margin="20,10,20,15"/>
 
         </VerticalStackLayout>
     </ScrollView>

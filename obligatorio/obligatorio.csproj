@@ -58,6 +58,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Models\ForecastResponse.cs" />
 	  <Compile Remove="RegistroPage.cs" />
 	</ItemGroup>
 

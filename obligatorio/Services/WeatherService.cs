@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace obligatorio.Services
 {
-    internal class WeatherService
+    public class WeatherService
     {
         private readonly HttpClient _httpClient;
         private const string ApiKey = "cf26c283759c6dd96366e95634f39056";
@@ -19,13 +19,22 @@ namespace obligatorio.Services
             _httpClient = new HttpClient();
         }
 
-        // 🔹 Método para obtener clima actual en Punta del Este
+        // 🔹 Clima actual en Punta del Este
         public async Task<Root> GetCurrentWeatherAsync()
         {
             string url = $"{BaseUrl}weather?q=Punta%20del%20Este,UY&units=metric&lang=es&appid={ApiKey}";
             var response = await _httpClient.GetStringAsync(url);
             var weatherData = JsonConvert.DeserializeObject<Root>(response);
             return weatherData;
+        }
+
+        // 🔹 Pronóstico 5 días en Punta del Este
+        public async Task<ForecastResponse> GetForecastAsync()
+        {
+            string url = $"{BaseUrl}forecast?q=Punta%20del%20Este,UY&units=metric&lang=es&appid={ApiKey}";
+            var response = await _httpClient.GetStringAsync(url);
+            var forecastData = JsonConvert.DeserializeObject<ForecastResponse>(response);
+            return forecastData;
         }
     }
 }
