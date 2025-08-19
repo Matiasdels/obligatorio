@@ -171,5 +171,12 @@ namespace obligatorio.Data
 
         public Task<int> UpdateClienteAsync(Cliente cliente) => SaveClienteAsync(cliente);
 
+        public async Task<Usuario> GetUsuarioConHuellaAsync()
+        {
+            return await _database.Table<Usuario>()
+                           .Where(u => u.HuellaRegistrada == true)
+                           .FirstOrDefaultAsync();
+        }
+
     }
 }

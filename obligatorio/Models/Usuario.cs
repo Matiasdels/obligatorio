@@ -37,6 +37,10 @@ namespace obligatorio.Models
 
             [MaxLength(20)]
             public string Telefono { get; set; }
-        
+
+            public bool HuellaRegistrada { get; set; }
+
+
+
     }
 }

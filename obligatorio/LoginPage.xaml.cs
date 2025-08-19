@@ -12,7 +12,7 @@ public partial class LoginPage : ContentPage
     {
         InitializeComponent();
         _dbService = dbService;
-
+        MostrarLoginManual();
         if (DeviceInfo.Platform != DevicePlatform.Android && DeviceInfo.Platform != DevicePlatform.iOS)
         {
             // Mostrar login manual directamente
@@ -48,7 +48,18 @@ public partial class LoginPage : ContentPage
 
             if (result.Authenticated)
             {
-                await Shell.Current.GoToAsync("//MainPage");
+                var usuarioConHuella = await _dbService.GetUsuarioConHuellaAsync();
+
+                if (usuarioConHuella != null)
+                {
+                    App.UsuarioService.SetUsuarioLogueado(usuarioConHuella);
+                    await Shell.Current.GoToAsync("//MainPage");
+                }
+                else
+                {
+                    await DisplayAlert("Error", "No hay un usuario registrado con huella. Inicie sesión manualmente.", "OK");
+                    MostrarLoginManual();
+                }
             }
             else
             {
