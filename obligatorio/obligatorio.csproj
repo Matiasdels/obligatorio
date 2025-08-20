@@ -102,6 +102,9 @@
 	  <MauiXaml Update="Perfil.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="PreferenciasPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="RegistroPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -109,6 +112,12 @@
 
 	<ItemGroup>
 	  <Folder Include="Clientes\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="PreferenciasPage.xaml.cs">
+	    <DependentUpon>PreferenciasPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

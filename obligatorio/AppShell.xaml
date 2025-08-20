@@ -65,19 +65,7 @@
                        LineBreakMode="TailTruncation" />
             </StackLayout>
 
-            <!-- Icono de menú -->
-            <Button Grid.Column="2"
-                    Text="☰"
-                    FontSize="20"
-                    TextColor="White"
-                    BackgroundColor="Transparent"
-                    BorderWidth="0"
-                    Margin="15,0"
-                    VerticalOptions="Center"
-                    HorizontalOptions="Center"
-                    Command="{Binding ToggleFlyoutCommand}"
-                    WidthRequest="50"
-                    HeightRequest="50" />
+            
 
         </Grid>
     </Shell.TitleView>
@@ -210,6 +198,8 @@
     <ShellContent Route="ClienteListPage" ContentTemplate="{DataTemplate local:ClienteListPage}" />
 
     <ShellContent Route="ClienteDetailPage" ContentTemplate="{DataTemplate local:ClienteDetailPage}" />
+
+    <ShellContent Route="PreferenciasPage" ContentTemplate="{DataTemplate local:PreferenciasPage}" />
 
     <!--<FlyoutItem Title="Inicio" Icon="home.png">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />

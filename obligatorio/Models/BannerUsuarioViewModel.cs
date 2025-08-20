@@ -102,7 +102,7 @@ namespace obligatorio.Models
                 if (Shell.Current != null)
                 {
                     Shell.Current.FlyoutIsPresented = false;
-                    await Shell.Current.GoToAsync("//Preferencias");
+                    await Shell.Current.GoToAsync("//PreferenciasPage");
                 }
             }
             catch (Exception ex)

@@ -18,6 +18,7 @@ public partial class LoginPage : ContentPage
             // Mostrar login manual directamente
             MostrarLoginManual();
             btnHuella.IsVisible = false;
+            separadorO.IsVisible = false;
         }
     }
 

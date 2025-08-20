@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="obligatorio.PreferenciasPage"
+             BackgroundColor="{AppThemeBinding Light=#F8FAFC, Dark=#0F172A}">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <!-- Estilos personalizados -->
+            <Style x:Key="PreferenceCardStyle" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#1E293B}" />
+                <Setter Property="CornerRadius" Value="16" />
+                <Setter Property="HasShadow" Value="True" />
+                <Setter Property="Padding" Value="20" />
+                <Setter Property="Margin" Value="0,10" />
+            </Style>
+
+            <Style x:Key="SectionTitleStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="20" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="#2196F3" />
+                <Setter Property="Margin" Value="0,20,0,10" />
+            </Style>
+
+            <Style x:Key="PreferenceTitleStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light=#1E293B, Dark=White}" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+            <Style x:Key="PreferenceDescriptionStyle" TargetType="Label">
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light=#64748B, Dark=#94A3B8}" />
+                <Setter Property="LineBreakMode" Value="WordWrap" />
+                <Setter Property="Margin" Value="0,2,0,0" />
+            </Style>
+
+            <Style x:Key="ModernSwitchStyle" TargetType="Switch">
+                <Setter Property="OnColor" Value="#2196F3" />
+                <Setter Property="ThumbColor" Value="White" />
+                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="Scale" Value="1.2" />
+            </Style>
+
+            <Style x:Key="IconFrameStyle" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="25" />
+                <Setter Property="HasShadow" Value="False" />
+                <Setter Property="Padding" Value="10" />
+                <Setter Property="WidthRequest" Value="50" />
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <ScrollView>
+        <StackLayout Padding="20" Spacing="0">
+
+            <!-- Header -->
+            <Frame BackgroundColor="{AppThemeBinding Light=White, Dark=#1E293B}"
+                   CornerRadius="20"
+                   HasShadow="True"
+                   Padding="0"
+                   Margin="0,0,0,20">
+
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="100" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <!-- Fondo degradado del header -->
+                    <Frame Grid.Row="0"
+                           BackgroundColor="#2196F3"
+                           CornerRadius="20,20,0,0"
+                           HasShadow="False"
+                           Padding="0">
+                        <Grid>
+                            <BoxView BackgroundColor="#1976D2" 
+                                     Opacity="0.7"
+                                     VerticalOptions="Fill" 
+                                     HorizontalOptions="Fill" />
+                        </Grid>
+                    </Frame>
+
+                    <!-- Contenido del header -->
+                    <StackLayout Grid.Row="0" Grid.RowSpan="2"
+                                 Padding="20"
+                                 Spacing="10">
+
+                        <!-- Icono principal -->
+                        <Frame BackgroundColor="White"
+                               CornerRadius="30"
+                               HasShadow="True"
+                               Padding="0"
+                               WidthRequest="60"
+                               HeightRequest="60"
+                               HorizontalOptions="Center"
+                               VerticalOptions="End"
+                               Margin="0,0,0,-30">
+
+                            <Label Text="⚙️"
+                                   FontSize="30"
+                                   HorizontalOptions="Center"
+                                   VerticalOptions="Center" />
+                        </Frame>
+
+                        <!-- Título y descripción -->
+                        <Label Text="Preferencias"
+                               FontSize="24"
+                               FontAttributes="Bold"
+                               TextColor="{AppThemeBinding Light=#1E293B, Dark=White}"
+                               HorizontalOptions="Center"
+                               Margin="0,40,0,0" />
+
+                        <Label Text="Personaliza tu experiencia en la aplicación"
+                               FontSize="14"
+                               TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"
+                               HorizontalOptions="Center"
+                               Margin="0,5,0,0" />
+                    </StackLayout>
+                </Grid>
+            </Frame>
+
+            <!-- Sección: Notificaciones -->
+            <Label Text="🔔 Notificaciones" Style="{StaticResource SectionTitleStyle}" />
+
+            <Frame Style="{StaticResource PreferenceCardStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Icono -->
+                    <Frame Grid.Column="0"
+                           BackgroundColor="#E3F2FD"
+                           Style="{StaticResource IconFrameStyle}">
+                        <Label Text="🔔"
+                               FontSize="20"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Frame>
+
+                    <!-- Información -->
+                    <StackLayout Grid.Column="1"
+                                 Margin="15,0,15,0"
+                                 VerticalOptions="Center"
+                                 Spacing="2">
+                        <Label Text="Notificaciones Push"
+                               Style="{StaticResource PreferenceTitleStyle}" />
+                        <Label Text="Recibe alertas sobre noticias importantes y programas en vivo"
+                               Style="{StaticResource PreferenceDescriptionStyle}" />
+                    </StackLayout>
+
+                    <!-- Switch -->
+                    <Switch Grid.Column="2"
+                            IsToggled="{Binding Preferencias.Notificaciones}"
+                            Style="{StaticResource ModernSwitchStyle}" />
+                </Grid>
+            </Frame>
+
+            <!-- Sección: Apariencia -->
+            <Label Text="🎨 Apariencia" Style="{StaticResource SectionTitleStyle}" />
+
+            <Frame Style="{StaticResource PreferenceCardStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Icono -->
+                    <Frame Grid.Column="0"
+                           BackgroundColor="#F3E5F5"
+                           Style="{StaticResource IconFrameStyle}">
+                        <Label Text="🌙"
+                               FontSize="20"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Frame>
+
+                    <!-- Información -->
+                    <StackLayout Grid.Column="1"
+                                 Margin="15,0,15,0"
+                                 VerticalOptions="Center"
+                                 Spacing="2">
+                        <Label Text="Tema Oscuro"
+                               Style="{StaticResource PreferenceTitleStyle}" />
+                        <Label Text="Cambia a un tema oscuro para mayor comodidad visual"
+                               Style="{StaticResource PreferenceDescriptionStyle}" />
+                    </StackLayout>
+
+                    <!-- Switch -->
+                    <Switch Grid.Column="2"
+                            IsToggled="{Binding Preferencias.TemaOscuro}"
+                            Style="{StaticResource ModernSwitchStyle}"
+                            Toggled="OnTemaOscuroToggled" />
+                </Grid>
+            </Frame>
+
+            <!-- Sección: Audio -->
+            <Label Text="🎵 Audio y Reproducción" Style="{StaticResource SectionTitleStyle}" />
+
+            <Frame Style="{StaticResource PreferenceCardStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Icono -->
+                    <Frame Grid.Column="0"
+                           BackgroundColor="#E8F5E8"
+                           Style="{StaticResource IconFrameStyle}">
+                        <Label Text="🎵"
+                               FontSize="20"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Frame>
+
+                    <!-- Información -->
+                    <StackLayout Grid.Column="1"
+                                 Margin="15,0,15,0"
+                                 VerticalOptions="Center"
+                                 Spacing="2">
+                        <Label Text="Música en Segundo Plano"
+                               Style="{StaticResource PreferenceTitleStyle}" />
+                        <Label Text="Continúa reproduciendo música cuando uses otras apps"
+                               Style="{StaticResource PreferenceDescriptionStyle}" />
+                    </StackLayout>
+
+                    <!-- Switch -->
+                    <Switch Grid.Column="2"
+                            IsToggled="{Binding Preferencias.MusicaSegundoPlano}"
+                            Style="{StaticResource ModernSwitchStyle}" />
+                </Grid>
+            </Frame>
+
+            <!-- Sección: Avanzadas -->
+            <Label Text="🔧 Configuración Avanzada" Style="{StaticResource SectionTitleStyle}" />
+
+            <!-- Calidad de Audio -->
+            <Frame Style="{StaticResource PreferenceCardStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Icono -->
+                    <Frame Grid.Column="0"
+                           BackgroundColor="#FFF3E0"
+                           Style="{StaticResource IconFrameStyle}">
+                        <Label Text="🔊"
+                               FontSize="20"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Frame>
+
+                    <!-- Información -->
+                    <StackLayout Grid.Column="1"
+                                 Margin="15,0,15,0"
+                                 VerticalOptions="Center"
+                                 Spacing="2">
+                        <Label Text="Alta Calidad de Audio"
+                               Style="{StaticResource PreferenceTitleStyle}" />
+                        <Label Text="Reproduce audio en máxima calidad (consume más datos)"
+                               Style="{StaticResource PreferenceDescriptionStyle}" />
+                    </StackLayout>
+
+                    <!-- Switch -->
+                    <Switch Grid.Column="2"
+                            IsToggled="{Binding Preferencias.AltaCalidadAudio}"
+                            Style="{StaticResource ModernSwitchStyle}" />
+                </Grid>
+            </Frame>
+
+            <!-- Descargas automáticas -->
+            <Frame Style="{StaticResource PreferenceCardStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <!-- Icono -->
+                    <Frame Grid.Column="0"
+                           BackgroundColor="#E1F5FE"
+                           Style="{StaticResource IconFrameStyle}">
+                        <Label Text="⬇️"
+                               FontSize="20"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center" />
+                    </Frame>
+
+                    <!-- Información -->
+                    <StackLayout Grid.Column="1"
+                                 Margin="15,0,15,0"
+                                 VerticalOptions="Center"
+                                 Spacing="2">
+                        <Label Text="Descarga Automática"
+                               Style="{StaticResource PreferenceTitleStyle}" />
+                        <Label Text="Descarga contenido nuevo cuando estés conectado a WiFi"
+                               Style="{StaticResource PreferenceDescriptionStyle}" />
+                    </StackLayout>
+
+                    <!-- Switch -->
+                    <Switch Grid.Column="2"
+                            IsToggled="{Binding Preferencias.DescargaAutomatica}"
+                            Style="{StaticResource ModernSwitchStyle}" />
+                </Grid>
+            </Frame>
+
+            <!-- Botones de acción -->
+            <StackLayout Orientation="Horizontal" 
+                         HorizontalOptions="FillAndExpand"
+                         Spacing="10"
+                         Margin="0,30,0,20">
+
+                <!-- Guardar Cambios -->
+                <Button Text="💾 Guardar Cambios"
+                        BackgroundColor="#4CAF50"
+                        TextColor="White"
+                        CornerRadius="12"
+                        FontAttributes="Bold"
+                        HeightRequest="50"
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding GuardarPreferenciasCommand}" />
+
+                <!-- Restablecer -->
+                <Button Text="🔄 Restablecer"
+                        BackgroundColor="{AppThemeBinding Light=#E0E0E0, Dark=#424242}"
+                        TextColor="{AppThemeBinding Light=#424242, Dark=White}"
+                        CornerRadius="12"
+                        FontAttributes="Bold"
+                        HeightRequest="50"
+                        HorizontalOptions="FillAndExpand"
+                        Command="{Binding RestablecerPreferenciasCommand}" />
+            </StackLayout>
+
+            <!-- Información adicional -->
+            <Frame BackgroundColor="#E3F2FD"
+                   CornerRadius="12"
+                   HasShadow="False"
+                   Padding="15"
+                   Margin="0,0,0,20">
+
+                <StackLayout Orientation="Horizontal" Spacing="10">
+                    <Label Text="💡"
+                           FontSize="20"
+                           VerticalOptions="Center" />
+
+                    <Label Text="Los cambios se aplicarán inmediatamente. Algunas configuraciones pueden requerir reiniciar la aplicación."
+                           FontSize="12"
+                           TextColor="#1976D2"
+                           VerticalOptions="Center"
+                           LineBreakMode="WordWrap"
+                           HorizontalOptions="FillAndExpand" />
+                </StackLayout>
+            </Frame>
+
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
