@@ -8,7 +8,6 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
 
-            <!-- Header Card - Información Principal del Clima -->
             <Frame BackgroundColor="{StaticResource PrussianBlue}"
                    CornerRadius="20"
                    HasShadow="True"
