@@ -1,17 +1,50 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
              x:Class="obligatorio.PatrocinadoresPage"
-             Title="PatrocinadoresPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-        <Button 
-            x:Name="btnAtras"
-            Text="Volver atrás"
-            Clicked="btnPatrocinadoresAtras_Clicked"
-            HorizontalOptions="Fill" />
-    </VerticalStackLayout>
+             >
+    <ScrollView>
+        <VerticalStackLayout Padding="20" Spacing="16">
+
+            <Entry x:Name="NombreEntry" Placeholder="Nombre del patrocinador" MaxLength="100" />
+
+            <Grid ColumnDefinitions="Auto,*" ColumnSpacing="12">
+                <Image x:Name="LogoImage" WidthRequest="72" HeightRequest="72" Aspect="AspectFill" 
+                       BackgroundColor="#EEE" />
+                <Button Grid.Column="1" Text="Seleccionar logo" Clicked="OnSeleccionarLogoClicked" />
+            </Grid>
+
+            <Entry x:Name="DireccionEntry" Placeholder="Dirección (temporal, luego mapa)" MaxLength="200" />
+
+            <!-- Mostramos coordenadas si existen (las completaremos cuando integremos el mapa) -->
+            <Label x:Name="CoordsLabel" Text="Sin coordenadas" FontSize="12" TextColor="#666" />
+
+            <Button Text="Guardar patrocinador" Clicked="OnGuardarClicked"
+                    BackgroundColor="#2E7D32" TextColor="White" />
+
+            <BoxView HeightRequest="1" Color="#DDD" Margin="0,10" />
+
+            <Label Text="Patrocinadores" FontAttributes="Bold" FontSize="18" />
+
+            <CollectionView x:Name="PatrocinadoresList">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Frame Padding="12" Margin="0,6" BorderColor="#DDD">
+                            <Grid ColumnDefinitions="80,*" ColumnSpacing="12">
+                                <Image Source="{Binding LogoRuta}" WidthRequest="72" HeightRequest="72" Aspect="AspectFill" />
+                                <VerticalStackLayout Grid.Column="1" Spacing="2">
+                                    <Label Text="{Binding Nombre}" FontAttributes="Bold" />
+                                    <Label Text="{Binding Direccion}" FontSize="12" TextColor="#666" />
+                                    <Label Text="{Binding Latitud, StringFormat='Lat: {0:F5}'}" FontSize="10" TextColor="#888" />
+                                    <Label Text="{Binding Longitud, StringFormat='Lng: {0:F5}'}" FontSize="10" TextColor="#888" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

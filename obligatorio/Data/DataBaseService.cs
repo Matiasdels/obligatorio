@@ -40,6 +40,7 @@ namespace obligatorio.Data
             await _database.CreateTableAsync<Cliente>();
             await _database.CreateTableAsync<Favorito>();
             await _database.CreateTableAsync<Usuario>();
+            await _database.CreateTableAsync<Patrocinador>();
 
             await CrearAdminPorDefecto();
         }
@@ -177,6 +178,18 @@ namespace obligatorio.Data
                            .Where(u => u.HuellaRegistrada == true)
                            .FirstOrDefaultAsync();
         }
+
+        public Task<List<Patrocinador>> GetPatrocinadoresAsync() =>
+        _database.Table<Patrocinador>().ToListAsync();
+
+        public Task<Patrocinador> GetPatrocinadorAsync(int id) =>
+            _database.Table<Patrocinador>().Where(p => p.Id == id).FirstOrDefaultAsync();
+
+        public Task<int> SavePatrocinadorAsync(Patrocinador p) =>
+            p.Id != 0 ? _database.UpdateAsync(p) : _database.InsertAsync(p);
+
+        public Task<int> DeletePatrocinadorAsync(Patrocinador p) =>
+            _database.DeleteAsync(p);
 
     }
 }

@@ -4,7 +4,7 @@ using Microsoft.Maui.Controls;
 
 namespace obligatorio;
 
-[QueryProperty(nameof(ClienteId), "clienteId")]
+
 public partial class ClienteDetailPage : ContentPage
 {
     private DataBaseService _dbService;
