@@ -20,7 +20,7 @@
                 <Frame x:Name="frameHuella" 
                        Style="{StaticResource AppCardFrame}"
                        Padding="0"
-                       IsVisible="False">
+                       IsVisible="True">
                     <Button x:Name="btnHuella" 
                             Text="🔐 Ingresar con Huella Digital" 
                             Style="{StaticResource AppSecondaryButton}"
