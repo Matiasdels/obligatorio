@@ -455,7 +455,7 @@
 
     <Style TargetType="Label" x:Key="AppSubtitleLabel">
         <Setter Property="FontSize" Value="18" />
-        <Setter Property="TextColor" Value="{StaticResource PrimaryBlue}" />
+        <Setter Property="TextColor" Value="White" />
         <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="Margin" Value="0,0,0,10" />
     </Style>
@@ -493,7 +493,7 @@
     </Style>
 
     <Style TargetType="Frame" x:Key="AppCardFrame">
-        <Setter Property="BackgroundColor" Value="White" />
+        <Setter Property="BackgroundColor" Value="{StaticResource PrussianBlue}" />
         <Setter Property="CornerRadius" Value="15" />
         <Setter Property="HasShadow" Value="True" />
         <Setter Property="Padding" Value="15" />
