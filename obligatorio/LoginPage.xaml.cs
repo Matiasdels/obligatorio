@@ -17,6 +17,7 @@ public partial class LoginPage : ContentPage
         {
             // Mostrar login manual directamente
             MostrarLoginManual();
+            frameHuella.IsVisible = false;
             btnHuella.IsVisible = false;
             separadorO.IsVisible = false;
         }
