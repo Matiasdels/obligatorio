@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using CommunityToolkit.Maui;
+using Microsoft.Extensions.Logging;
+using Microsoft.Maui.Controls.Hosting;
 using obligatorio.Data;
 using obligatorio.Models;
 using obligatorio.Services;
@@ -12,6 +14,8 @@ namespace obligatorio
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
+                .UseMauiMaps()
+                .UseMauiCommunityToolkit()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -31,8 +35,18 @@ namespace obligatorio
             builder.Services.AddSingleton<IUsuarioService, UsuarioService>();
             builder.Services.AddSingleton<AppShell>();
             builder.Services.AddSingleton<App>();
+            builder.Services.AddTransient<PatrocinadoresPage>();
+            builder.Services.AddTransient<MapaPatrocinadorPage>();
+            builder.Services.AddTransient<GestionPatrocinadoresPage>();
+            //builder.Services.AddTransient<FormularioPatrocinadorPage>();
+            //builder.Services.AddTransient<DetallePatrocinadorPage>();
             builder.Services.AddTransient<BannerUsuarioViewModel>();
+            builder.Services.AddTransient<PatrocinadoresViewModel>();
 
+
+#if DEBUG
+            builder.Logging.AddDebug();
+#endif
 
             return builder.Build();
         }
