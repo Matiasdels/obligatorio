@@ -16,9 +16,9 @@ namespace obligatorio.Models
         private bool _isLoading;
         private bool _isRefreshing;
 
-        public PatrocinadoresViewModel(DataBaseService databaseService)
+        public PatrocinadoresViewModel()
         {
-            _databaseService = databaseService;
+            _databaseService = App.Database;
             Patrocinadores = new ObservableCollection<Patrocinador>();
             InitializeAsync();
         }
@@ -50,7 +50,7 @@ namespace obligatorio.Models
 
         private async Task InitializeAsync()
         {
-            await _databaseService.InitializeAsync();
+            await _databaseService.InitAsync();
         }
 
         public async Task LoadPatrocinadoresAsync()

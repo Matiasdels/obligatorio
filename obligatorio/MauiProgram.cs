@@ -42,6 +42,7 @@ namespace obligatorio
             //builder.Services.AddTransient<DetallePatrocinadorPage>();
             builder.Services.AddTransient<BannerUsuarioViewModel>();
             builder.Services.AddTransient<PatrocinadoresViewModel>();
+            
 
 
 #if DEBUG

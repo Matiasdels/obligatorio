@@ -1,19 +1,32 @@
+using Microsoft.Maui.Controls.Maps;
+using Microsoft.Maui.Maps;
 using obligatorio.Data;
-using PencilKit;
+using obligatorio.Models;
 using System.Net.NetworkInformation;
 
-namespace obligatorio.Models;
+namespace obligatorio;
 
-public partial class MapaPatrocinadorPage : ContentPage
+public partial class MapaPatrocinadorPage : ContentPage, IQueryAttributable
 {
-        private readonly DataBaseService _databaseService;
+    private readonly DataBaseService _databaseService;
     private Patrocinador _patrocinador;
     private Location _userLocation;
 
     public MapaPatrocinadorPage()
     {
         InitializeComponent();
-        _databaseService = new DataBaseService();
+        // Pasar la ruta de la base de datos
+        string dbPath = Path.Combine(FileSystem.AppDataDirectory, "obligatorio.db");
+        _databaseService = App.Database;
+    }
+
+    // Implementar IQueryAttributable para recibir parámetros de navegación
+    public void ApplyQueryAttributes(IDictionary<string, object> query)
+    {
+        if (query.ContainsKey("patrocinadorId"))
+        {
+            PatrocinadorId = query["patrocinadorId"].ToString();
+        }
     }
 
     public string PatrocinadorId { get; set; }
@@ -61,8 +74,8 @@ public partial class MapaPatrocinadorPage : ContentPage
             // Ubicación del patrocinador
             var patrocinadorLocation = new Location(_patrocinador.Latitud, _patrocinador.Longitud);
 
-            // Crear pin para el patrocinador
-            var patrocinadorPin = new Microsoft.Graph.Education.Classes.Item.Modules.Item.Pin
+            // Crear pin para el patrocinador - CORREGIDO: usar el tipo correcto
+            var patrocinadorPin = new Pin
             {
                 Label = _patrocinador.Nombre,
                 Address = _patrocinador.Direccion,
@@ -102,16 +115,26 @@ public partial class MapaPatrocinadorPage : ContentPage
     {
         try
         {
-            var request = new GeolocationRequest
+            // Verificar permisos de ubicación
+            var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+            if (status != PermissionStatus.Granted)
             {
-                DesiredAccuracy = GeolocationAccuracy.Medium,
-                Timeout = TimeSpan.FromSeconds(10)
-            };
+                status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
+            }
 
-            var location = await Geolocation.GetLocationAsync(request);
-            if (location != null)
+            if (status == PermissionStatus.Granted)
             {
-                _userLocation = location;
+                var request = new GeolocationRequest
+                {
+                    DesiredAccuracy = GeolocationAccuracy.Medium,
+                    Timeout = TimeSpan.FromSeconds(10)
+                };
+
+                var location = await Geolocation.GetLocationAsync(request);
+                if (location != null)
+                {
+                    _userLocation = location;
+                }
             }
         }
         catch (Exception ex)
@@ -128,11 +151,6 @@ public partial class MapaPatrocinadorPage : ContentPage
         return new Location(centerLat, centerLng);
     }
 
-    private async void OnLlamarClicked(object sender, EventArgs e)
-    {
-        await ShowToast("Función de llamada no disponible - No hay teléfono registrado");
-    }
-
     private async void OnDireccionesClicked(object sender, EventArgs e)
     {
         try
@@ -146,7 +164,7 @@ public partial class MapaPatrocinadorPage : ContentPage
                     NavigationMode = NavigationMode.Driving
                 };
 
-                await Map.Default.OpenAsync(location, options);
+                await Microsoft.Maui.ApplicationModel.Map.Default.OpenAsync(location, options);
             }
         }
         catch (Exception ex)

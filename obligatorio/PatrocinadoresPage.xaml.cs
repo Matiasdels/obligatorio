@@ -11,8 +11,8 @@ public partial class PatrocinadoresPage : ContentPage
     public PatrocinadoresPage()
     {
         InitializeComponent();
-        _databaseService = new DataBaseService();
-        _viewModel = new PatrocinadoresViewModel(_databaseService);
+        _databaseService = App.Database;
+        _viewModel = new PatrocinadoresViewModel();
         BindingContext = _viewModel;
     }
 
@@ -27,11 +27,22 @@ public partial class PatrocinadoresPage : ContentPage
         if (sender is Frame frame && frame.BindingContext is Patrocinador patrocinador)
         {
             // Animación de toque
-            await frame.ScaleTo(0.95, 100);
-            await frame.ScaleTo(1.0, 100);
+            await frame.ScaleTo(0.95, 100, Easing.CubicOut);
+            await frame.ScaleTo(1.0, 100, Easing.CubicOut);
 
-            // Navegar a MapaPatrocinadorPage
-            await Shell.Current.GoToAsync($"///mapapatrocinador?patrocinadorId={patrocinador.Id}");
+            try
+            {
+                await Shell.Current.GoToAsync(nameof(MapaPatrocinadorPage),
+    new Dictionary<string, object>
+    {
+        { "patrocinadorId", patrocinador.Id }
+    });
+            }
+            catch (Exception ex)
+            {
+                // Log del error o mostrar mensaje al usuario
+                await DisplayAlert("Error", "No se pudo abrir el mapa", "OK");
+            }
         }
     }
 

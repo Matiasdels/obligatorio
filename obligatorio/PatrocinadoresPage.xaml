@@ -2,75 +2,68 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="obligatorio.PatrocinadoresPage"
-             Title="PatrocinadoresPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-
-    </VerticalStackLayout>
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             Title="PatrocinadoresPage"BackgroundColor="#f8f9fa">
+                Title="PatrocinadoresPage"
+             BackgroundColor="#f8f9fa">
+    
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <!-- Gradiente azul principal -->
-            <LinearGradientBrush x:Key="BlueGradient" StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#2196F3" Offset="0.0" />
-                <GradientStop Color="#1976D2" Offset="1.0" />
-            </LinearGradientBrush>
+        <ContentPage.Resources>
+            <ResourceDictionary>
+                <!-- Gradiente azul principal -->
+                <LinearGradientBrush x:Key="BlueGradient" StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#2196F3" Offset="0.0" />
+                    <GradientStop Color="#1976D2" Offset="1.0" />
+                </LinearGradientBrush>
 
-            <!-- Gradiente azul suave -->
-            <LinearGradientBrush x:Key="SoftBlueGradient" StartPoint="0,0" EndPoint="1,1">
-                <GradientStop Color="#E3F2FD" Offset="0.0" />
-                <GradientStop Color="#BBDEFB" Offset="1.0" />
-            </LinearGradientBrush>
+                <!-- Gradiente azul suave -->
+                <LinearGradientBrush x:Key="SoftBlueGradient" StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#E3F2FD" Offset="0.0" />
+                    <GradientStop Color="#BBDEFB" Offset="1.0" />
+                </LinearGradientBrush>
 
-            <!-- Estilo para tarjetas de patrocinadores -->
-            <Style x:Key="PatrocinadorCard" TargetType="Frame">
-                <Setter Property="BackgroundColor" Value="White" />
-                <Setter Property="CornerRadius" Value="15" />
-                <Setter Property="HasShadow" Value="True" />
-                <Setter Property="Margin" Value="10,5" />
-                <Setter Property="Padding" Value="15" />
-                <Setter Property="toolkit:ShadowEffect.Color" Value="#40000000" />
-                <Setter Property="toolkit:ShadowEffect.Offset" Value="0,4" />
-                <Setter Property="toolkit:ShadowEffect.Radius" Value="10" />
-            </Style>
+                <!-- Estilo para tarjetas de patrocinadores -->
+                <Style x:Key="PatrocinadorCard" TargetType="Frame">
+                    <Setter Property="BackgroundColor" Value="White" />
+                    <Setter Property="CornerRadius" Value="15" />
+                    <Setter Property="HasShadow" Value="True" />
+                    <Setter Property="Margin" Value="10,5" />
+                    <Setter Property="Padding" Value="15" />
+                </Style>
 
-            <!-- Estilo para botones principales -->
-            <Style x:Key="PrimaryButton" TargetType="Button">
-                <Setter Property="Background" Value="{StaticResource BlueGradient}" />
-                <Setter Property="TextColor" Value="White" />
-                <Setter Property="CornerRadius" Value="25" />
-                <Setter Property="FontSize" Value="16" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="Padding" Value="20,12" />
-                <Setter Property="Margin" Value="5" />
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
+                <!-- Estilo para botones principales -->
+                <Style x:Key="PrimaryButton" TargetType="Button">
+                    <Setter Property="Background" Value="{StaticResource BlueGradient}" />
+                    <Setter Property="TextColor" Value="White" />
+                    <Setter Property="CornerRadius" Value="25" />
+                    <Setter Property="FontSize" Value="16" />
+                    <Setter Property="FontAttributes" Value="Bold" />
+                    <Setter Property="Padding" Value="20,12" />
+                    <Setter Property="Margin" Value="5" />
+                </Style>
+            </ResourceDictionary>
+        </ContentPage.Resources>
 
-    <Grid>
-        <!-- Header con gradiente -->
-        <Grid.RowDefinitions>
-            <RowDefinition Height="80" />
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+        <Grid>
+            <!-- Header con gradiente -->
+            <Grid.RowDefinitions>
+                <RowDefinition Height="80" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
 
-        <!-- Header -->
-        <Frame Grid.Row="0" 
+            <!-- Header -->
+            <Frame Grid.Row="0" 
                Background="{StaticResource BlueGradient}"
                CornerRadius="0,0,20,20"
                HasShadow="True"
                Margin="0,0,0,10">
 
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="Auto" />
-                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
 
-                <Label Grid.Column="0"
+                    <Label Grid.Column="0"
                        Text="Nuestros Patrocinadores"
                        FontSize="24"
                        FontAttributes="Bold"
@@ -78,7 +71,7 @@
                        VerticalOptions="Center"
                        Margin="20,0" />
 
-                <Button Grid.Column="1"
+                    <Button Grid.Column="1"
                         x:Name="BtnGestionar"
                         Text="⚙️ Gestionar"
                         BackgroundColor="Transparent"
@@ -90,57 +83,60 @@
                         Padding="15,8"
                         Margin="0,0,20,0"
                         Clicked="OnGestionarClicked" />
-            </Grid>
-        </Frame>
+                </Grid>
+            </Frame>
 
-        <!-- Lista de patrocinadores -->
-        <RefreshView Grid.Row="1" 
+            <!-- Lista de patrocinadores -->
+            <RefreshView Grid.Row="1" 
                      x:Name="RefreshView"
                      IsRefreshing="{Binding IsRefreshing}"
                      RefreshColor="#2196F3"
                      Refreshing="OnRefreshing">
 
-            <ScrollView>
-                <StackLayout x:Name="LoadingLayout" 
-                            IsVisible="{Binding IsLoading}"
-                            VerticalOptions="CenterAndExpand"
-                            HorizontalOptions="CenterAndExpand">
-                    <ActivityIndicator IsRunning="{Binding IsLoading}"
-                                     Color="#2196F3"
-                                     Scale="1.5" />
-                    <Label Text="Cargando patrocinadores..."
-                           FontSize="16"
-                           TextColor="#666"
-                           HorizontalOptions="Center"
-                           Margin="0,20,0,0" />
-                </StackLayout>
+                <ScrollView>
+                    <Grid>
+                        <!-- Loading Layout -->
+                        <StackLayout x:Name="LoadingLayout" 
+                                IsVisible="{Binding IsLoading}"
+                                VerticalOptions="CenterAndExpand"
+                                HorizontalOptions="CenterAndExpand">
+                            <ActivityIndicator IsRunning="{Binding IsLoading}"
+                                         Color="#2196F3"
+                                         Scale="1.5" />
+                            <Label Text="Cargando patrocinadores..."
+                               FontSize="16"
+                               TextColor="#666"
+                               HorizontalOptions="Center"
+                               Margin="0,20,0,0" />
+                        </StackLayout>
 
-                <CollectionView x:Name="PatrocinadoresCollection"
-                               ItemsSource="{Binding Patrocinadores}"
-                               IsVisible="{Binding IsNotLoading}"
-                               SelectionMode="None">
+                        <!-- Collection View -->
+                        <CollectionView x:Name="PatrocinadoresCollection"
+                                   ItemsSource="{Binding Patrocinadores}"
+                                   IsVisible="{Binding IsNotLoading}"
+                                   SelectionMode="None">
 
-                    <CollectionView.ItemsLayout>
-                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
-                    </CollectionView.ItemsLayout>
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
+                            </CollectionView.ItemsLayout>
 
-                    <CollectionView.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <Frame Style="{StaticResource PatrocinadorCard}">
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="OnPatrocinadorTapped" />
-                                    </Frame.GestureRecognizers>
-
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate>
                                     <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="80" />
-                                            <ColumnDefinition Width="*" />
-                                            <ColumnDefinition Width="Auto" />
-                                        </Grid.ColumnDefinitions>
+                                        <Frame Style="{StaticResource PatrocinadorCard}">
+                                            <Frame.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="OnPatrocinadorTapped" />
+                                            </Frame.GestureRecognizers>
 
-                                        <!-- Imagen del patrocinador -->
-                                        <Frame Grid.Column="0"
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="80" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <!-- Imagen del patrocinador -->
+                                                <Frame Grid.Column="0"
                                                BackgroundColor="{StaticResource SoftBlueGradient}"
                                                CornerRadius="40"
                                                WidthRequest="70"
@@ -149,85 +145,86 @@
                                                Padding="0"
                                                VerticalOptions="Center">
 
-                                            <Label Text="🏢"
+                                                    <Label Text="🏢"
                                                    FontSize="30"
                                                    HorizontalOptions="Center"
                                                    VerticalOptions="Center" />
-                                        </Frame>
+                                                </Frame>
 
-                                        <!-- Información del patrocinador -->
-                                        <StackLayout Grid.Column="1"
+                                                <!-- Información del patrocinador -->
+                                                <StackLayout Grid.Column="1"
                                                     Margin="15,0,0,0"
                                                     VerticalOptions="Center">
 
-                                            <Label Text="{Binding Nombre}"
+                                                    <Label Text="{Binding Nombre}"
                                                    FontSize="18"
                                                    FontAttributes="Bold"
                                                    TextColor="#1976D2"
                                                    LineBreakMode="TailTruncation" />
 
-                                            <Label Text="{Binding Direccion}"
+                                                    <Label Text="{Binding Direccion}"
                                                    FontSize="14"
                                                    TextColor="#666"
                                                    LineBreakMode="TailTruncation"
                                                    Margin="0,2,0,0" />
-                                        </StackLayout>
+                                                </StackLayout>
 
-                                        <!-- Icono de navegación -->
-                                        <Label Grid.Column="2"
+                                                <!-- Icono de navegación -->
+                                                <Label Grid.Column="2"
                                                Text="📍"
                                                FontSize="24"
                                                VerticalOptions="Center"
                                                HorizontalOptions="Center"
                                                Margin="0,0,10,0" />
+                                            </Grid>
+
+                                            <!-- Efecto visual hover (opcional) -->
+                                            <VisualStateManager.VisualStateGroups>
+                                                <VisualStateGroup x:Name="CommonStates">
+                                                    <VisualState x:Name="Normal" />
+                                                    <VisualState x:Name="Selected">
+                                                        <VisualState.Setters>
+                                                            <Setter Property="Scale" Value="0.95" />
+                                                        </VisualState.Setters>
+                                                    </VisualState>
+                                                </VisualStateGroup>
+                                            </VisualStateManager.VisualStateGroups>
+                                        </Frame>
                                     </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
 
-                                    <!-- Animación al tocar -->
-                                    <Frame.Triggers>
-                                        <EventTrigger Event="Focused">
-                                            <Trigger.EnterActions>
-                                                <ScaleAction Scale="0.95" />
-                                            </Trigger.EnterActions>
-                                            <Trigger.ExitActions>
-                                                <ScaleAction Scale="1.0" />
-                                            </Trigger.ExitActions>
-                                        </EventTrigger>
-                                    </Frame.Triggers>
-                                </Frame>
-                            </Grid>
-                        </DataTemplate>
-                    </CollectionView.ItemTemplate>
-
-                    <CollectionView.EmptyView>
-                        <StackLayout HorizontalOptions="CenterAndExpand"
+                            <CollectionView.EmptyView>
+                                <StackLayout HorizontalOptions="CenterAndExpand"
                                     VerticalOptions="CenterAndExpand"
                                     Margin="20">
 
-                            <Label Text="📭"
+                                    <Label Text="📭"
                                    FontSize="48"
                                    HorizontalOptions="Center" />
 
-                            <Label Text="No hay patrocinadores disponibles"
+                                    <Label Text="No hay patrocinadores disponibles"
                                    FontSize="18"
                                    FontAttributes="Bold"
                                    TextColor="#666"
                                    HorizontalOptions="Center"
                                    Margin="0,20,0,0" />
 
-                            <Label Text="Toca 'Gestionar' para agregar patrocinadores"
+                                    <Label Text="Toca 'Gestionar' para agregar patrocinadores"
                                    FontSize="14"
                                    TextColor="#999"
                                    HorizontalOptions="Center"
                                    HorizontalTextAlignment="Center"
                                    Margin="0,10,0,0" />
-                        </StackLayout>
-                    </CollectionView.EmptyView>
-                </CollectionView>
-            </ScrollView>
-        </RefreshView>
+                                </StackLayout>
+                            </CollectionView.EmptyView>
+                        </CollectionView>
+                    </Grid>
+                </ScrollView>
+            </RefreshView>
 
-        <!-- Botón flotante para agregar -->
-        <Button Grid.Row="1"
+            <!-- Botón flotante para agregar -->
+            <Button Grid.Row="1"
                 x:Name="BtnAdd"
                 Text="+"
                 Style="{StaticResource PrimaryButton}"
@@ -238,9 +235,13 @@
                 HorizontalOptions="End"
                 VerticalOptions="End"
                 Margin="0,0,20,20"
-                Clicked="OnAgregarPatrocinadorClicked"
-                toolkit:ShadowEffect.Color="#40000000"
-                toolkit:ShadowEffect.Offset="0,6"
-                toolkit:ShadowEffect.Radius="15" />
-    </Grid>
-</ContentPage>
+                Clicked="OnAgregarPatrocinadorClicked">
+                <Button.Shadow>
+                    <Shadow Brush="Black"
+                        Offset="0,6"
+                        Radius="15"
+                        Opacity="0.25" />
+                </Button.Shadow>
+            </Button>
+        </Grid>
+    </ContentPage>

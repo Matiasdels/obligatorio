@@ -13,8 +13,8 @@ public partial class GestionPatrocinadoresPage : ContentPage
     public GestionPatrocinadoresPage()
     {
         InitializeComponent();
-        _databaseService = new DataBaseService();
-        _viewModel = new PatrocinadoresViewModel(_databaseService);
+        _databaseService = App.Database;
+        _viewModel = new PatrocinadoresViewModel();
         BindingContext = _viewModel;
     }
 
