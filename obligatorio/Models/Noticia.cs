@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Text.Json.Serialization;
-using System.Threading.Tasks;
+﻿using System.Text.Json.Serialization;
 
 namespace obligatorio.Models
 {
@@ -38,6 +33,26 @@ namespace obligatorio.Models
 
         [JsonPropertyName("language")]
         public string Language { get; set; }
+
+        // Constructor
+        public Noticia()
+        {
+            Title = "";
+            Link = "";
+            Creator = new List<string>();
+            Description = "";
+            PubDate = "";
+            ImageUrl = "";
+            SourceId = "";
+            Category = new List<string>();
+            Country = new List<string>();
+            Language = "";
+        }
+
+        // Propiedad de ayuda para mostrar creadores como string
+        public string CreatorString => Creator != null && Creator.Any()
+            ? string.Join(", ", Creator)
+            : "Autor desconocido";
     }
 
     public class RespuestaNoticias
@@ -48,8 +63,15 @@ namespace obligatorio.Models
         [JsonPropertyName("totalResults")]
         public int TotalResults { get; set; }
 
-        // En la respuesta JSON, el campo es "results", no "Data"
         [JsonPropertyName("results")]
         public List<Noticia> Results { get; set; }
+
+        // Constructor
+        public RespuestaNoticias()
+        {
+            Status = "";
+            TotalResults = 0;
+            Results = new List<Noticia>();
+        }
     }
 }

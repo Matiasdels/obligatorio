@@ -1,5 +1,6 @@
 using obligatorio.Models;
 using obligatorio.Services;
+using System.Globalization;
 
 namespace obligatorio;
 
@@ -10,7 +11,6 @@ public partial class NoticiasPage : ContentPage
     public NoticiasPage()
     {
         InitializeComponent();
-
         _viewModel = new NoticiasViewModel();
         BindingContext = _viewModel;
     }
@@ -21,6 +21,49 @@ public partial class NoticiasPage : ContentPage
         await _viewModel.CargarNoticiasAsync();
     }
 
+
+    private void OnNewsSearchTextChanged(object sender, TextChangedEventArgs e)
+    {
+        _viewModel.FiltrarNoticias(e.NewTextValue);
+    }
+    private async void OnReadMoreClicked(object sender, EventArgs e)
+    {
+        try
+        {
+            if (sender is Button button && button.BindingContext is Noticia noticia)
+            {
+                if (!string.IsNullOrEmpty(noticia.Link))
+                {
+                    // Abrir en navegador
+                    await Launcher.OpenAsync(noticia.Link);
+                }
+                else
+                {
+                    await DisplayAlert("Error", "No hay enlace disponible para esta noticia", "OK");
+                }
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", $"No se pudo abrir el enlace: {ex.Message}", "OK");
+        }
+    }
+
+
+    private void OnImageLoaded(object sender, EventArgs e)
+    {
+        if (sender is Image image)
+        {
+            image.IsVisible = true;
+ 
+            if (image.Parent is Grid grid)
+            {
+                var fallback = grid.Children.OfType<StackLayout>().FirstOrDefault();
+                if (fallback != null)
+                    fallback.IsVisible = false;
+            }
+        }
+    }
     public async void btnNoticiasAtras_Clicked(object sender, EventArgs e)
 	{
 		try

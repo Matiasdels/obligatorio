@@ -1,10 +1,8 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
              x:Class="obligatorio.NoticiasPage" 
              Title="Últimas Noticias"
-             BackgroundColor="{StaticResource AppBackgroundDark}">
-
+             BackgroundColor="{StaticResource OxfordBlue}">
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style x:Key="NewsDateLabel" TargetType="Label">
@@ -12,6 +10,56 @@
                 <Setter Property="FontSize" Value="12"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="Margin" Value="0,5,0,0"/>
+            </Style>
+
+            <Style x:Key="NewsTitleLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="{StaticResource White}"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="LineBreakMode" Value="WordWrap"/>
+                <Setter Property="Margin" Value="0,0,0,8"/>
+            </Style>
+
+            <Style x:Key="NewsDescriptionLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="#E5E7EB"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="LineBreakMode" Value="WordWrap"/>
+                <Setter Property="MaxLines" Value="3"/>
+                <Setter Property="Margin" Value="0,0,0,10"/>
+            </Style>
+
+            <Style x:Key="NewsSourceLabel" TargetType="Label">
+                <Setter Property="TextColor" Value="#9CA3AF"/>
+                <Setter Property="FontSize" Value="12"/>
+                <Setter Property="FontAttributes" Value="Italic"/>
+                <Setter Property="Margin" Value="0,0,0,8"/>
+            </Style>
+
+            <Style x:Key="NewsImageFrame" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="12"/>
+                <Setter Property="HasShadow" Value="False"/>
+                <Setter Property="Padding" Value="0"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="HeightRequest" Value="180"/>
+                <Setter Property="Margin" Value="0,0,0,12"/>
+            </Style>
+
+            <Style x:Key="NewsCardFrame" TargetType="Frame">
+                <Setter Property="BackgroundColor" Value="#1F2937"/>
+                <Setter Property="CornerRadius" Value="16"/>
+                <Setter Property="HasShadow" Value="True"/>
+                <Setter Property="Padding" Value="16"/>
+                <Setter Property="Margin" Value="8,6"/>
+            </Style>
+
+            <Style x:Key="ReadMoreButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#3B82F6"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="CornerRadius" Value="20"/>
+                <Setter Property="HeightRequest" Value="36"/>
+                <Setter Property="Padding" Value="16,8"/>
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -24,85 +72,132 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
+      
         <Frame Grid.Row="0" Style="{StaticResource AppHeaderFrame}">
-            <Label Text="📰 Últimas Noticias" 
-                   Style="{StaticResource AppTitleLabel}"
-                   FontSize="22"
-                   TextColor="{StaticResource White}"
-
-                   HorizontalOptions="Center"/>
-            
+            <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                <Label Text="📰" FontSize="24" VerticalOptions="Center"/>
+                <Label Text="Últimas Noticias" 
+                       Style="{StaticResource AppTitleLabel}"
+                       FontSize="22"
+                       TextColor="{StaticResource White}"
+                       VerticalOptions="Center"
+                       Margin="8,0,0,0"/>
+            </StackLayout>
         </Frame>
 
-
+  
         <Frame Grid.Row="1" 
-               Style="{StaticResource AppBaseFrame}"
+               Style="{StaticResource AppCardFrame}"
                CornerRadius="20"
                Margin="20,15,20,10"
-               Padding="15"
-               IsVisible="{Binding IsBusy}">
-            <ActivityIndicator IsRunning="{Binding IsBusy}" 
-                             IsVisible="{Binding IsBusy}" 
-                             Color="{StaticResource AppAccentColor}"
-                             HeightRequest="40"
-                             HorizontalOptions="Center"/>
+               Padding="5">
+            <SearchBar x:Name="NewsSearchBar"
+                       Placeholder="🔍 Buscar noticias..."
+                       Style="{StaticResource AppSearchBar}"
+                       TextChanged="OnNewsSearchTextChanged"/>
         </Frame>
 
-        <CollectionView Grid.Row="2" 
-                       x:Name="NoticiasCollection"
-                       ItemsSource="{Binding Noticias}"
-                       Margin="0,5,0,0">
-
+      
+        <CollectionView x:Name="NewsCollection"
+                        Grid.Row="2"
+                        ItemsSource="{Binding NoticiasFiltradas}"
+                        Margin="10"
+                        ItemSizingStrategy="MeasureAllItems">
             <CollectionView.ItemTemplate>
                 <DataTemplate>
-                    <Frame Style="{StaticResource AppCardFrame}" Margin="15,10">
-                        <StackLayout Padding="15">
+                    <Frame Style="{StaticResource NewsCardFrame}">
+                        <StackLayout Spacing="12">
 
-                  
-                            <Label Text="{Binding Title}" 
-                                   Style="{StaticResource AppSubtitleLabel}"
-                                   FontSize="16"
-                                   Margin="0,0,0,8"/>
+                         
+                            <Frame Style="{StaticResource NewsImageFrame}" 
+                                   BackgroundColor="#374151">
+                                <Grid>
+                              
+                                    <Image Source="{Binding ImageUrl}" 
+                                           Aspect="AspectFill"
+                                           IsVisible="False"
+                                           x:Name="NewsImage"/>
 
-               
-                            <Label Text="{Binding Description}" 
-                                   MaxLines="3" 
-                                   LineBreakMode="TailTruncation"
-                                   Style="{StaticResource AppBodyLabel}"
-                                   FontSize="13"
-                                   VerticalOptions="Fill"
-                                   Margin="0,0,0,8"/>
-
-                      <!--ESTO AGREGA LA HORA Y FECHA PERO SIEMPRE MARCA LA MISMA QUE ES CUANDO SE ABRE NOTICIA, 
-                            LO PODEMOS INTENTAR ARREGLAR O DEJAR SIN USAR PORQUE NO ES NECESARIO-->
-                            <!--<Label Text="{Binding PubDate}" 
-                                   Style="{StaticResource NewsDateLabel}"
-                                   TextColor="{StaticResource PrimaryBlue}"
-                                   HorizontalOptions="End"/>-->
                                    
+                                    <StackLayout VerticalOptions="Center" HorizontalOptions="Center">
+                                        <Label Text="📰" 
+                                               FontSize="32" 
+                                               TextColor="#9CA3AF"
+                                               HorizontalOptions="Center"/>
+                                        <Label Text="{Binding SourceId, StringFormat='Fuente: {0}'}" 
+                                               FontSize="12" 
+                                               TextColor="#6B7280"
+                                               HorizontalOptions="Center"/>
+                                    </StackLayout>
+                                </Grid>
+                            </Frame>
 
+                     
+                            <StackLayout Spacing="8">
+
+                                <!--Da problemas xq marca la fecha y hroa actual
+                                <Label Text="{Binding PubDate, StringFormat='📅 {0}'}" 
+                                       Style="{StaticResource NewsDateLabel}"/>-->
+
+
+                                <Label Text="{Binding Title}" 
+                                       Style="{StaticResource NewsTitleLabel}"/>
+
+                              
+                                <Label Text="{Binding Description}" 
+                                       Style="{StaticResource NewsDescriptionLabel}"/>
+
+                             
+                                <Label Text="{Binding Link, StringFormat='🔗 {0}'}" 
+                                       FontSize="10" 
+                                       TextColor="#6B7280"
+                                       LineBreakMode="TailTruncation"/>
+
+                               
+                                <Button Text="📖 Leer artículo completo" 
+                                        Style="{StaticResource ReadMoreButton}"
+                                        Clicked="OnReadMoreClicked"/>
+                            </StackLayout>
                         </StackLayout>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
 
-
+       
             <CollectionView.EmptyView>
                 <StackLayout VerticalOptions="Center" 
-                           HorizontalOptions="Center"
-                           Padding="40">
-                    <Label Text="📰" 
-                           FontSize="48" 
-                           HorizontalOptions="Center"/>
-                    <Label Text="No se encontraron noticias" 
-                           Style="{StaticResource AppSubtitleLabel}"
-                           FontSize="16"
-                           HorizontalOptions="Center"
-                           Margin="0,10,0,0"/>
+                             HorizontalOptions="Center"
+                             Padding="40"
+                             Spacing="16">
+                    <Frame BackgroundColor="#1F2937" 
+                           CornerRadius="50" 
+                           WidthRequest="100" 
+                           HeightRequest="100"
+                           HasShadow="False"
+                           Padding="0">
+                        <Label Text="📰" 
+                               FontSize="48" 
+                               TextColor="#6B7280"
+                               HorizontalOptions="Center"
+                               VerticalOptions="Center"/>
+                    </Frame>
+
+                    <StackLayout Spacing="8">
+                        <Label Text="No se encontraron noticias" 
+                               Style="{StaticResource AppSubtitleLabel}"
+                               FontSize="18"
+                               FontAttributes="Bold"
+                               HorizontalOptions="Center"/>
+                        <Label Text="Intenta con otros términos de búsqueda" 
+                               FontSize="14"
+                               TextColor="#9CA3AF"
+                               HorizontalOptions="Center"/>
+                    </StackLayout>
                 </StackLayout>
             </CollectionView.EmptyView>
         </CollectionView>
 
+       
         <Button Grid.Row="3"
                 x:Name="btnAtras" 
                 Text="← Volver atrás" 
