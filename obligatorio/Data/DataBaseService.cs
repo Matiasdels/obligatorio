@@ -40,8 +40,48 @@ namespace obligatorio.Data
             await _database.CreateTableAsync<Cliente>();
             await _database.CreateTableAsync<Favorito>();
             await _database.CreateTableAsync<Usuario>();
-
+            await _database.CreateTableAsync<Patrocinador>();
+            var count = await _database.Table<Patrocinador>().CountAsync();
+            if (count == 0)
+            {
+                await InsertSampleData();
+            }
             await CrearAdminPorDefecto();
+        }
+
+        private async Task InsertSampleData()
+        {
+            var patrocinadores = new List<Patrocinador>
+            {
+                new Patrocinador
+                {
+                    Nombre = "Restaurant El Buen Sabor",
+                    Imagen = "restaurant_icon.png",
+                    Latitud = -34.9011,
+                    Longitud = -56.1645,
+                    Direccion = "Av. 18 de Julio 1234, Montevideo"
+                },
+                new Patrocinador
+                {
+                    Nombre = "Auto Service Premium",
+                    Imagen = "car_service_icon.png",
+                    Latitud = -34.8941,
+                    Longitud = -56.1591,
+                    Direccion = "Bvar. Artigas 5678, Montevideo"
+                },
+                new Patrocinador
+                {
+                    Nombre = "Farmacia Central",
+                    Imagen = "pharmacy_icon.png",
+                    Latitud = -34.9067,
+                    Longitud = -56.1929,
+                    Direccion = "8 de Octubre 2345, Montevideo"
+                }
+            };
+            foreach (var patrocinador in patrocinadores)
+            {
+                await _database.InsertAsync(patrocinador);
+            }
         }
 
         public Task<List<Sucursal>> GetSucursalesAsync()
@@ -176,6 +216,36 @@ namespace obligatorio.Data
             return await _database.Table<Usuario>()
                            .Where(u => u.HuellaRegistrada == true)
                            .FirstOrDefaultAsync();
+        }
+
+
+
+        public async Task<List<Patrocinador>> GetPatrocinadoresAsync()
+        {
+            return await _database.Table<Patrocinador>().OrderBy(p => p.Nombre).ToListAsync();
+        }
+
+        public async Task<Patrocinador> GetPatrocinadorByIdAsync(int id)
+        {
+            return await _database.Table<Patrocinador>().Where(p => p.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<int> SavePatrocinadorAsync(Patrocinador patrocinador)
+        {
+            if (patrocinador.Id != 0)
+                return await _database.UpdateAsync(patrocinador);
+            else
+                return await _database.InsertAsync(patrocinador);
+        }
+
+        public async Task<int> DeletePatrocinadorAsync(Patrocinador patrocinador)
+        {
+            return await _database.DeleteAsync(patrocinador);
+        }
+
+        public async Task<int> DeletePatrocinadorAsync(int id)
+        {
+            return await _database.DeleteAsync<Patrocinador>(id);
         }
 
     }
