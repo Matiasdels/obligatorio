@@ -164,6 +164,11 @@ namespace obligatorio.Data
         public Task<int> DeleteUsuarioAsync(Usuario usuario) =>
             _database.DeleteAsync(usuario);
 
+        public Task<List<Usuario>> ObtenerTodosUsuariosAsync()
+        {
+            return _database.Table<Usuario>().ToListAsync();
+        }
+
         // Alias para compatibilidad con ClienteDetailPage
         public Task<Cliente> GetClienteByIdAsync(int id) => GetClienteAsync(id);
 

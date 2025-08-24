@@ -366,6 +366,15 @@
                 </StackLayout>
             </Frame>
 
+            <Button Grid.Row="3"
+x:Name="btnAtras" 
+Text="← Volver atrás" 
+Clicked="btnAtras_Clicked"
+Style="{StaticResource AppPrimaryButton}"
+HeightRequest="45"
+Margin="20,10,20,15"/>
+
         </StackLayout>
+        
     </ScrollView>
 </ContentPage>

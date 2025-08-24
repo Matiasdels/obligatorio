@@ -11,7 +11,7 @@ public partial class LoginPage : ContentPage
     public LoginPage(DataBaseService dbService)
     {
         InitializeComponent();
-        _dbService = dbService;
+        _dbService = App.Database;
         MostrarLoginManual();
         if (DeviceInfo.Platform != DevicePlatform.Android && DeviceInfo.Platform != DevicePlatform.iOS)
         {
@@ -83,9 +83,10 @@ public partial class LoginPage : ContentPage
         txtPassword.IsVisible = true;
         btnLogin.IsVisible = true;
     }
-
+    
     private async void BtnLogin_Clicked(object sender, EventArgs e)
     {
+        
         string valor = txtUsuario.Text.Trim();
         string password = txtPassword.Text;
 
