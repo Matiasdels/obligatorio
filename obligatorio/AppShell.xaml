@@ -4,7 +4,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:obligatorio"
-    
+    Shell.NavBarIsVisible="True"
+             Shell.TabBarIsVisible="False"
     Shell.FlyoutBehavior="Flyout"
     Shell.FlyoutWidth="320"
     Shell.FlyoutBackgroundColor="{AppThemeBinding Light=#F8FAFC, Dark=#0F172A}"
