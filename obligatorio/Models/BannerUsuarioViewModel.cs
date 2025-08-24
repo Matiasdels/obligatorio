@@ -86,7 +86,7 @@ namespace obligatorio.Models
                 if (Shell.Current != null)
                 {
                     Shell.Current.FlyoutIsPresented = false;
-                    await Shell.Current.GoToAsync("//Perfil");
+                    await Shell.Current.GoToAsync("Perfil");
                 }
             }
             catch (Exception ex)
