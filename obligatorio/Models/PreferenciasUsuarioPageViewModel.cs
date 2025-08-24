@@ -69,8 +69,11 @@ namespace obligatorio.Models
                 }
                 else
                 {
+                    
                     await MostrarError("No hay usuario logueado");
+                    await Shell.Current.GoToAsync("//LoginPage");
                 }
+                
             }
             catch (Exception ex)
             {
@@ -154,6 +157,7 @@ namespace obligatorio.Models
             if (Application.Current?.MainPage != null)
             {
                 await Application.Current.MainPage.DisplayAlert("Error", mensaje, "OK");
+                
             }
         }
 

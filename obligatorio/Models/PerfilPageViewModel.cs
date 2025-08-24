@@ -1,4 +1,5 @@
-﻿using System;
+﻿using obligatorio.Services;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -11,28 +12,19 @@ namespace obligatorio.Models
 {
     public class PerfilPageViewModel : INotifyPropertyChanged
     {
-        private Usuario _usuario;
+        private readonly IUsuarioService _usuarioService;
         private ImageSource _fotoPerfilSource;
         private bool _mostrarIniciales = true;
 
-        public PerfilPageViewModel()
+        public PerfilPageViewModel(IUsuarioService usuarioService)
         {
+            _usuarioService = usuarioService;
             CambiarFotoCommand = new Command(async () => await CambiarFoto());
-            CargarDatosUsuario();
+            ActualizarFotoPerfil();
         }
 
-        // Propiedades
-        public Usuario Usuario
-        {
-            get => _usuario;
-            set
-            {
-                _usuario = value;
-                OnPropertyChanged();
-                ActualizarFotoPerfil();
-                OnPropertyChanged(nameof(InicalesUsuario));
-            }
-        }
+        // Propiedades que obtienen datos directamente del servicio
+        public Usuario Usuario => _usuarioService?.UsuarioActual;
 
         public ImageSource FotoPerfilSource
         {
@@ -72,34 +64,6 @@ namespace obligatorio.Models
         // Comandos
         public ICommand CambiarFotoCommand { get; }
 
-        // Métodos
-        private async void CargarDatosUsuario()
-        {
-            try
-            {
-                // Aquí cargas los datos del usuario desde tu servicio/base de datos
-                // Por ejemplo:
-                // Usuario = await _usuarioService.ObtenerUsuarioActualAsync();
-
-                // Datos de ejemplo (reemplaza con tu lógica):
-                Usuario = new Usuario
-                {
-                    Id = 1,
-                    Nombre = "Juan Pérez",
-                    Email = "juan.perez@email.com",
-                    Rol = "Administrador",
-                    Telefono = "+598 99 123 456",
-                    Direccion = "Av. 18 de Julio 1234, Montevideo, Uruguay",
-                    FotoBase64 = null // Se cargará desde la base de datos
-                };
-            }
-            catch (Exception ex)
-            {
-                await Application.Current.MainPage.DisplayAlert("Error",
-                    $"No se pudieron cargar los datos del usuario: {ex.Message}", "OK");
-            }
-        }
-
         private void ActualizarFotoPerfil()
         {
             if (Usuario?.FotoBase64 != null)
@@ -112,7 +76,6 @@ namespace obligatorio.Models
                 }
                 catch
                 {
-                    // Si hay error al cargar la imagen, mostrar iniciales
                     FotoPerfilSource = null;
                     MostrarIniciales = true;
                 }
@@ -172,11 +135,11 @@ namespace obligatorio.Models
                 var imageBytes = memoryStream.ToArray();
                 var base64String = Convert.ToBase64String(imageBytes);
 
-                // Actualizar el usuario con la nueva foto
+                // Actualizar la foto en el usuario actual
                 Usuario.FotoBase64 = base64String;
 
                 // Guardar en la base de datos
-                await GuardarFotoEnBaseDatos(base64String);
+                await GuardarFotoEnBaseDatos(Usuario.Id, base64String);
 
                 // Actualizar la interfaz
                 ActualizarFotoPerfil();
@@ -191,16 +154,12 @@ namespace obligatorio.Models
             }
         }
 
-        private async Task GuardarFotoEnBaseDatos(string fotoBase64)
+        private async Task GuardarFotoEnBaseDatos(int usuarioId, string fotoBase64)
         {
             try
             {
-                // Aquí implementas la lógica para guardar en tu base de datos
-                // Por ejemplo:
-                // await _usuarioService.ActualizarFotoPerfilAsync(Usuario.Id, fotoBase64);
-
-                // Simulación de guardado exitoso
-                await Task.Delay(500);
+                // Aquí implementas tu lógica para guardar en la base de datos
+                await Task.Delay(500); // Simulación
             }
             catch (Exception ex)
             {
