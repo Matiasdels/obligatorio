@@ -27,7 +27,8 @@ namespace obligatorio.Data
                     Nombre = "admin",
                     Email = "admin@admin.com",
                     Password = "1234", // puedes cambiar la contraseña por defecto
-                    Rol = "Administrador"
+                    Rol = "Administrador",
+                    HuellaRegistrada = true
                 };
 
                 await _database.InsertAsync(admin);
