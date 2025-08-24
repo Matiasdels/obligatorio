@@ -1,82 +1,61 @@
-// CÛdigo completo corregido para CinePage.xaml.cs:
-
-namespace obligatorio;
+Ôªøusing Microsoft.Maui.Controls;
 using obligatorio.Services;
-using obligatorio.Models;
-using System.Collections.Generic;
-using System.Linq;
+using obligatorio.ViewModels;
 
-public partial class CinePage : ContentPage
+namespace obligatorio
 {
-    private readonly TmdbService _tmdbService;
-    private List<Result> allMovies = new List<Result>(); // Lista completa de pelÌculas
-
-    public CinePage()
+    public partial class CinePage : ContentPage
     {
-        InitializeComponent();
-        _tmdbService = new TmdbService();
-        LoadMovies();
-    }
+        private CinePageViewModel _viewModel;
 
-    private async void LoadMovies()
-    {
-        try
+        public CinePage()
         {
-            var cineData = await _tmdbService.GetNowPlayingMoviesAsync();
-            foreach (var movie in cineData.Results)
+            InitializeComponent();
+            InitializeViewModel();
+        }
+
+        private void InitializeViewModel()
+        {
+            _viewModel = new CinePageViewModel();
+            BindingContext = _viewModel;
+        }
+
+        private async void OnSearchTextChanged(object sender, TextChangedEventArgs e)
+        {
+            // Usar el comando del ViewModel
+            if (_viewModel.SearchCommand.CanExecute(e.NewTextValue))
             {
-                movie.PosterPath = $"https://image.tmdb.org/t/p/w500{movie.PosterPath}";
+                _viewModel.SearchCommand.Execute(e.NewTextValue);
+            }
+        }
+        // Animaci√≥n para cuando el cursor entra al encabezado
+        private async void OnHeaderPointerEntered(object sender, PointerEventArgs e)
+        {
+            if (sender is Frame frame)
+            {
+                await frame.ScaleTo(1.08, 200, Easing.CubicOut);
             }
 
-            // Guardar todas las pelÌculas para el filtrado
-            allMovies = cineData.Results.ToList();
-            MoviesCollection.ItemsSource = allMovies;
         }
-        catch (Exception ex)
+
+        // Animaci√≥n para cuando el cursor sale del encabezado
+        private async void OnHeaderPointerExited(object sender, PointerEventArgs e)
         {
-            await DisplayAlert("Error", $"No se pudieron cargar las pelÌculas: {ex.Message}", "OK");
+            if (sender is Frame frame)
+            {
+                await frame.ScaleTo(1.0, 200, Easing.CubicOut);
+            }
         }
-    }
-
-    // MÈtodo para manejar la b˙squeda
-    private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
-    {
-        string searchText = e.NewTextValue?.ToLower() ?? "";
-
-        if (string.IsNullOrWhiteSpace(searchText))
+        private async void btnCineAtras_Clicked(object sender, EventArgs e)
         {
-            // Mostrar todas las pelÌculas si no hay b˙squeda
-            MoviesCollection.ItemsSource = allMovies;
-        }
-        else
-        {
-            // Filtrar por tÌtulo y descripciÛn
-            var filteredMovies = allMovies.Where(movie =>
-                movie.Title?.ToLower().Contains(searchText) == true ||
-                movie.Overview?.ToLower().Contains(searchText) == true
-            ).ToList();
-
-            MoviesCollection.ItemsSource = filteredMovies;
-        }
-    }
-
-    public async void btnCineAtras_Clicked(object sender, EventArgs e)
-    {
-        try
-        {
-            var navStack = Shell.Current.Navigation.NavigationStack;
-            if (navStack.Count > 1)
+            try
             {
                 await Shell.Current.GoToAsync("..");
             }
-            else
+            catch (Exception ex)
             {
-                await Shell.Current.GoToAsync("//MainPage");
+                await DisplayAlert("Error", "No se pudo navegar hacia atr√°s", "OK");
             }
-        }
-        catch (Exception ex)
-        {
-            await DisplayAlert("Error", ex.Message, "OK");
         }
     }
 }

@@ -78,7 +78,11 @@
     <Color x:Key="AppTextSecondary">#757575</Color>
 
     <Color x:Key="TextOnPrimary">#FFFFFF</Color>
-
     
+    <LinearGradientBrush x:Key="PrimaryGradient" StartPoint="0,0" EndPoint="1,1">
+        <GradientStop Color="#0D47A1" Offset="0.0" />
+        <GradientStop Color="#1976D2" Offset="1.0" />
+    </LinearGradientBrush>
+
 
 </ResourceDictionary>
