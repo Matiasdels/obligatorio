@@ -226,13 +226,6 @@
                             IsVisible="{Binding PreferenciasActuales.MostrarClientes}" />
                 </Grid>
 
-                <!-- Botón de detalles de clientes -->
-                <Button Text="📋 Detalles de Clientes (PONERLO DENTRO DE CLIENTES)"
-                        Clicked="IrADetallesClientes"
-                        Style="{StaticResource ModernButtonStyle}"
-                        Background="{StaticResource PrimaryGradient}"
-                        Margin="20,10,20,0" />
-
             </StackLayout>
 
             <Frame Grid.Row="4"

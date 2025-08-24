@@ -11,8 +11,10 @@
                 <Label Text="Bienvenido" 
                        Style="{StaticResource AppTitleLabel}"/>
 
-                <Label Text="Ingresa a tu cuenta para continuar" 
-                       Style="{StaticResource AppSubtitleLabel}"/>
+                <Label Text="Ingresa tu cuenta para continuar" 
+                       Style="{StaticResource AppTitleLabel}"
+                       FontAttributes="None"
+                       FontSize="16"/>
             </StackLayout>
 
             <StackLayout Grid.Row="1" Spacing="25" VerticalOptions="Center">

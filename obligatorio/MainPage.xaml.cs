@@ -76,20 +76,11 @@ namespace obligatorio
             await Shell.Current.GoToAsync(nameof(PatrocinadoresPage));
         }
 
-        private void btnClima_Clicked(object sender, EventArgs e)
-        {
-
-        }
-
         private async void IrAClientes(object sender, EventArgs e)
         {
             await Shell.Current.GoToAsync(nameof(ClienteListPage));
         }
 
-        private async void IrADetallesClientes(object sender, EventArgs e)
-        {
-            await Shell.Current.GoToAsync(nameof(ClienteDetailPage));
-        }
     }
 
 
