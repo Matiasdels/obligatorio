@@ -108,7 +108,7 @@
                        Padding="15"
                        Margin="5">
                     <StackLayout HorizontalOptions="Center">
-                        <Label Text="7" 
+                        <Label Text="6" 
                                FontSize="24" 
                                FontAttributes="Bold" 
                                TextColor="White"
