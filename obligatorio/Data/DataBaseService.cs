@@ -40,6 +40,7 @@ namespace obligatorio.Data
             await _database.CreateTableAsync<Cliente>();
             await _database.CreateTableAsync<Favorito>();
             await _database.CreateTableAsync<Usuario>();
+            await _database.CreateTableAsync<PreferenciasUsuario>();
 
             await CrearAdminPorDefecto();
         }
@@ -181,6 +182,80 @@ namespace obligatorio.Data
             return await _database.Table<Usuario>()
                            .Where(u => u.HuellaRegistrada == true)
                            .FirstOrDefaultAsync();
+        }
+
+        // ---------- CRUD PreferenciasUsuario ----------
+
+        public async Task<PreferenciasUsuario> GetPreferenciasUsuarioAsync(int usuarioId)
+        {
+            try
+            {
+                System.Diagnostics.Debug.WriteLine($"Buscando preferencias para usuario ID: {usuarioId}");
+
+                var preferencias = await _database.Table<PreferenciasUsuario>()
+                    .Where(p => p.UsuarioId == usuarioId)
+                    .FirstOrDefaultAsync();
+
+                // Si no existen preferencias, crear las por defecto
+                if (preferencias == null)
+                {
+                    System.Diagnostics.Debug.WriteLine("No se encontraron preferencias, creando por defecto");
+
+                    preferencias = new PreferenciasUsuario
+                    {
+                        UsuarioId = usuarioId,
+                        MostrarClima = true,
+                        MostrarCotizaciones = true,
+                        MostrarNoticias = true,
+                        MostrarCine = true,
+                        MostrarPatrocinadores = true,
+                        MostrarClientes = true
+                    };
+
+                    await SavePreferenciasUsuarioAsync(preferencias);
+                    System.Diagnostics.Debug.WriteLine($"Preferencias por defecto creadas con ID: {preferencias.Id}");
+                }
+                else
+                {
+                    System.Diagnostics.Debug.WriteLine($"Preferencias encontradas - ID: {preferencias.Id}");
+                }
+
+                return preferencias;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error al obtener preferencias: {ex.Message}");
+                throw;
+            }
+
+        }
+        public async Task<int> SavePreferenciasUsuarioAsync(PreferenciasUsuario preferencias)
+        {
+            try
+            {
+                int result;
+                if (preferencias.Id != 0)
+                {
+                    result = await _database.UpdateAsync(preferencias);
+                    System.Diagnostics.Debug.WriteLine($"Preferencias actualizadas - ID: {preferencias.Id}");
+                }
+                else
+                {
+                    result = await _database.InsertAsync(preferencias);
+                    System.Diagnostics.Debug.WriteLine($"Preferencias insertadas - Nuevo ID: {preferencias.Id}");
+                }
+                return result;
+            }
+            catch (Exception ex)
+            {
+                System.Diagnostics.Debug.WriteLine($"Error al guardar preferencias: {ex.Message}");
+                throw;
+            }
+        }
+
+        public Task<int> DeletePreferenciasUsuarioAsync(PreferenciasUsuario preferencias)
+        {
+            return _database.DeleteAsync(preferencias);
         }
 
     }

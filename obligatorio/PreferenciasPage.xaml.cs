@@ -4,37 +4,31 @@ namespace obligatorio;
 
 public partial class PreferenciasPage : ContentPage
 {
-    private PreferenciasPageViewModel _viewModel;
+    private PreferenciasUsuarioPageViewModel _viewModel;
 
     public PreferenciasPage()
     {
         InitializeComponent();
-        _viewModel = new PreferenciasPageViewModel();
+        _viewModel = new PreferenciasUsuarioPageViewModel(
+            App.PreferenciasUsuarioService,
+            App.UsuarioService);
         BindingContext = _viewModel;
     }
 
-    protected override void OnAppearing()
+    protected override async void OnAppearing()
     {
         base.OnAppearing();
-
-        // Opcional: Recargar preferencias cuando la página aparece
-        // _viewModel.RecargarPreferencias(); // Si implementas este método
+        await _viewModel.InicializarAsync();
     }
 
-    // Evento específico para el cambio de tema
-    private void OnTemaOscuroToggled(object sender, ToggledEventArgs e)
-    {
-        if (_viewModel != null)
-        {
-            // Aplicar el tema inmediatamente
-            _viewModel.AplicarTema(e.Value);
-        }
-    }
-
-    private async void btnAtras_Clicked(object sender, EventArgs e)
+    private async void btnVolver_Clicked(object sender, EventArgs e)
     {
         try
         {
+            // Asegurar que los cambios se guarden antes de salir
+            await _viewModel.GuardarPreferenciasAsync();
+
+            // Navegar de vuelta
             var navStack = Shell.Current.Navigation.NavigationStack;
             if (navStack.Count > 1)
             {
@@ -47,7 +41,7 @@ public partial class PreferenciasPage : ContentPage
         }
         catch (Exception ex)
         {
-            await DisplayAlert("Error", ex.Message, "OK");
+            await DisplayAlert("Error", $"Error al volver: {ex.Message}", "OK");
         }
     }
 }

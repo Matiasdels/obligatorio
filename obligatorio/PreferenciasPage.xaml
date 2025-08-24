@@ -7,9 +7,9 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <!-- Estilos personalizados -->
-            <Style x:Key="PreferenceCardStyle" TargetType="Frame">
+            <Style x:Key="ModuleCardStyle" TargetType="Frame">
                 <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=#1E293B}" />
-                <Setter Property="CornerRadius" Value="16" />
+                <Setter Property="CornerRadius" Value="15" />
                 <Setter Property="HasShadow" Value="True" />
                 <Setter Property="Padding" Value="20" />
                 <Setter Property="Margin" Value="0,10" />
@@ -22,14 +22,14 @@
                 <Setter Property="Margin" Value="0,20,0,10" />
             </Style>
 
-            <Style x:Key="PreferenceTitleStyle" TargetType="Label">
+            <Style x:Key="ModuleTitleStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="16" />
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="TextColor" Value="{AppThemeBinding Light=#1E293B, Dark=White}" />
                 <Setter Property="VerticalOptions" Value="Center" />
             </Style>
 
-            <Style x:Key="PreferenceDescriptionStyle" TargetType="Label">
+            <Style x:Key="ModuleDescriptionStyle" TargetType="Label">
                 <Setter Property="FontSize" Value="14" />
                 <Setter Property="TextColor" Value="{AppThemeBinding Light=#64748B, Dark=#94A3B8}" />
                 <Setter Property="LineBreakMode" Value="WordWrap" />
@@ -41,15 +41,6 @@
                 <Setter Property="ThumbColor" Value="White" />
                 <Setter Property="VerticalOptions" Value="Center" />
                 <Setter Property="Scale" Value="1.2" />
-            </Style>
-
-            <Style x:Key="IconFrameStyle" TargetType="Frame">
-                <Setter Property="CornerRadius" Value="25" />
-                <Setter Property="HasShadow" Value="False" />
-                <Setter Property="Padding" Value="10" />
-                <Setter Property="WidthRequest" Value="50" />
-                <Setter Property="HeightRequest" Value="50" />
-                <Setter Property="VerticalOptions" Value="Center" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -100,21 +91,21 @@
                                VerticalOptions="End"
                                Margin="0,0,0,-30">
 
-                            <Label Text="⚙️"
+                            <Label Text="📱"
                                    FontSize="30"
                                    HorizontalOptions="Center"
                                    VerticalOptions="Center" />
                         </Frame>
 
                         <!-- Título y descripción -->
-                        <Label Text="Preferencias"
+                        <Label Text="Configurar Módulos"
                                FontSize="24"
                                FontAttributes="Bold"
                                TextColor="{AppThemeBinding Light=#1E293B, Dark=White}"
                                HorizontalOptions="Center"
                                Margin="0,40,0,0" />
 
-                        <Label Text="Personaliza tu experiencia en la aplicación"
+                        <Label Text="Selecciona qué módulos quieres ver en tu página principal"
                                FontSize="14"
                                TextColor="{AppThemeBinding Light=#64748B, Dark=#94A3B8}"
                                HorizontalOptions="Center"
@@ -123,10 +114,11 @@
                 </Grid>
             </Frame>
 
-            <!-- Sección: Notificaciones -->
-            <Label Text="🔔 Notificaciones" Style="{StaticResource SectionTitleStyle}" />
+            <!-- Sección: Módulos Disponibles -->
+            <Label Text="🏠 Módulos de la Página Principal" Style="{StaticResource SectionTitleStyle}" />
 
-            <Frame Style="{StaticResource PreferenceCardStyle}">
+            <!-- Módulo Clima -->
+            <Frame Style="{StaticResource ModuleCardStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -134,38 +126,29 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <!-- Icono -->
-                    <Frame Grid.Column="0"
-                           BackgroundColor="#E3F2FD"
-                           Style="{StaticResource IconFrameStyle}">
-                        <Label Text="🔔"
-                               FontSize="20"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center" />
-                    </Frame>
+                    <Label Grid.Column="0"
+                           Text="🌤️"
+                           FontSize="30"
+                           VerticalOptions="Center"
+                           Margin="0,0,15,0" />
 
-                    <!-- Información -->
                     <StackLayout Grid.Column="1"
-                                 Margin="15,0,15,0"
                                  VerticalOptions="Center"
                                  Spacing="2">
-                        <Label Text="Notificaciones Push"
-                               Style="{StaticResource PreferenceTitleStyle}" />
-                        <Label Text="Recibe alertas sobre noticias importantes y programas en vivo"
-                               Style="{StaticResource PreferenceDescriptionStyle}" />
+                        <Label Text="Clima"
+                               Style="{StaticResource ModuleTitleStyle}" />
+                        <Label Text="Consulta el estado del tiempo y pronósticos"
+                               Style="{StaticResource ModuleDescriptionStyle}" />
                     </StackLayout>
 
-                    <!-- Switch -->
                     <Switch Grid.Column="2"
-                            IsToggled="{Binding Preferencias.Notificaciones}"
+                            IsToggled="{Binding PreferenciasActuales.MostrarClima}"
                             Style="{StaticResource ModernSwitchStyle}" />
                 </Grid>
             </Frame>
 
-            <!-- Sección: Apariencia -->
-            <Label Text="🎨 Apariencia" Style="{StaticResource SectionTitleStyle}" />
-
-            <Frame Style="{StaticResource PreferenceCardStyle}">
+            <!-- Módulo Cotizaciones -->
+            <Frame Style="{StaticResource ModuleCardStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -173,79 +156,29 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <!-- Icono -->
-                    <Frame Grid.Column="0"
-                           BackgroundColor="#F3E5F5"
-                           Style="{StaticResource IconFrameStyle}">
-                        <Label Text="🌙"
-                               FontSize="20"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center" />
-                    </Frame>
+                    <Label Grid.Column="0"
+                           Text="💱"
+                           FontSize="30"
+                           VerticalOptions="Center"
+                           Margin="0,0,15,0" />
 
-                    <!-- Información -->
                     <StackLayout Grid.Column="1"
-                                 Margin="15,0,15,0"
                                  VerticalOptions="Center"
                                  Spacing="2">
-                        <Label Text="Tema Oscuro"
-                               Style="{StaticResource PreferenceTitleStyle}" />
-                        <Label Text="Cambia a un tema oscuro para mayor comodidad visual"
-                               Style="{StaticResource PreferenceDescriptionStyle}" />
+                        <Label Text="Cotizaciones"
+                               Style="{StaticResource ModuleTitleStyle}" />
+                        <Label Text="Ve las cotizaciones actuales de divisas"
+                               Style="{StaticResource ModuleDescriptionStyle}" />
                     </StackLayout>
 
-                    <!-- Switch -->
                     <Switch Grid.Column="2"
-                            IsToggled="{Binding Preferencias.TemaOscuro}"
-                            Style="{StaticResource ModernSwitchStyle}"
-                            Toggled="OnTemaOscuroToggled" />
-                </Grid>
-            </Frame>
-
-            <!-- Sección: Audio -->
-            <Label Text="🎵 Audio y Reproducción" Style="{StaticResource SectionTitleStyle}" />
-
-            <Frame Style="{StaticResource PreferenceCardStyle}">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" />
-                    </Grid.ColumnDefinitions>
-
-                    <!-- Icono -->
-                    <Frame Grid.Column="0"
-                           BackgroundColor="#E8F5E8"
-                           Style="{StaticResource IconFrameStyle}">
-                        <Label Text="🎵"
-                               FontSize="20"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center" />
-                    </Frame>
-
-                    <!-- Información -->
-                    <StackLayout Grid.Column="1"
-                                 Margin="15,0,15,0"
-                                 VerticalOptions="Center"
-                                 Spacing="2">
-                        <Label Text="Música en Segundo Plano"
-                               Style="{StaticResource PreferenceTitleStyle}" />
-                        <Label Text="Continúa reproduciendo música cuando uses otras apps"
-                               Style="{StaticResource PreferenceDescriptionStyle}" />
-                    </StackLayout>
-
-                    <!-- Switch -->
-                    <Switch Grid.Column="2"
-                            IsToggled="{Binding Preferencias.MusicaSegundoPlano}"
+                            IsToggled="{Binding PreferenciasActuales.MostrarCotizaciones}"
                             Style="{StaticResource ModernSwitchStyle}" />
                 </Grid>
             </Frame>
 
-            <!-- Sección: Avanzadas -->
-            <Label Text="🔧 Configuración Avanzada" Style="{StaticResource SectionTitleStyle}" />
-
-            <!-- Calidad de Audio -->
-            <Frame Style="{StaticResource PreferenceCardStyle}">
+            <!-- Módulo Noticias -->
+            <Frame Style="{StaticResource ModuleCardStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -253,36 +186,29 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <!-- Icono -->
-                    <Frame Grid.Column="0"
-                           BackgroundColor="#FFF3E0"
-                           Style="{StaticResource IconFrameStyle}">
-                        <Label Text="🔊"
-                               FontSize="20"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center" />
-                    </Frame>
+                    <Label Grid.Column="0"
+                           Text="📰"
+                           FontSize="30"
+                           VerticalOptions="Center"
+                           Margin="0,0,15,0" />
 
-                    <!-- Información -->
                     <StackLayout Grid.Column="1"
-                                 Margin="15,0,15,0"
                                  VerticalOptions="Center"
                                  Spacing="2">
-                        <Label Text="Alta Calidad de Audio"
-                               Style="{StaticResource PreferenceTitleStyle}" />
-                        <Label Text="Reproduce audio en máxima calidad (consume más datos)"
-                               Style="{StaticResource PreferenceDescriptionStyle}" />
+                        <Label Text="Noticias"
+                               Style="{StaticResource ModuleTitleStyle}" />
+                        <Label Text="Mantente al día con las últimas noticias"
+                               Style="{StaticResource ModuleDescriptionStyle}" />
                     </StackLayout>
 
-                    <!-- Switch -->
                     <Switch Grid.Column="2"
-                            IsToggled="{Binding Preferencias.AltaCalidadAudio}"
+                            IsToggled="{Binding PreferenciasActuales.MostrarNoticias}"
                             Style="{StaticResource ModernSwitchStyle}" />
                 </Grid>
             </Frame>
 
-            <!-- Descargas automáticas -->
-            <Frame Style="{StaticResource PreferenceCardStyle}">
+            <!-- Módulo Cine -->
+            <Frame Style="{StaticResource ModuleCardStyle}">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
@@ -290,30 +216,83 @@
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
 
-                    <!-- Icono -->
-                    <Frame Grid.Column="0"
-                           BackgroundColor="#E1F5FE"
-                           Style="{StaticResource IconFrameStyle}">
-                        <Label Text="⬇️"
-                               FontSize="20"
-                               HorizontalOptions="Center"
-                               VerticalOptions="Center" />
-                    </Frame>
+                    <Label Grid.Column="0"
+                           Text="🎬"
+                           FontSize="30"
+                           VerticalOptions="Center"
+                           Margin="0,0,15,0" />
 
-                    <!-- Información -->
                     <StackLayout Grid.Column="1"
-                                 Margin="15,0,15,0"
                                  VerticalOptions="Center"
                                  Spacing="2">
-                        <Label Text="Descarga Automática"
-                               Style="{StaticResource PreferenceTitleStyle}" />
-                        <Label Text="Descarga contenido nuevo cuando estés conectado a WiFi"
-                               Style="{StaticResource PreferenceDescriptionStyle}" />
+                        <Label Text="Cine"
+                               Style="{StaticResource ModuleTitleStyle}" />
+                        <Label Text="Explora carteleras y horarios de cine"
+                               Style="{StaticResource ModuleDescriptionStyle}" />
                     </StackLayout>
 
-                    <!-- Switch -->
                     <Switch Grid.Column="2"
-                            IsToggled="{Binding Preferencias.DescargaAutomatica}"
+                            IsToggled="{Binding PreferenciasActuales.MostrarCine}"
+                            Style="{StaticResource ModernSwitchStyle}" />
+                </Grid>
+            </Frame>
+
+            <!-- Módulo Patrocinadores -->
+            <Frame Style="{StaticResource ModuleCardStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0"
+                           Text="🏢"
+                           FontSize="30"
+                           VerticalOptions="Center"
+                           Margin="0,0,15,0" />
+
+                    <StackLayout Grid.Column="1"
+                                 VerticalOptions="Center"
+                                 Spacing="2">
+                        <Label Text="Patrocinadores"
+                               Style="{StaticResource ModuleTitleStyle}" />
+                        <Label Text="Conoce nuestros patrocinadores y colaboradores"
+                               Style="{StaticResource ModuleDescriptionStyle}" />
+                    </StackLayout>
+
+                    <Switch Grid.Column="2"
+                            IsToggled="{Binding PreferenciasActuales.MostrarPatrocinadores}"
+                            Style="{StaticResource ModernSwitchStyle}" />
+                </Grid>
+            </Frame>
+
+            <!-- Módulo Clientes -->
+            <Frame Style="{StaticResource ModuleCardStyle}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Grid.Column="0"
+                           Text="👥"
+                           FontSize="30"
+                           VerticalOptions="Center"
+                           Margin="0,0,15,0" />
+
+                    <StackLayout Grid.Column="1"
+                                 VerticalOptions="Center"
+                                 Spacing="2">
+                        <Label Text="Clientes"
+                               Style="{StaticResource ModuleTitleStyle}" />
+                        <Label Text="Gestiona la información de tus clientes"
+                               Style="{StaticResource ModuleDescriptionStyle}" />
+                    </StackLayout>
+
+                    <Switch Grid.Column="2"
+                            IsToggled="{Binding PreferenciasActuales.MostrarClientes}"
                             Style="{StaticResource ModernSwitchStyle}" />
                 </Grid>
             </Frame>
@@ -334,15 +313,15 @@
                         HorizontalOptions="FillAndExpand"
                         Command="{Binding GuardarPreferenciasCommand}" />
 
-                <!-- Restablecer -->
-                <Button Text="🔄 Restablecer"
-                        BackgroundColor="{AppThemeBinding Light=#E0E0E0, Dark=#424242}"
-                        TextColor="{AppThemeBinding Light=#424242, Dark=White}"
+                <!-- Restablecer Todos -->
+                <Button Text="🔄 Activar Todos"
+                        BackgroundColor="{AppThemeBinding Light=#2196F3, Dark=#1976D2}"
+                        TextColor="White"
                         CornerRadius="12"
                         FontAttributes="Bold"
                         HeightRequest="50"
                         HorizontalOptions="FillAndExpand"
-                        Command="{Binding RestablecerPreferenciasCommand}" />
+                        Command="{Binding ActivarTodosCommand}" />
             </StackLayout>
 
             <!-- Información adicional -->
@@ -357,7 +336,7 @@
                            FontSize="20"
                            VerticalOptions="Center" />
 
-                    <Label Text="Los cambios se aplicarán inmediatamente. Algunas configuraciones pueden requerir reiniciar la aplicación."
+                    <Label Text="Los módulos desactivados no aparecerán en tu página principal. Los cambios se guardan automáticamente."
                            FontSize="12"
                            TextColor="#1976D2"
                            VerticalOptions="Center"
@@ -366,15 +345,16 @@
                 </StackLayout>
             </Frame>
 
-            <Button Grid.Row="3"
-x:Name="btnAtras" 
-Text="← Volver atrás" 
-Clicked="btnAtras_Clicked"
-Style="{StaticResource AppPrimaryButton}"
-HeightRequest="45"
-Margin="20,10,20,15"/>
+            <!-- Botón Volver -->
+            <Button Text="← Volver a Inicio"
+                    BackgroundColor="{AppThemeBinding Light=#E0E0E0, Dark=#424242}"
+                    TextColor="{AppThemeBinding Light=#424242, Dark=White}"
+                    CornerRadius="12"
+                    FontAttributes="Bold"
+                    HeightRequest="45"
+                    Clicked="btnVolver_Clicked"
+                    Margin="0,10,0,15" />
 
         </StackLayout>
-        
     </ScrollView>
 </ContentPage>
