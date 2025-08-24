@@ -16,19 +16,20 @@ namespace obligatorio.Services
 
         void SetUsuarioLogueado(Usuario usuario);
         void CerrarSesion();
+        Task CambiarUsuarioAsync(Usuario usuario);
 
         event EventHandler<Usuario> UsuarioCambiado;
     }
-    
+
     public class UsuarioService : IUsuarioService
     {
         private Usuario _usuarioActual;
-        
-        public Usuario UsuarioActual 
-        { 
-            get => _usuarioActual; 
-            private set 
-            { 
+
+        public Usuario UsuarioActual
+        {
+            get => _usuarioActual;
+            private set
+            {
                 if (_usuarioActual != value)
                 {
                     _usuarioActual = value;
@@ -47,6 +48,15 @@ namespace obligatorio.Services
         public void SetUsuarioLogueado(Usuario usuario)
         {
             UsuarioActual = usuario;
+        }
+
+        public async Task CambiarUsuarioAsync(Usuario usuario)
+        {
+            // Método asíncrono para cambiar usuario y permitir que otros servicios reaccionen
+            UsuarioActual = usuario;
+
+            // Dar tiempo a otros servicios para reaccionar al cambio
+            await Task.Delay(100);
         }
 
         public void CerrarSesion()
