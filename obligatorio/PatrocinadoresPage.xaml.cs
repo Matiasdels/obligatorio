@@ -61,4 +61,63 @@ public partial class PatrocinadoresPage : ContentPage
         await _viewModel.LoadPatrocinadoresAsync();
         RefreshView.IsRefreshing = false;
     }
+
+    private async void OnHeaderPointerEntered(object sender, PointerEventArgs e)
+    {
+        if (sender is Frame frame)
+        {
+            await frame.ScaleTo(1.05, 200, Easing.CubicOut);
+        }
+    }
+
+
+    private async void OnHeaderPointerExited(object sender, PointerEventArgs e)
+    {
+        if (sender is Frame frame)
+        {
+            await frame.ScaleTo(1.0, 200, Easing.CubicOut);
+        }
+    }
+
+
+    private async void OnPatrocinadorPointerEntered(object sender, PointerEventArgs e)
+    {
+        if (sender is Frame frame)
+        {
+            await Task.WhenAll(
+                frame.ScaleTo(1.08, 200, Easing.CubicOut),
+                frame.TranslateTo(0, -5, 200, Easing.CubicOut)
+            );
+        }
+    }
+
+    private async void OnPatrocinadorPointerExited(object sender, PointerEventArgs e)
+    {
+        if (sender is Frame frame)
+        {
+            await Task.WhenAll(
+                frame.ScaleTo(1.0, 200, Easing.CubicOut),
+                frame.TranslateTo(0, 0, 200, Easing.CubicOut)
+            );
+        }
+    }
+    private async void btnAtras_Clicked(object sender, EventArgs e)
+    {
+        try
+        {
+            var navStack = Shell.Current.Navigation.NavigationStack;
+            if (navStack.Count > 1)
+            {
+                await Shell.Current.GoToAsync("..");
+            }
+            else
+            {
+                await Shell.Current.GoToAsync("//MainPage");
+            }
+        }
+        catch (Exception ex)
+        {
+            await DisplayAlert("Error", ex.Message, "OK");
+        }
+    }
 }
