@@ -2,14 +2,14 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="obligatorio.MainPage">
-               
+
     <ContentPage.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
             <GradientStop Color="#0D1B2A" Offset="0.0" />
             <GradientStop Color="#1B2A44" Offset="1.0" />
         </LinearGradientBrush>
     </ContentPage.Background>
-    
+
 
     <ContentPage.Resources>
         <Style x:Key="HeaderLabelStyle" TargetType="Label">
@@ -62,14 +62,13 @@
             <GradientStop Color="#28374D" Offset="1.0"/>
         </LinearGradientBrush>
     </ContentPage.Resources>
-    
+
     <ScrollView>
         <Grid RowDefinitions="Auto,Auto,Auto,*,Auto" Padding="0">
 
             <Frame Grid.Row="0" 
                    Background="{StaticResource PrussianBlue}"
                    CornerRadius="0"
-
                    Padding="30,40,30,30"
                    Margin="0,0,0,20"
                    HasShadow="True">
@@ -77,19 +76,16 @@
                     <Label Text="Voz del Este"
                        FontSize="36"
                        FontAttributes="Bold"
-                       
                        TextColor="White"
                        HorizontalOptions="Center"/>
                     <Label Text="La radio del Uruguay"
                        FontSize="16"
                        FontAttributes="Italic"
-                           
                        TextColor="#B0C4DE"
                        HorizontalOptions="Center"/>
                 </StackLayout>
             </Frame>
 
-  
             <Frame Grid.Row="1"
                    BackgroundColor="White"
                    CornerRadius="20"
@@ -112,7 +108,7 @@
                        Padding="15"
                        Margin="5">
                     <StackLayout HorizontalOptions="Center">
-                        <Label Text="7" 
+                        <Label Text="6" 
                                FontSize="24" 
                                FontAttributes="Bold" 
                                TextColor="White"
@@ -163,64 +159,72 @@
 
             <StackLayout Grid.Row="3" Spacing="12" Margin="0,10,0,20">
 
-                <Label Text="Navegación Principal" 
-                       FontSize="20" 
-                       FontAttributes="Bold" 
-                       TextColor="White" 
-                       Margin="30,0,0,10" />
+                <StackLayout Orientation="Horizontal" Spacing="10" Margin="30,0,30,10">
+                    <Label Text="Navegación Principal" 
+                           FontSize="20" 
+                           FontAttributes="Bold" 
+                           TextColor="White" 
+                           VerticalOptions="Center"
+                           HorizontalOptions="StartAndExpand" />
 
+                    
+                </StackLayout>
+
+                <!-- Primera fila de botones -->
                 <Grid ColumnDefinitions="*,*" Margin="20,0">
                     <Button Text="🌤 Clima"
                             Clicked="IrAClima"
                             Style="{StaticResource ModernButtonStyle}"
                             Background="{StaticResource AccentGradient}"
-                            Margin="0,0,5,0" />
+                            Margin="0,0,5,0"
+                            IsVisible="{Binding PreferenciasActuales.MostrarClima}" />
 
                     <Button Grid.Column="1"
                             Text="💰 Cotizaciones"
                             Clicked="IrACotizaciones"
                             Style="{StaticResource ModernButtonStyle}"
                             Background="{StaticResource AccentGradient}"
-                            Margin="5,0,0,0" />
+                            Margin="5,0,0,0"
+                            IsVisible="{Binding PreferenciasActuales.MostrarCotizaciones}" />
                 </Grid>
 
+                <!-- Segunda fila de botones -->
                 <Grid ColumnDefinitions="*,*" Margin="20,0">
                     <Button Grid.Column="0"
                             Text="📰 Noticias"
                             Clicked="IrANoticias"
                             Style="{StaticResource ModernButtonStyle}"
                             Background="{StaticResource SecondaryGradient}"
-                            Margin="0,0,5,0" />
+                            Margin="0,0,5,0"
+                            IsVisible="{Binding PreferenciasActuales.MostrarNoticias}" />
 
                     <Button Grid.Column="1"
                             Text="🎬 Cine"
                             Clicked="IrACine"
                             Style="{StaticResource ModernButtonStyle}"
                             Background="{StaticResource PrimaryGradient}"
-                            Margin="5,0,0,0" />
+                            Margin="5,0,0,0"
+                            IsVisible="{Binding PreferenciasActuales.MostrarCine}" />
                 </Grid>
 
+                <!-- Tercera fila de botones -->
                 <Grid ColumnDefinitions="*,*" Margin="20,0">
                     <Button Grid.Column="0"
                             Text="🤝 Patrocinadores"
                             Clicked="IrAPatrocinadores"
                             Style="{StaticResource ModernButtonStyle}"
                             Background="{StaticResource DarkGradient}"
-                            Margin="0,0,5,0" />
+                            Margin="0,0,5,0"
+                            IsVisible="{Binding PreferenciasActuales.MostrarPatrocinadores}" />
 
                     <Button Grid.Column="1"
                             Text="👥 Clientes"
                             Clicked="IrAClientes"
                             Style="{StaticResource ModernButtonStyle}"
                             Background="{StaticResource SecondaryGradient}"
-                            Margin="5,0,0,0" />
+                            Margin="5,0,0,0"
+                            IsVisible="{Binding PreferenciasActuales.MostrarClientes}" />
                 </Grid>
-
-                <Button Text="📋 Detalles de Clientes (PONERLO DENTRO DE CLIENTES)"
-                        Clicked="IrADetallesClientes"
-                        Style="{StaticResource ModernButtonStyle}"
-                        Background="{StaticResource PrimaryGradient}"
-                        Margin="20,10,20,0" />
 
             </StackLayout>
 

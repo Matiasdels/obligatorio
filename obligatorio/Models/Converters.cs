@@ -1,38 +1,61 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Microsoft.Maui.Controls;
 
-namespace obligatorio.Models
+namespace obligatorio.Converters
 {
-    internal class Converters
+    public class StringToBoolConverter : IValueConverter
     {
-        public class StringToBoolConverter : IValueConverter
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                return !string.IsNullOrEmpty(value?.ToString());
-            }
-
-            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                throw new NotImplementedException();
-            }
+            return !string.IsNullOrEmpty(value?.ToString());
         }
 
-        public class InvertedStringToBoolConverter : IValueConverter
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                return string.IsNullOrEmpty(value?.ToString());
-            }
+            throw new NotImplementedException();
+        }
+    }
 
-            public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-            {
-                throw new NotImplementedException();
-            }
+    public class InvertedStringToBoolConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return string.IsNullOrEmpty(value?.ToString());
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    // ✅ Añadir los convertidores que necesitas para las películas
+    public class IsNotZeroConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            if (value is double d) return d > 0;
+            if (value is int i) return i > 0;
+            return false;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    public class IsNotNullConverter : IValueConverter
+    {
+        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            return value != null;
+        }
+
+        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        {
+            throw new NotImplementedException();
         }
     }
 }

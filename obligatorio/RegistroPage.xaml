@@ -52,20 +52,7 @@
                            BackgroundColor="Transparent"/>
                 </Frame>
 
-                <Frame BackgroundColor="{StaticResource White}"
-                       HasShadow="True"
-                       CornerRadius="15"
-                       Padding="0"
-                       MaximumWidthRequest="350"
-                        HorizontalOptions="Fill">
-                    <Entry x:Name="txtNombre"
-                           Placeholder="Nombre completo"
-                           FontSize="16"
-                           TextColor="{StaticResource Gray600}"
-                           PlaceholderColor="{StaticResource Gray400}"
-                           HeightRequest="50"
-                           BackgroundColor="Transparent"/>
-                </Frame>
+             
 
                 <Frame BackgroundColor="{StaticResource White}"
                        HasShadow="True"

@@ -61,7 +61,45 @@ namespace obligatorio
                 await DisplayAlert("Error", $"No se pudo obtener el clima: {ex.Message}", "OK");
             }
         }
+        private async void OnHeaderPointerEntered(object sender, PointerEventArgs e)
+        {
+            if (sender is Frame frame)
+            {
+                await frame.ScaleTo(1.05, 200, Easing.CubicOut);
+            }
+        }
 
+  
+        private async void OnHeaderPointerExited(object sender, PointerEventArgs e)
+        {
+            if (sender is Frame frame)
+            {
+                await frame.ScaleTo(1.0, 200, Easing.CubicOut);
+            }
+        }
+
+
+        private async void OnClimaPointerEntered(object sender, PointerEventArgs e)
+        {
+            if (sender is Frame frame)
+            {
+                await Task.WhenAll(
+                    frame.ScaleTo(1.08, 200, Easing.CubicOut),
+                    frame.TranslateTo(0, -5, 200, Easing.CubicOut)
+                );
+            }
+        }
+
+        private async void OnClimaPointerExited(object sender, PointerEventArgs e)
+        {
+            if (sender is Frame frame)
+            {
+                await Task.WhenAll(
+                    frame.ScaleTo(1.0, 200, Easing.CubicOut),
+                    frame.TranslateTo(0, 0, 200, Easing.CubicOut)
+                );
+            }
+        }
         private async void btnAtras_Clicked(object sender, EventArgs e)
         {
             try

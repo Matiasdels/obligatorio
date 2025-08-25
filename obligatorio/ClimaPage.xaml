@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:converters="clr-namespace:obligatorio.Converters"
              x:Class="obligatorio.ClimaPage"
              Title="Clima"
              BackgroundColor="{StaticResource OxfordBlue}">
@@ -8,6 +9,29 @@
     <ScrollView>
         <VerticalStackLayout Padding="20" Spacing="20">
 
+            <Frame x:Name="HeaderFrame"
+                   BackgroundColor="Transparent" 
+                   Background="{StaticResource PrimaryGradient}" 
+                   CornerRadius="20" 
+                   Padding="25" 
+                   Shadow="{StaticResource CardShadow}">
+                <Frame.GestureRecognizers>
+                    <PointerGestureRecognizer PointerEntered="OnHeaderPointerEntered" 
+                                            PointerExited="OnHeaderPointerExited"/>
+                </Frame.GestureRecognizers>
+                <VerticalStackLayout Spacing="8">
+                    <Label Text="☀️ Clima" 
+                       FontSize="28" 
+                       FontAttributes="Bold" 
+                       TextColor="White" 
+                       HorizontalOptions="Center"/>
+                    <Label Text="Pronóstico actual y próximos días" 
+                       FontSize="16" 
+                       TextColor="White" 
+                       Opacity="0.9" 
+                       HorizontalOptions="Center"/>
+                </VerticalStackLayout>
+            </Frame>
             <Frame BackgroundColor="{StaticResource PrussianBlue}"
                    CornerRadius="20"
                    HasShadow="True"
@@ -60,18 +84,26 @@
 
                     <CollectionView x:Name="forecastCollection"
                         ItemsLayout="HorizontalList"
-                        HeightRequest="180"
+                        HeightRequest="180"              
                         HorizontalOptions="Center">
                         
+                       
                         <CollectionView.ItemTemplate>
+                            
                             <DataTemplate>
+                                
                                 <Frame BackgroundColor="{StaticResource Gray100}"
-                                   CornerRadius="15"
+                                   CornerRadius="10"
                                    Padding="10"
                                    Margin="5,0"
                                    HasShadow="False"
                                    HorizontalOptions="Fill"
                                    MinimumWidthRequest="100">
+
+                                    <Frame.GestureRecognizers>
+                                        <PointerGestureRecognizer PointerEntered="OnClimaPointerEntered"
+                                                                  PointerExited="OnClimaPointerExited"/>
+                                    </Frame.GestureRecognizers>
 
                                     <Grid RowDefinitions="Auto,Auto,Auto,Auto" ColumnDefinitions="*">
                                         <Label Text="{Binding Date}" 

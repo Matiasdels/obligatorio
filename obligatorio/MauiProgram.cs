@@ -14,12 +14,17 @@ namespace obligatorio
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                .UseMauiMaps()
-                .UseMauiCommunityToolkit()
+                
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
+
+#if ANDROID
+            builder
+              .UseMauiMaps()
+              .UseMauiCommunityToolkit();
+#endif
 
             // Ruta para la base de datos
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "miBase.db3");
