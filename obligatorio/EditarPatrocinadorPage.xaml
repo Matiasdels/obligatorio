@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="obligatorio.EditarPatrocinadorPage"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             Title="Editar Patrocinador">
+
+    <ScrollView>
+        <Grid Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="300"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Título -->
+            <Label Grid.Row="0" 
+                   Text="Editar Patrocinador" 
+                   FontSize="24" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center" 
+                   Margin="0,0,0,20"/>
+
+            <!-- Campo Nombre -->
+            <StackLayout Grid.Row="1" Margin="0,0,0,15">
+                <Label Text="Nombre:" FontAttributes="Bold"/>
+                <Entry x:Name="NombreEntry" 
+                       Placeholder="Ingrese el nombre del patrocinador"/>
+            </StackLayout>
+
+            <!-- Campo Imagen URL -->
+            <StackLayout Grid.Row="2" Margin="0,0,0,15">
+                <Label Text="URL de Imagen:" FontAttributes="Bold"/>
+                <Entry x:Name="ImagenEntry" 
+                       Placeholder="Ingrese la URL de la imagen"/>
+            </StackLayout>
+
+            <!-- Mapa para editar ubicación -->
+            <StackLayout Grid.Row="3" Margin="0,0,0,15">
+                <Label Text="Ubicación actual (toque para cambiar):" FontAttributes="Bold" Margin="0,0,0,10"/>
+                <Frame BorderColor="Gray" HasShadow="True" Padding="0">
+                    <maps:Map x:Name="MapaEdicion" 
+                              HeightRequest="280"
+                              MapClicked="OnMapClicked">
+                        <maps:Map.Pins>
+                            <!-- El pin se agregará dinámicamente desde el código -->
+                        </maps:Map.Pins>
+                    </maps:Map>
+                </Frame>
+            </StackLayout>
+
+            <!-- Información de ubicación -->
+            <StackLayout Grid.Row="4" Margin="0,0,0,15">
+                <Label Text="Ubicación:" FontAttributes="Bold"/>
+                <Label x:Name="UbicacionLabel" 
+                       FontSize="12"/>
+            </StackLayout>
+
+            <!-- Campo Dirección -->
+            <StackLayout Grid.Row="5" Margin="0,0,0,20">
+                <Label Text="Dirección:" FontAttributes="Bold"/>
+                <Entry x:Name="DireccionEntry" 
+                       Placeholder="Ingrese la dirección"/>
+            </StackLayout>
+
+            <!-- Botones -->
+            <StackLayout Grid.Row="6" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20">
+                <Button Text="Actualizar" 
+                        BackgroundColor="#2196F3" 
+                        TextColor="White" 
+                        WidthRequest="120"
+                        Clicked="OnActualizarClicked"/>
+                <Button Text="Eliminar" 
+                        BackgroundColor="#f44336" 
+                        TextColor="White" 
+                        WidthRequest="120"
+                        Clicked="OnEliminarClicked"/>
+                <Button Text="Cancelar" 
+                        BackgroundColor="#9E9E9E" 
+                        TextColor="White" 
+                        WidthRequest="120"
+                        Clicked="OnCancelarClicked"/>
+            </StackLayout>
+
+            <!-- Loading indicator -->
+            <ActivityIndicator Grid.Row="0" 
+                               Grid.RowSpan="7"
+                               x:Name="LoadingIndicator" 
+                               IsVisible="False" 
+                               IsRunning="False"
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Center"/>
+        </Grid>
+    </ScrollView>
+</ContentPage>

@@ -201,6 +201,23 @@
     <ShellContent Route="ClienteDetailPage" ContentTemplate="{DataTemplate local:ClienteDetailPage}" />
 
     <ShellContent Route="PreferenciasPage" ContentTemplate="{DataTemplate local:PreferenciasPage}" />
+    
+    <ShellContent Route="CotizacionesPage" ContentTemplate="{DataTemplate local:CotizacionesPage}" />
+    <ShellContent Route="NoticiasPage" ContentTemplate="{DataTemplate local:NoticiasPage}" />
+    <ShellContent Route="CinePage" ContentTemplate="{DataTemplate local:CinePage}" />
+    <ShellContent Route="PatrocinadoresPage" ContentTemplate="{DataTemplate local:PatrocinadoresPage}" />
+    <ShellContent Route="GestionPatrocinadoresPage" ContentTemplate="{DataTemplate local:GestionPatrocinadoresPage}" />
+    <ShellContent Route="CrearPatrocinadorPage" ContentTemplate="{DataTemplate local:CrearPatrocinadorPage}" />
+    <ShellContent Route="EditarPatrocinadorPage" ContentTemplate="{DataTemplate local:EditarPatrocinadorPage}" />
+    <ShellContent Route="VerPatrocinadorPage" ContentTemplate="{DataTemplate local:VerPatrocinadorPage}" />
+    <ShellContent Route="MapaPatrocinadorPage" ContentTemplate="{DataTemplate local:MapaPatrocinadorPage}" />
+    <ShellContent Route="RegistroPage" ContentTemplate="{DataTemplate local:RegistroPage}" />
+    
+    
+
+
+
+
 
     <!--<FlyoutItem Title="Inicio" Icon="home.png">
         <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />

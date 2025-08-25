@@ -44,11 +44,23 @@ namespace obligatorio
             builder.Services.AddTransient<PatrocinadoresPage>();
             builder.Services.AddTransient<MapaPatrocinadorPage>();
             builder.Services.AddTransient<GestionPatrocinadoresPage>();
-            //builder.Services.AddTransient<FormularioPatrocinadorPage>();
-            //builder.Services.AddTransient<DetallePatrocinadorPage>();
+            builder.Services.AddTransient<VerPatrocinadorPage>();
             builder.Services.AddTransient<BannerUsuarioViewModel>();
             builder.Services.AddTransient<PatrocinadoresViewModel>();
+            builder.Services.AddTransient<CrearPatrocinadorPage>();
+            builder.Services.AddTransient<EditarPatrocinadorPage>();
+            builder.Services.AddSingleton<PreferenciasUsuarioService>();
+            builder.Services.AddSingleton<IPreferenciasUsuarioService, PreferenciasUsuarioService>();
+            builder.Services.AddTransient<Perfil>();
+            builder.Services.AddTransient<PreferenciasPage>();
+            builder.Services.AddTransient<CotizacionesPage>();
+            builder.Services.AddTransient<NoticiasPage>();
+            builder.Services.AddTransient<CinePage>();
+            builder.Services.AddTransient<MainPageViewModel>();
+
+
             
+
 
 
 #if DEBUG

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Input;
 
 namespace obligatorio.Models
 {
@@ -20,10 +21,13 @@ namespace obligatorio.Models
         {
             _databaseService = App.Database;
             Patrocinadores = new ObservableCollection<Patrocinador>();
+            RefreshCommand = new Command(async () => await LoadPatrocinadoresAsync());
             InitializeAsync();
         }
 
         public ObservableCollection<Patrocinador> Patrocinadores { get; set; }
+
+        public ICommand RefreshCommand { get; }
 
         public bool IsLoading
         {
@@ -57,12 +61,13 @@ namespace obligatorio.Models
         {
             try
             {
-                IsLoading = true;
+                if (!IsRefreshing)
+                    IsLoading = true;
 
                 var patrocinadores = await _databaseService.GetPatrocinadoresAsync();
-
                 Patrocinadores.Clear();
-                foreach (var patrocinador in patrocinadores)
+
+                foreach (var patrocinador in patrocinadores.OrderBy(p => p.Nombre))
                 {
                     Patrocinadores.Add(patrocinador);
                 }

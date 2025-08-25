@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="obligatorio.VerPatrocinadorPage"
+             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps"
+             Title="Detalles del Patrocinador">
+
+    <ScrollView>
+        <Grid Padding="20">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="300"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Imagen del patrocinador -->
+            <Frame Grid.Row="0" 
+                   BackgroundColor="White" 
+                   BorderColor="Gray" 
+                   HasShadow="True"
+                   Margin="0,0,0,20"
+                   HeightRequest="200"
+                   HorizontalOptions="Center">
+                <Image x:Name="ImagenPatrocinador" 
+                       Aspect="AspectFit"
+                       BackgroundColor="LightGray"
+                       WidthRequest="300"
+                       HeightRequest="180"/>
+            </Frame>
+
+            <!-- Nombre del patrocinador -->
+            <Label Grid.Row="1" 
+                   x:Name="NombreLabel"
+                   FontSize="26" 
+                   FontAttributes="Bold" 
+                   HorizontalOptions="Center" 
+                   Margin="0,0,0,20"/>
+
+            <!-- ID del patrocinador -->
+            <StackLayout Grid.Row="2" Margin="0,0,0,15">
+                <Label Text="ID:" FontAttributes="Bold" FontSize="16"/>
+                <Label x:Name="IdLabel" 
+                       FontSize="14" 
+                       TextColor="Gray"/>
+            </StackLayout>
+
+            <!-- Dirección -->
+            <StackLayout Grid.Row="3" Margin="0,0,0,15" x:Name="DireccionStack">
+                <Label Text="Dirección:" FontAttributes="Bold" FontSize="16"/>
+                <Label x:Name="DireccionLabel" 
+                       FontSize="14" 
+                       TextColor="DarkSlateGray"/>
+            </StackLayout>
+
+            <!-- Mapa con ubicación -->
+            <StackLayout Grid.Row="4" Margin="0,0,0,15">
+                <Label Text="Ubicación:" FontAttributes="Bold" FontSize="16" Margin="0,0,0,10"/>
+                <Frame BorderColor="Gray" HasShadow="True" Padding="0">
+                    <maps:Map x:Name="MapaVisualizacion" 
+                              HeightRequest="280"
+                              IsScrollEnabled="True"
+                              IsZoomEnabled="True">
+                        <maps:Map.Pins>
+                            <maps:Pin x:Name="PinPatrocinador"/>
+                        </maps:Map.Pins>
+                    </maps:Map>
+                </Frame>
+            </StackLayout>
+
+            <!-- Coordenadas -->
+            <StackLayout Grid.Row="5" Margin="0,0,0,20">
+                <Label Text="Coordenadas:" FontAttributes="Bold" FontSize="16"/>
+                <Label x:Name="CoordenadasLabel" 
+                       FontSize="12" 
+                       TextColor="Gray"/>
+            </StackLayout>
+
+            <!-- Botones de acción -->
+            <StackLayout Grid.Row="6" Orientation="Horizontal" HorizontalOptions="Center" Spacing="20">
+                <Button Text="Editar" 
+                        BackgroundColor="#2196F3" 
+                        TextColor="White" 
+                        WidthRequest="120"
+                        Clicked="OnEditarClicked"/>
+                <Button Text="Compartir Ubicación" 
+                        BackgroundColor="#4CAF50" 
+                        TextColor="White" 
+                        WidthRequest="150"
+                        Clicked="OnCompartirUbicacionClicked"/>
+                <Button Text="Volver" 
+                        BackgroundColor="#9E9E9E" 
+                        TextColor="White" 
+                        WidthRequest="120"
+                        Clicked="OnVolverClicked"/>
+            </StackLayout>
+
+            <!-- Loading indicator -->
+            <ActivityIndicator Grid.Row="0" 
+                               Grid.RowSpan="7"
+                               x:Name="LoadingIndicator" 
+                               IsVisible="False" 
+                               IsRunning="False"
+                               VerticalOptions="Center" 
+                               HorizontalOptions="Center"/>
+        </Grid>
+    </ScrollView>
+</ContentPage>
