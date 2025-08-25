@@ -230,7 +230,7 @@ namespace obligatorio.Data
                            .FirstOrDefaultAsync();
         }
 
-<<<<<<<<< Temporary merge branch 1
+
 
 
         public async Task<List<Patrocinador>> GetPatrocinadoresAsync()
@@ -256,11 +256,8 @@ namespace obligatorio.Data
             return await _database.DeleteAsync(patrocinador);
         }
 
-        public async Task<int> DeletePatrocinadorAsync(int id)
-        {
-            return await _database.DeleteAsync<Patrocinador>(id);
-=========
-        // ---------- CRUD PreferenciasUsuario ----------
+       
+                    // ---------- CRUD PreferenciasUsuario ----------
 
         public async Task<PreferenciasUsuario> GetPreferenciasUsuarioAsync(int usuarioId)
         {
@@ -332,7 +329,7 @@ namespace obligatorio.Data
         public Task<int> DeletePreferenciasUsuarioAsync(PreferenciasUsuario preferencias)
         {
             return _database.DeleteAsync(preferencias);
->>>>>>>>> Temporary merge branch 2
+
         }
 
     }
