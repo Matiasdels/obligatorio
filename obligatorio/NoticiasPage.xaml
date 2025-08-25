@@ -111,26 +111,33 @@
 
 
         <CollectionView x:Name="NewsCollection"
-                Grid.Row="2"
-                ItemsSource="{Binding NoticiasFiltradas}"
-                Margin="10"
-                ItemSizingStrategy="MeasureAllItems">
-
+               Grid.Row="2"
+               ItemsSource="{Binding NoticiasFiltradas}"
+               Margin="10"
+               ItemSizingStrategy="MeasureAllItems">
             <!-- Configuración del Grid Layout -->
             <CollectionView.ItemsLayout>
                 <GridItemsLayout Orientation="Vertical" 
-                        Span="2" 
-                        HorizontalItemSpacing="10"
-                        VerticalItemSpacing="10"/>
+                Span="2" 
+                HorizontalItemSpacing="10"
+                VerticalItemSpacing="10"/>
             </CollectionView.ItemsLayout>
-
             <CollectionView.ItemTemplate>
                 <DataTemplate>
                     <Frame Style="{StaticResource NewsCardFrame}">
-                        <StackLayout Spacing="8">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <!-- Imagen -->
+                                <RowDefinition Height="*"/>
+                                <!-- Contenido -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- Botón -->
+                            </Grid.RowDefinitions>
 
-                            <!-- Frame de imagen más compacto -->
-                            <Frame Style="{StaticResource NewsImageFrame}" 
+                            <!-- Frame de imagen -->
+                            <Frame Grid.Row="0"
+                           Style="{StaticResource NewsImageFrame}" 
                            BackgroundColor="#374151"
                            HeightRequest="120">
                                 <Grid>
@@ -138,11 +145,10 @@
                                     <Image Source="{Binding ImageUrl}" 
                                    Aspect="AspectFill"
                                    IsVisible="{Binding HasImage}"/>
-
                                     <!-- Placeholder -->
                                     <StackLayout VerticalOptions="Center" 
-                                       HorizontalOptions="Center"
-                                       IsVisible="{Binding HasImage, Converter={StaticResource InverseBoolConverter}}">
+                                         HorizontalOptions="Center"
+                                         IsVisible="{Binding HasImage, Converter={StaticResource InverseBoolConverter}}">
                                         <Label Text="📰" 
                                        FontSize="24" 
                                        TextColor="#9CA3AF"
@@ -156,24 +162,30 @@
                                 </Grid>
                             </Frame>
 
-                            <!-- Contenido más compacto -->
-                            <StackLayout Spacing="6">
+                            <!-- Contenido de texto con límite de altura -->
+                            <StackLayout Grid.Row="1" 
+                                 Spacing="6" 
+                                 Margin="0,8,0,8">
                                 <Label Text="{Binding Title}" 
                                Style="{StaticResource NewsTitleLabel}"
                                MaxLines="2"
                                LineBreakMode="TailTruncation"/>
-
-                                <Label Text="{Binding Description}" 
-                               Style="{StaticResource NewsDescriptionLabel}"
-                               MaxLines="3"
-                               LineBreakMode="TailTruncation"/>
-
-                                <Button Text="📖 Leer más" 
-                                Style="{StaticResource ReadMoreButton}"
-                                FontSize="12"
-                                Clicked="OnReadMoreClicked"/>
+                                <ScrollView MaximumHeightRequest="80"
+                                    VerticalScrollBarVisibility="Never">
+                                    <Label Text="{Binding Description}" 
+                                   Style="{StaticResource NewsDescriptionLabel}"
+                                   LineBreakMode="WordWrap"/>
+                                </ScrollView>
                             </StackLayout>
-                        </StackLayout>
+
+                            <!-- Botón siempre visible -->
+                            <Button Grid.Row="2"
+                            Text="📖 Leer más" 
+                            Style="{StaticResource ReadMoreButton}"
+                            FontSize="12"
+                            Clicked="OnReadMoreClicked"
+                            Margin="0,4,0,0"/>
+                        </Grid>
                     </Frame>
                 </DataTemplate>
             </CollectionView.ItemTemplate>
