@@ -64,6 +64,22 @@ public partial class NoticiasPage : ContentPage
             }
         }
     }
+
+    private async void OnHeaderPointerEntered(object sender, PointerEventArgs e)
+    {
+        if (sender is Frame frame)
+        {
+            await frame.ScaleTo(1.05, 200, Easing.CubicOut);
+        }
+    }
+
+    private async void OnHeaderPointerExited(object sender, PointerEventArgs e)
+    {
+        if (sender is Frame frame)
+        {
+            await frame.ScaleTo(1.0, 200, Easing.CubicOut);
+        }
+    }
     public async void btnNoticiasAtras_Clicked(object sender, EventArgs e)
 	{
 		try

@@ -1,6 +1,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="obligatorio.LoginPage"
+             Shell.NavBarIsVisible="False"
+             Shell.TabBarIsVisible="False"
              Title=""
              BackgroundColor="{StaticResource BackgroundLight}">
 
@@ -11,8 +13,10 @@
                 <Label Text="Bienvenido" 
                        Style="{StaticResource AppTitleLabel}"/>
 
-                <Label Text="Ingresa a tu cuenta para continuar" 
-                       Style="{StaticResource AppSubtitleLabel}"/>
+                <Label Text="Ingresa tu cuenta para continuar" 
+                       Style="{StaticResource AppTitleLabel}"
+                       FontAttributes="None"
+                       FontSize="16"/>
             </StackLayout>
 
             <StackLayout Grid.Row="1" Spacing="25" VerticalOptions="Center">

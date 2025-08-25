@@ -74,13 +74,13 @@ public partial class RegistroPage : ContentPage
     {
         string usuario = txtUsuario.Text?.Trim();
         string password = txtPassword.Text;
-        string nombre = txtNombre.Text?.Trim();
+        
         string direccion = txtDireccion.Text?.Trim();
         string telefono = txtTelefono.Text?.Trim();
         string email = txtEmail.Text?.Trim();
 
-        if (string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(password) ||
-            string.IsNullOrWhiteSpace(nombre) || string.IsNullOrWhiteSpace(direccion) ||
+        if (string.IsNullOrWhiteSpace(usuario) || string.IsNullOrWhiteSpace(password)
+             || string.IsNullOrWhiteSpace(direccion) ||
             string.IsNullOrWhiteSpace(telefono) || string.IsNullOrWhiteSpace(email))
         {
             
@@ -106,6 +106,7 @@ public partial class RegistroPage : ContentPage
             Nombre = usuario,
             Email = email,
             Password = password,
+            
             Rol = "Cliente",
             Direccion = direccion,
             Telefono = telefono,

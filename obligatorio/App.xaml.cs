@@ -9,7 +9,7 @@ namespace obligatorio
         public static DataBaseService Database { get; private set; }
         
         public static IUsuarioService UsuarioService { get; private set; }
-
+        public static IPreferenciasUsuarioService PreferenciasUsuarioService { get; private set; }
         public App()
         {
             InitializeComponent();
@@ -18,11 +18,12 @@ namespace obligatorio
                 FileSystem.AppDataDirectory, // Carpeta segura de la app
                 "app.db3"                     // Nombre del archivo SQLite
             );
+            
 
-           
+
             Database = new DataBaseService(dbPath);
             UsuarioService = new UsuarioService();
-
+            PreferenciasUsuarioService = new PreferenciasUsuarioService();
             //MainPage = new NavigationPage(new LoginPage(Database));
             MainPage = new AppShell();
 

@@ -20,9 +20,9 @@
             </Style>
 
     
-            <Style TargetType="Button">
+            <!--<Style TargetType="Button">
                 <Setter Property="FontFamily" Value="NataSans"/>
-            </Style>
+            </Style>-->
 
      
             <Style TargetType="Entry">
@@ -68,6 +68,32 @@
             </ResourceDictionary>
 
 
+            <Style TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#2C3E50"/>
+                <Setter Property="TextColor" Value="White"/>
+                <Setter Property="FontFamily" Value="NataSans"/>
+                <Setter Property="CornerRadius" Value="12"/>
+                <Setter Property="Padding" Value="10,5"/>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup Name="CommonStates">
+                            <VisualState Name="Normal"/>
+                            <VisualState Name="PointerOver">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="#34495E"/>
+                                    <Setter Property="Scale" Value="1.02"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState Name="Pressed">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="Gray"/>
+                                    <Setter Property="Scale" Value="0.97"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>
             <x:Double x:Key="TextSizeScale">1.0</x:Double>
 
 
