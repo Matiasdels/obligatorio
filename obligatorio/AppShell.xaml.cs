@@ -28,6 +28,7 @@ namespace obligatorio
             Routing.RegisterRoute(nameof(MapaPatrocinadorPage), typeof(MapaPatrocinadorPage));
             Routing.RegisterRoute("gestionpatrocinadores/agregar", typeof(GestionPatrocinadoresPage));
             Routing.RegisterRoute("gestionpatrocinadores/editar", typeof(GestionPatrocinadoresPage));
+
         }
     }
 }

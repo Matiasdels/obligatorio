@@ -41,15 +41,20 @@ namespace obligatorio.Data
             await _database.CreateTableAsync<Cliente>();
             await _database.CreateTableAsync<Favorito>();
             await _database.CreateTableAsync<Usuario>();
+
             await _database.CreateTableAsync<Patrocinador>();
             var count = await _database.Table<Patrocinador>().CountAsync();
             if (count == 0)
             {
                 await InsertSampleData();
             }
+
+            await _database.CreateTableAsync<PreferenciasUsuario>();
+
+
             await CrearAdminPorDefecto();
         }
-            await _database.CreateTableAsync<PreferenciasUsuario>();
+            
 
         private async Task InsertSampleData()
         {
@@ -225,6 +230,36 @@ namespace obligatorio.Data
                            .FirstOrDefaultAsync();
         }
 
+<<<<<<<<< Temporary merge branch 1
+
+
+        public async Task<List<Patrocinador>> GetPatrocinadoresAsync()
+        {
+            return await _database.Table<Patrocinador>().OrderBy(p => p.Nombre).ToListAsync();
+        }
+
+        public async Task<Patrocinador> GetPatrocinadorByIdAsync(int id)
+        {
+            return await _database.Table<Patrocinador>().Where(p => p.Id == id).FirstOrDefaultAsync();
+        }
+
+        public async Task<int> SavePatrocinadorAsync(Patrocinador patrocinador)
+        {
+            if (patrocinador.Id != 0)
+                return await _database.UpdateAsync(patrocinador);
+            else
+                return await _database.InsertAsync(patrocinador);
+        }
+
+        public async Task<int> DeletePatrocinadorAsync(Patrocinador patrocinador)
+        {
+            return await _database.DeleteAsync(patrocinador);
+        }
+
+        public async Task<int> DeletePatrocinadorAsync(int id)
+        {
+            return await _database.DeleteAsync<Patrocinador>(id);
+=========
         // ---------- CRUD PreferenciasUsuario ----------
 
         public async Task<PreferenciasUsuario> GetPreferenciasUsuarioAsync(int usuarioId)
@@ -297,36 +332,7 @@ namespace obligatorio.Data
         public Task<int> DeletePreferenciasUsuarioAsync(PreferenciasUsuario preferencias)
         {
             return _database.DeleteAsync(preferencias);
-        }
-
-
-
-        public async Task<List<Patrocinador>> GetPatrocinadoresAsync()
-        {
-            return await _database.Table<Patrocinador>().OrderBy(p => p.Nombre).ToListAsync();
-        }
-
-        public async Task<Patrocinador> GetPatrocinadorByIdAsync(int id)
-        {
-            return await _database.Table<Patrocinador>().Where(p => p.Id == id).FirstOrDefaultAsync();
-        }
-
-        public async Task<int> SavePatrocinadorAsync(Patrocinador patrocinador)
-        {
-            if (patrocinador.Id != 0)
-                return await _database.UpdateAsync(patrocinador);
-            else
-                return await _database.InsertAsync(patrocinador);
-        }
-
-        public async Task<int> DeletePatrocinadorAsync(Patrocinador patrocinador)
-        {
-            return await _database.DeleteAsync(patrocinador);
-        }
-
-        public async Task<int> DeletePatrocinadorAsync(int id)
-        {
-            return await _database.DeleteAsync<Patrocinador>(id);
+>>>>>>>>> Temporary merge branch 2
         }
 
     }
