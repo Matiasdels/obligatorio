@@ -1,5 +1,4 @@
-﻿
-using CommunityToolkit.Maui;
+﻿using CommunityToolkit.Maui;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Hosting;
 using obligatorio.Data;
@@ -15,22 +14,15 @@ namespace obligatorio
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-                
+                .UseMauiCommunityToolkitMediaElement()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
 
-#if ANDROID
-            builder
-              .UseMauiMaps()
-              .UseMauiCommunityToolkit();
-#endif
-
             // Ruta para la base de datos
             string dbPath = Path.Combine(FileSystem.AppDataDirectory, "miBase.db3");
 
-            // Registro del servicio con parámetro
             builder.Services.AddSingleton<DataBaseService>(s => new DataBaseService(dbPath));
             builder.Services.AddSingleton<LoginPage>();
             builder.Services.AddSingleton<MainPage>();

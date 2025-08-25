@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
              x:Class="obligatorio.MainPage">
 
     <ContentPage.Background>
@@ -64,7 +65,7 @@
     </ContentPage.Resources>
 
     <ScrollView>
-        <Grid RowDefinitions="Auto,Auto,Auto,*,Auto" Padding="0">
+        <Grid RowDefinitions="Auto,Auto,Auto,Auto,*,Auto" Padding="0">
 
             <Frame Grid.Row="0" 
                    Background="{StaticResource PrussianBlue}"
@@ -157,7 +158,74 @@
                 </Frame>
             </Grid>
 
-            <StackLayout Grid.Row="3" Spacing="12" Margin="0,10,0,20">
+            <Frame Grid.Row="3"
+                   BackgroundColor="{StaticResource PrussianBlue}"
+                   CornerRadius="15" 
+                   Padding="15" 
+                   HasShadow="True"
+                   Margin="20,10">
+
+                <Grid ColumnDefinitions="Auto,*,Auto,Auto,Auto" 
+                      ColumnSpacing="15">
+
+                    <Label Grid.Column="0"
+                           Text="📻" 
+                           FontSize="24" 
+                           VerticalOptions="Center"/>
+
+                    <StackLayout Grid.Column="1" 
+                                 VerticalOptions="Center">
+                        <Label Text="Voz del Este FM" 
+                               FontSize="16" 
+                               FontAttributes="Bold" 
+                               TextColor="White"/>
+                        <Label x:Name="StatusLabel"
+                               Text="Listo para reproducir" 
+                               FontSize="12" 
+                               TextColor="#93C5FD"/>
+                    </StackLayout>
+
+                    <Button x:Name="PlayPauseButton"
+                            Grid.Column="2"
+                            Text="▶️"
+                            FontSize="18"
+                            BackgroundColor="#3B82F6"
+                            TextColor="White"
+                            CornerRadius="20"
+                            WidthRequest="40"
+                            HeightRequest="40"
+                            Padding="0"
+                            Clicked="TogglePlayPause"/>
+
+                    <Slider x:Name="VolumeSlider"
+                            Grid.Column="3"
+                            Minimum="0"
+                            Maximum="1"
+                            Value="0.7"
+                            MinimumTrackColor="#60A5FA"
+                            MaximumTrackColor="#1E40AF"
+                            ThumbColor="#DBEAFE"
+                            WidthRequest="80"
+                            VerticalOptions="Center"
+                            ValueChanged="OnVolumeChanged"/>
+
+                    <Label x:Name="VolumeLabel"
+                           Grid.Column="4"
+                           Text="70%"
+                           FontSize="12"
+                           TextColor="#93C5FD"
+                           VerticalOptions="Center"
+                           WidthRequest="30"/>
+                </Grid>
+            </Frame>
+
+            <toolkit:MediaElement x:Name="radioPlayer"
+                                  Source="https://icecasthd.net/proxy/azulp/live"
+                                  ShouldAutoPlay="False"
+                                  IsVisible="False"
+                                  StateChanged="OnMediaStateChanged"/>
+
+            <StackLayout Grid.Row="4" Spacing="12" Margin="0,10,0,20">
 
                 <StackLayout Orientation="Horizontal" Spacing="10" Margin="30,0,30,10">
                     <Label Text="Navegación Principal" 
@@ -166,11 +234,8 @@
                            TextColor="White" 
                            VerticalOptions="Center"
                            HorizontalOptions="StartAndExpand" />
-
-                    
                 </StackLayout>
 
-                <!-- Primera fila de botones -->
                 <Grid ColumnDefinitions="*,*" Margin="20,0">
                     <Button Text="🌤 Clima"
                             Clicked="IrAClima"
@@ -188,7 +253,6 @@
                             IsVisible="{Binding PreferenciasActuales.MostrarCotizaciones}" />
                 </Grid>
 
-                <!-- Segunda fila de botones -->
                 <Grid ColumnDefinitions="*,*" Margin="20,0">
                     <Button Grid.Column="0"
                             Text="📰 Noticias"
@@ -207,7 +271,6 @@
                             IsVisible="{Binding PreferenciasActuales.MostrarCine}" />
                 </Grid>
 
-                <!-- Tercera fila de botones -->
                 <Grid ColumnDefinitions="*,*" Margin="20,0">
                     <Button Grid.Column="0"
                             Text="🤝 Patrocinadores"
@@ -228,7 +291,7 @@
 
             </StackLayout>
 
-            <Frame Grid.Row="4"
+            <Frame Grid.Row="5"
                    Background="{StaticResource PrussianBlue}"
                    CornerRadius="0"
                    Padding="30,20"

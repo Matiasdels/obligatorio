@@ -1,26 +1,95 @@
-﻿using obligatorio;
+﻿using CommunityToolkit.Maui.Core.Primitives;
+using CommunityToolkit.Maui.Views;
+using obligatorio;
 using obligatorio.Models;
 
 namespace obligatorio
 {
     public partial class MainPage : ContentPage
     {
-        int count = 0;
-        private readonly MainPageViewModel _viewModel;
+        private MainPageViewModel _viewModel;
+        private bool isPlaying = false;
 
         public MainPage()
         {
             InitializeComponent();
-
             System.Diagnostics.Debug.WriteLine($"UsuarioService: {App.UsuarioService != null}");
             System.Diagnostics.Debug.WriteLine($"PreferenciasService: {App.PreferenciasUsuarioService != null}");
-
             _viewModel = new MainPageViewModel(App.PreferenciasUsuarioService, App.UsuarioService);
             BindingContext = _viewModel;
-
             System.Diagnostics.Debug.WriteLine($"ViewModel creado: {_viewModel != null}");
+
+            VolumeSlider.Value = 0.7;
+            radioPlayer.Volume = 0.7;
         }
 
+        private async void TogglePlayPause(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!isPlaying)
+                {
+                    StatusLabel.Text = "Conectando...";
+                    PlayPauseButton.Text = "⏳";
+                    PlayPauseButton.IsEnabled = false;
+
+                    await Task.Delay(300);
+                    radioPlayer.Play();
+                }
+                else
+                {
+                    radioPlayer.Pause();
+                    isPlaying = false;
+                    PlayPauseButton.Text = "▶️";
+                    StatusLabel.Text = "Pausado";
+                }
+            }
+            catch (Exception ex)
+            {
+                await DisplayAlert("Error", "No se pudo conectar a la radio", "OK");
+                PlayPauseButton.Text = "▶️";
+                PlayPauseButton.IsEnabled = true;
+                StatusLabel.Text = "Error de conexión";
+            }
+        }
+
+        private void OnMediaStateChanged(object sender, MediaStateChangedEventArgs e)
+        {
+            MainThread.BeginInvokeOnMainThread(() =>
+            {
+                switch (e.NewState)
+                {
+                    case MediaElementState.Playing:
+                        isPlaying = true;
+                        PlayPauseButton.Text = "⏸️";
+                        PlayPauseButton.IsEnabled = true;
+                        StatusLabel.Text = "Reproduciendo";
+                        break;
+
+                    case MediaElementState.Paused:
+                    case MediaElementState.Stopped:
+                        isPlaying = false;
+                        PlayPauseButton.Text = "▶️";
+                        PlayPauseButton.IsEnabled = true;
+                        StatusLabel.Text = "Detenido";
+                        break;
+
+                    case MediaElementState.Failed:
+                        isPlaying = false;
+                        PlayPauseButton.Text = "▶️";
+                        PlayPauseButton.IsEnabled = true;
+                        StatusLabel.Text = "Error";
+                        break;
+                }
+            });
+        }
+
+        private void OnVolumeChanged(object sender, ValueChangedEventArgs e)
+        {
+            double volume = e.NewValue;
+            radioPlayer.Volume = volume;
+            VolumeLabel.Text = $"{(int)(volume * 100)}%";
+        }
         protected override async void OnAppearing()
         {
             base.OnAppearing();

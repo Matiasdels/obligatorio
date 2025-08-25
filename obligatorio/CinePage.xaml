@@ -81,7 +81,6 @@
         </Grid.RowDefinitions>
 
       
-        <!-- Header -->
         <Frame Grid.Row="0"
        x:Name="HeaderFrame"
        BackgroundColor="Transparent"
