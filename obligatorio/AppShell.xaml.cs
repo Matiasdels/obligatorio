@@ -22,9 +22,15 @@ namespace obligatorio
             Routing.RegisterRoute(nameof(PatrocinadoresPage), typeof(PatrocinadoresPage));
             Routing.RegisterRoute(nameof(ClienteListPage), typeof(ClienteListPage));
             Routing.RegisterRoute(nameof(ClienteDetailPage), typeof(ClienteDetailPage));
+
+            Routing.RegisterRoute(nameof(MapaPatrocinadorPage), typeof(MapaPatrocinadorPage));
+            Routing.RegisterRoute("gestionpatrocinadores/agregar", typeof(GestionPatrocinadoresPage));
+            Routing.RegisterRoute("gestionpatrocinadores/editar", typeof(GestionPatrocinadoresPage));
+
             Routing.RegisterRoute(nameof(Perfil), typeof(Perfil));
             Routing.RegisterRoute(nameof(PreferenciasPage), typeof(PreferenciasPage));
             
+
         }
     }
 }
