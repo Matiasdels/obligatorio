@@ -4,7 +4,7 @@
              x:Class="obligatorio.PatrocinadoresPage"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
                 Title="PatrocinadoresPage"
-             BackgroundColor="#f8f9fa">
+             BackgroundColor="{StaticResource OxfordBlue}">
 
 
     <ContentPage.Resources>
@@ -54,10 +54,10 @@
 
         <!-- Header -->
         <Frame Grid.Row="0" 
-               Background="{StaticResource BlueGradient}"
-               CornerRadius="0,0,20,20"
-               HasShadow="True"
-               Margin="0,0,0,10">
+             BackgroundColor="Transparent" 
+             Background="{StaticResource PrimaryGradient}" 
+             CornerRadius="20" 
+             Padding="25">
 
             <Grid>
                 <Grid.ColumnDefinitions>
@@ -81,7 +81,7 @@
                         FontSize="14"
                         CornerRadius="20"
                         BorderColor="White"
-                        BorderWidth="2"
+                        BorderWidth="1"
                         Padding="15,8"
                         Margin="0,0,20,0"
                         Clicked="OnGestionarClicked" />
@@ -282,5 +282,12 @@
                         Opacity="0.25" />
             </Button.Shadow>
         </Button>
+        <Button Grid.Row="3"
+            x:Name="btnAtras" 
+            Text="← Volver atrás" 
+            Clicked="btnAtras_Clicked"
+            Style="{StaticResource AppPrimaryButton}"
+            HeightRequest="45"
+            Margin="20,10,20,15"/>
     </Grid>
 </ContentPage>

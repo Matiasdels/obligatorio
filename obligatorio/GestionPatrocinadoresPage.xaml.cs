@@ -119,4 +119,6 @@ public partial class GestionPatrocinadoresPage : ContentPage
             RefreshView.IsRefreshing = false;
         }
     }
+
+
 }
