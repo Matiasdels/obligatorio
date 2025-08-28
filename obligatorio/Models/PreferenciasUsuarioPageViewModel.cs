@@ -37,7 +37,7 @@ namespace obligatorio.Models
             }
         }
 
-        // Comandos
+       
         public ICommand GuardarPreferenciasCommand { get; }
         public ICommand ActivarTodosCommand { get; }
 
@@ -51,7 +51,6 @@ namespace obligatorio.Models
             GuardarPreferenciasCommand = new Command(async () => await GuardarPreferenciasAsync());
             ActivarTodosCommand = new Command(async () => await ActivarTodosModulos());
 
-            // Suscribirse a cambios en las preferencias
             _preferenciasService.PreferenciasCambiadas += OnPreferenciasCambiadas;
         }
 
@@ -63,7 +62,6 @@ namespace obligatorio.Models
 
                 if (_usuarioService.EstaLogueado)
                 {
-                    // Cargar preferencias del usuario actual
                     await _preferenciasService.CargarPreferenciasAsync(_usuarioService.UsuarioActual.Id);
                     PreferenciasActuales = _preferenciasService.PreferenciasActuales;
                 }
@@ -123,7 +121,6 @@ namespace obligatorio.Models
 
                 IsLoading = true;
 
-                // Activar todos los módulos
                 PreferenciasActuales.MostrarClima = true;
                 PreferenciasActuales.MostrarCotizaciones = true;
                 PreferenciasActuales.MostrarNoticias = true;
@@ -131,10 +128,8 @@ namespace obligatorio.Models
                 PreferenciasActuales.MostrarPatrocinadores = true;
                 PreferenciasActuales.MostrarClientes = true;
 
-                // Actualizar la UI
                 OnPropertyChanged(nameof(PreferenciasActuales));
 
-                // Guardar los cambios
                 await GuardarPreferenciasAsync();
             }
             catch (Exception ex)

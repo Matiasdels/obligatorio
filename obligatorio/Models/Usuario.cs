@@ -28,10 +28,8 @@ namespace obligatorio.Models
             [MaxLength(50)]
             public string Rol { get; set; }
 
-            // Para guardar la foto como Base64
             public string FotoBase64 { get; set; }
 
-            // Opcional: dirección y teléfono si quieres almacenarlos en la tabla Usuario
             [MaxLength(200)]
             public string Direccion { get; set; }
 

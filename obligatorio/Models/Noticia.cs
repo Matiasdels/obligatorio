@@ -34,7 +34,6 @@ namespace obligatorio.Models
         [JsonPropertyName("language")]
         public string Language { get; set; }
 
-        // Constructor
         public Noticia()
         {
             Title = "";
@@ -49,7 +48,6 @@ namespace obligatorio.Models
             Language = "";
         }
 
-        // Propiedad de ayuda para mostrar creadores como string
         public string CreatorString => Creator != null && Creator.Any()
             ? string.Join(", ", Creator)
             : "Autor desconocido";
@@ -66,7 +64,6 @@ namespace obligatorio.Models
         [JsonPropertyName("results")]
         public List<Noticia> Results { get; set; }
 
-        // Constructor
         public RespuestaNoticias()
         {
             Status = "";

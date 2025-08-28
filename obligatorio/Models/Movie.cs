@@ -51,7 +51,6 @@ namespace obligatorio.Models
         [JsonProperty("genre_ids")]
         public int[] GenreIds { get; set; }
 
-        // Propiedades adicionales (no vienen de la API básica)
         public int Runtime { get; set; }
         public long Budget { get; set; }
         public long Revenue { get; set; }
@@ -61,7 +60,6 @@ namespace obligatorio.Models
         public List<Genre> Genres { get; set; } = new List<Genre>();
         public List<Cast> Cast { get; set; } = new List<Cast>();
 
-        // URLs completas para las imágenes
         [JsonIgnore]
         public string PosterUrl => !string.IsNullOrEmpty(PosterPath)
             ? $"https://image.tmdb.org/t/p/w500{PosterPath}"
@@ -79,7 +77,6 @@ namespace obligatorio.Models
 
 
 
-        // Propiedades para UI state
         [JsonIgnore]
         public bool IsLoadingPoster
         {

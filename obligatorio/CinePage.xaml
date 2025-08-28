@@ -90,7 +90,6 @@
        Shadow="{StaticResource CardShadow}"
        Margin="0,0,0,10">
 
-            <!-- 👇 Efecto hover -->
             <Frame.GestureRecognizers>
                 <PointerGestureRecognizer PointerEntered="OnHeaderPointerEntered" 
                                   PointerExited="OnHeaderPointerExited"/>
@@ -99,7 +98,6 @@
             <Grid RowDefinitions="Auto,Auto"
           ColumnDefinitions="*,Auto">
 
-                <!-- Título -->
                 <Label Grid.Row="0" Grid.Column="0"
                Text="🎬 Películas en Cartelera" 
                FontSize="28" 
@@ -107,7 +105,6 @@
                TextColor="White" 
                HorizontalOptions="Center"/>
 
-                <!-- Indicador a la derecha -->
                 <ActivityIndicator x:Name="HeaderLoadingIndicator"
                            Style="{StaticResource LoadingIndicator}"
                            Grid.Row="0" Grid.Column="1"
@@ -115,7 +112,6 @@
                            Margin="0,0,15,0"
                            IsVisible="False"/>
 
-                <!-- Subtítulo -->
                 <Label Grid.Row="1" Grid.ColumnSpan="2"
                Text="Estrenos y funciones disponibles" 
                FontSize="16" 
@@ -126,7 +122,6 @@
         </Frame>
 
 
-        <!-- Barra de búsqueda -->
         <Frame Grid.Row="1" 
                Style="{StaticResource AppCardFrame}"
                CornerRadius="20"
@@ -140,7 +135,6 @@
                       SearchCommandParameter="{Binding Source={x:Reference MovieSearchBar}, Path=Text}"/>
         </Frame>
 
-        <!-- Grid de películas -->
         <RefreshView Grid.Row="2" 
                     x:Name="MoviesRefreshView"
                     RefreshColor="#E50914"
@@ -151,7 +145,6 @@
                            ItemsSource="{Binding Movies}"
                            Margin="8,0">
 
-                <!-- Layout para diferentes tamaños de pantalla -->
                 <CollectionView.ItemsLayout>
                     <GridItemsLayout x:Name="MoviesGridLayout"
                                    Orientation="Vertical"
@@ -169,12 +162,10 @@
                                     <RowDefinition Height="Auto"/>
                                 </Grid.RowDefinitions>
 
-                                <!-- Póster de la película -->
                                 <Frame Grid.Row="0" 
                                        Style="{StaticResource PosterFrame}"
                                        Margin="12,12,12,8">
                                     <Grid>
-                                        <!-- Imagen del póster -->
                                         <Image Source="{Binding PosterUrl}" 
                                                Aspect="AspectFill"
                                                BackgroundColor="#0F0F23">
@@ -184,7 +175,6 @@
                                             </Image.GestureRecognizers>
                                         </Image>
 
-                                        <!-- Rating overlay -->
                                         <Frame BackgroundColor="#000000AA"
                                                CornerRadius="12"
                                                Padding="8,4"
@@ -197,7 +187,6 @@
                                                    FontSize="10"/>
                                         </Frame>
 
-                                        <!-- Indicador de carga para imágenes -->
                                         <ActivityIndicator IsRunning="{Binding IsLoadingPoster}"
                                                          IsVisible="{Binding IsLoadingPoster}"
                                                          Color="#E50914"
@@ -206,27 +195,22 @@
                                     </Grid>
                                 </Frame>
 
-                                <!-- Información de la película -->
                                 <StackLayout Grid.Row="1" 
                                            Padding="12,0,12,12"
                                            Spacing="4">
 
-                                    <!-- Título -->
                                     <Label Text="{Binding Title}" 
                                            Style="{StaticResource MovieTitleLabel}"/>
 
-                                    <!-- Sinopsis corta -->
                                     <Label Text="{Binding Overview}" 
                                            Style="{StaticResource MovieOverviewLabel}"/>
 
-                                    <!-- Footer con fecha y botón -->
                                     <Grid Margin="0,4,0,0">
                                         <Grid.ColumnDefinitions>
                                             <ColumnDefinition Width="*"/>
                                             <ColumnDefinition Width="Auto"/>
                                         </Grid.ColumnDefinitions>
 
-                                        <!-- Fecha de estreno -->
                                         <Label Grid.Column="0"
                                                Text="{Binding ReleaseDate, StringFormat='📅 {0:dd/MM/yyyy}'}"
                                                TextColor="#888888"
@@ -234,7 +218,6 @@
                                                VerticalOptions="Center"
                                                IsVisible="{Binding ReleaseDate, Converter={StaticResource IsNotNullConverter}}"/>
 
-                                        <!-- Botón Ver más -->
                                         <Button Grid.Column="1"
                                                 Text="Ver más"
                                                 Style="{StaticResource VerMasButton}"
@@ -247,14 +230,12 @@
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
 
-                <!-- Estado vacío -->
                 <CollectionView.EmptyView>
                     <StackLayout VerticalOptions="Center" 
                                HorizontalOptions="Center"
                                Padding="40"
                                Spacing="16">
 
-                        <!-- Icono dinámico basado en el estado -->
                         <Label x:Name="EmptyStateIcon"
                                Text="{Binding EmptyStateIcon, FallbackValue='🔍'}" 
                                FontSize="64" 
@@ -275,7 +256,6 @@
                                HorizontalOptions="Center"
                                HorizontalTextAlignment="Center"/>
 
-                        <!-- Botón para recargar -->
                         <Button Text="🔄 Recargar películas"
                                 Command="{Binding RefreshCommand}"
                                 Style="{StaticResource AppPrimaryButton}"
@@ -284,7 +264,6 @@
                     </StackLayout>
                 </CollectionView.EmptyView>
 
-                <!-- Footer para cargar más películas -->
                 <CollectionView.Footer>
                     <StackLayout IsVisible="{Binding HasMoreMovies}"
                                Padding="20"
@@ -304,7 +283,6 @@
         </RefreshView>
 
 
-        <!-- Botón de navegación -->
         <Button Grid.Row="3"
                 x:Name="btnAtras" 
                 Text="← Volver atrás" 

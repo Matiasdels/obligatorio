@@ -8,13 +8,11 @@
              BackgroundColor="#f8f9fa">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <!-- Gradiente azul principal -->
             <LinearGradientBrush x:Key="BlueGradient" StartPoint="0,0" EndPoint="1,1">
                 <GradientStop Color="#2196F3" Offset="0.0" />
                 <GradientStop Color="#1976D2" Offset="1.0" />
             </LinearGradientBrush>
 
-            <!-- Estilo para botones -->
             <Style x:Key="ActionButton" TargetType="Button">
                 <Setter Property="Background" Value="{StaticResource BlueGradient}" />
                 <Setter Property="TextColor" Value="White" />
@@ -34,7 +32,6 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <!-- Header con información del patrocinador -->
         <Frame Grid.Row="0"
                Background="{StaticResource BlueGradient}"
                CornerRadius="0,0,20,20"
@@ -43,8 +40,6 @@
 
             <StackLayout Orientation="Horizontal" 
                         Spacing="15">
-
-                <!-- Imagen/Icono del patrocinador -->
                 <Frame BackgroundColor="White"
                        CornerRadius="25"
                        WidthRequest="50"
@@ -58,7 +53,6 @@
                            VerticalOptions="Center" />
                 </Frame>
 
-                <!-- Información del patrocinador -->
                 <StackLayout VerticalOptions="Center" 
                             HorizontalOptions="FillAndExpand">
 
@@ -78,7 +72,6 @@
             </StackLayout>
         </Frame>
 
-        <!-- Mapa -->
         <Frame Grid.Row="1"
                BackgroundColor="White"
                CornerRadius="15"
@@ -91,7 +84,6 @@
                          IsShowingUser="True"
                          MapType="Street" />
 
-                <!-- Indicador de carga -->
                 <StackLayout x:Name="LoadingIndicator"
                             IsVisible="True"
                             BackgroundColor="#80FFFFFF"
@@ -111,7 +103,6 @@
             </Grid>
         </Frame>
 
-        <!-- Panel de acciones -->
         <Border Grid.Row="2"
                 BackgroundColor="White"
                 Padding="20,15">
@@ -122,7 +113,6 @@
                 <Shadow Brush="Black" Offset="0,-2" Radius="10" Opacity="0.1" />
             </Border.Shadow>
 
-            <!-- Solo el botón de direcciones centrado -->
             <Button x:Name="BtnDirecciones"
                     Text="🧭 Ir al Lugar"
                     Style="{StaticResource ActionButton}"
@@ -131,7 +121,6 @@
                     Clicked="OnDireccionesClicked" />
         </Border>
 
-        <!-- Toast/Mensaje de estado -->
         <Frame x:Name="ToastMessage"
                Grid.Row="0"
                Grid.RowSpan="3"

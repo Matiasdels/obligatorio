@@ -57,7 +57,7 @@ namespace obligatorio.Models
                 foreach (var n in lista)
                 {
                     Noticias.Add(n);
-                    NoticiasFiltradas.Add(n); // Inicialmente mostrar todas
+                    NoticiasFiltradas.Add(n); 
                 }
             }
             finally

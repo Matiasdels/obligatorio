@@ -30,7 +30,6 @@ namespace obligatorio.Converters
         }
     }
 
-    // ✅ Añadir los convertidores que necesitas para las películas
     public class IsNotZeroConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

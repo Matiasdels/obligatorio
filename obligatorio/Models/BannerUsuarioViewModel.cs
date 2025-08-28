@@ -25,13 +25,11 @@ namespace obligatorio.Models
 
             _usuarioService = usuarioService;
 
-            // Suscribirse al evento solo si el servicio no es nulo
             if (_usuarioService != null)
             {
                 _usuarioService.PropertyChanged += OnUsuarioServicePropertyChanged;
             }
 
-            // Comandos
             ToggleFlyoutCommand = new Command(OnToggleFlyout);
             IrAPerfilCommand = new Command(OnIrAPerfil);
             IrAPreferenciasCommand = new Command(OnIrAPreferencias);
@@ -40,24 +38,20 @@ namespace obligatorio.Models
             System.Diagnostics.Debug.WriteLine("BannerUsuarioViewModel creado correctamente");
         }
 
-        // Propiedades que se actualizan automáticamente
         public string NombreUsuario => _usuarioService?.UsuarioActual?.Nombre ?? "Invitado";
         public string RolUsuario => _usuarioService?.UsuarioActual?.Rol ?? "Sin rol";
         public bool EstaLogueado => _usuarioService?.EstaLogueado ?? false;
         public string InicalesUsuario => GenerarIniciales(NombreUsuario);
 
-        // Comandos
         public ICommand ToggleFlyoutCommand { get; }
         public ICommand IrAPerfilCommand { get; }
         public ICommand IrAPreferenciasCommand { get; }
         public ICommand CerrarSesionCommand { get; }
 
-        // Eventos
         public event PropertyChangedEventHandler PropertyChanged;
 
         private void OnUsuarioServicePropertyChanged(object sender, PropertyChangedEventArgs e)
         {
-            // Actualizar las propiedades cuando cambien en el servicio
             OnPropertyChanged(nameof(NombreUsuario));
             OnPropertyChanged(nameof(RolUsuario));
             OnPropertyChanged(nameof(EstaLogueado));

@@ -12,9 +12,9 @@ namespace obligatorio.ViewModels
 {
     public class CinePageViewModel : INotifyPropertyChanged
     {
-        private readonly TmdbService _tmdbService; // ✅ Usando TU servicio
+        private readonly TmdbService _tmdbService; 
         private ObservableCollection<Movie> _movies;
-        private ObservableCollection<Movie> _allMovies; // Cache para búsquedas
+        private ObservableCollection<Movie> _allMovies; 
         private bool _isLoading;
         private bool _isRefreshing;
         private bool _hasError;
@@ -24,16 +24,14 @@ namespace obligatorio.ViewModels
 
         public CinePageViewModel()
         {
-            _tmdbService = new TmdbService(); // ✅ Instanciar tu servicio
+            _tmdbService = new TmdbService(); 
             Movies = new ObservableCollection<Movie>();
             _allMovies = new ObservableCollection<Movie>();
 
-            // Comandos
             RefreshCommand = new Command(async () => await RefreshMoviesAsync());
             SearchCommand = new Command<string>(async (query) => await SearchMoviesAsync(query));
             MovieTappedCommand = new Command<Movie>(async (movie) => await OnMovieTapped(movie));
 
-            // ✅ Carga inicial automática
             _ = Task.Run(LoadInitialMoviesAsync);
         }
 
@@ -196,7 +194,6 @@ namespace obligatorio.ViewModels
             {
                 if (string.IsNullOrWhiteSpace(query))
                 {
-                    // Restaurar películas originales
                     Movies.Clear();
                     foreach (var movie in _allMovies)
                     {
@@ -205,7 +202,7 @@ namespace obligatorio.ViewModels
                     return;
                 }
 
-                if (query.Length < 2) return; // Esperar al menos 2 caracteres
+                if (query.Length < 2) return; 
 
                 System.Diagnostics.Debug.WriteLine($"🔍 Buscando: '{query}'");
 

@@ -23,7 +23,6 @@ namespace obligatorio.Models
             ActualizarFotoPerfil();
         }
 
-        // Propiedades que obtienen datos directamente del servicio
         public Usuario Usuario => _usuarioService?.UsuarioActual;
 
         public ImageSource FotoPerfilSource
@@ -61,7 +60,6 @@ namespace obligatorio.Models
             }
         }
 
-        // Comandos
         public ICommand CambiarFotoCommand { get; }
 
         private void ActualizarFotoPerfil()
@@ -135,13 +133,10 @@ namespace obligatorio.Models
                 var imageBytes = memoryStream.ToArray();
                 var base64String = Convert.ToBase64String(imageBytes);
 
-                // Actualizar la foto en el usuario actual
                 Usuario.FotoBase64 = base64String;
 
-                // Guardar en la base de datos
                 await GuardarFotoEnBaseDatos(Usuario.Id, base64String);
 
-                // Actualizar la interfaz
                 ActualizarFotoPerfil();
 
                 await Application.Current.MainPage.DisplayAlert("Éxito",
@@ -158,8 +153,8 @@ namespace obligatorio.Models
         {
             try
             {
-                // Aquí implementas tu lógica para guardar en la base de datos
-                await Task.Delay(500); // Simulación
+               
+                await Task.Delay(500);
             }
             catch (Exception ex)
             {
@@ -167,7 +162,6 @@ namespace obligatorio.Models
             }
         }
 
-        // INotifyPropertyChanged implementation
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)

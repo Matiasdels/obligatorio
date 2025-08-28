@@ -32,17 +32,14 @@ namespace obligatorio
         {
             try
             {
-                // Clima actual
                 var data = await _weatherService.GetCurrentWeatherAsync();
                 lblCity.Text = data.name;
                 lblTemp.Text = $"{data.main.temp}°C";
                 lblDescription.Text = data.weather.First().description;
                 imgIcon.Source = $"https://openweathermap.org/img/wn/{data.weather.First().icon}@2x.png";
 
-                // Pronóstico
                 var forecast = await _weatherService.GetForecastAsync();
 
-                // Tomar solo 1 por día (ejemplo: el del mediodía)
                 var daily = forecast.list
                     .Where(f => f.dt_txt.Hour == 12)
                     .Take(5)

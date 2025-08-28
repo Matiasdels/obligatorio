@@ -30,7 +30,6 @@ namespace obligatorio.Models
             _preferenciasService = preferenciasService;
             _usuarioService = usuarioService;
 
-            // Suscribirse a cambios en las preferencias
             _preferenciasService.PreferenciasCambiadas += OnPreferenciasCambiadas;
             _usuarioService.UsuarioCambiado += OnUsuarioCambiado;
         }

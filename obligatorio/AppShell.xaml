@@ -13,7 +13,6 @@
     >
     
 
-    <!-- Banner flotante personalizado - SOLO visible cuando está logueado -->
     <Shell.TitleView>
         <Grid x:Name="BannerContainer" 
               IsVisible="{Binding EstaLogueado}"
@@ -30,7 +29,6 @@
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
 
-            <!-- Avatar/Iniciales del usuario -->
             <Border Grid.Column="0"
                     Margin="10,10,15,10"
                     BackgroundColor="{AppThemeBinding Light=White, Dark=#333333}"
@@ -50,7 +48,6 @@
                        VerticalOptions="Center" />
             </Border>
 
-            <!-- Información del usuario -->
             <StackLayout Grid.Column="1" 
                          Orientation="Vertical" 
                          VerticalOptions="Center"
@@ -71,12 +68,10 @@
         </Grid>
     </Shell.TitleView>
 
-    <!-- Contenido del Flyout -->
     <Shell.FlyoutContent>
         <ScrollView BackgroundColor="{AppThemeBinding Light=#F5F5F5, Dark=#121212}">
             <StackLayout Spacing="0">
 
-                <!-- Header del Flyout con información del usuario -->
                 <Grid BackgroundColor="{AppThemeBinding Light=#2196F3, Dark=#1976D2}"
                       Padding="20"
                       HeightRequest="150">
@@ -84,7 +79,6 @@
                     <StackLayout Orientation="Vertical" 
                                  VerticalOptions="Center">
 
-                        <!-- Avatar grande -->
                         <Border BackgroundColor="White"
                                 StrokeThickness="0"
                                 WidthRequest="60"
@@ -102,7 +96,6 @@
                                    VerticalOptions="Center" />
                         </Border>
 
-                        <!-- Información del usuario -->
                         <Label Text="{Binding NombreUsuario}"
                                FontSize="18"
                                FontAttributes="Bold"
@@ -115,10 +108,8 @@
                     </StackLayout>
                 </Grid>
 
-                <!-- Opciones del menú -->
                 <StackLayout Spacing="0" Padding="0,10">
 
-                    <!-- Perfil -->
                     <Grid BackgroundColor="Transparent" 
                           HeightRequest="50">
                         <Grid.GestureRecognizers>
@@ -137,12 +128,10 @@
                         </StackLayout>
                     </Grid>
 
-                    <!-- Separador -->
                     <BoxView HeightRequest="1" 
                              BackgroundColor="{AppThemeBinding Light=#E0E0E0, Dark=#333333}" 
                              Margin="20,0" />
 
-                    <!-- Preferencias -->
                     <Grid BackgroundColor="Transparent" 
                           HeightRequest="50">
                         <Grid.GestureRecognizers>
@@ -161,12 +150,10 @@
                         </StackLayout>
                     </Grid>
 
-                    <!-- Separador -->
                     <BoxView HeightRequest="1" 
                              BackgroundColor="{AppThemeBinding Light=#E0E0E0, Dark=#333333}" 
                              Margin="20,0" />
 
-                    <!-- Cerrar Sesión -->
                     <Grid BackgroundColor="Transparent" 
                           HeightRequest="50">
                         <Grid.GestureRecognizers>
@@ -214,29 +201,4 @@
     <ShellContent Route="RegistroPage" ContentTemplate="{DataTemplate local:RegistroPage}" />
     
     
-
-
-
-
-
-    <!--<FlyoutItem Title="Inicio" Icon="home.png">
-        <ShellContent ContentTemplate="{DataTemplate local:MainPage}" />
-    </FlyoutItem>
-        
-    <FlyoutItem Title="Cotizaciones" Icon="money.png">
-        <ShellContent ContentTemplate="{DataTemplate local:CotizacionesPage}" />
-    </FlyoutItem>
-
-    <FlyoutItem Title="Noticias" Icon="news.png">
-        <ShellContent ContentTemplate="{DataTemplate local:NoticiasPage}" />
-    </FlyoutItem>
-
-    <FlyoutItem Title="Cine" Icon="cinema.png">
-        <ShellContent ContentTemplate="{DataTemplate local:CinePage}" />
-    </FlyoutItem>
-
-    <FlyoutItem Title="Patrocinadores" Icon="sponsor.png">
-        <ShellContent ContentTemplate="{DataTemplate local:PatrocinadoresPage}" />
-    </FlyoutItem>-->
-
 </Shell>
